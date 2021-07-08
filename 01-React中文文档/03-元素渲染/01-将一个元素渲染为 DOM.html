@@ -1,0 +1,23 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-06-01 11:59:21
+ * @LastEditTime: 2021-06-01 12:01:35
+ * @FilePath: \LearnReact\01-React中文文档\03-元素渲染\01-将一个元素渲染为 DOM.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React</title>
+</head>
+<body>
+    <div id="root"></div>
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+    <script type="text/babel">
+        const element = <h1>Hello World</h1>
+        ReactDOM.render(element,document.getElementById('root'))
+    </script>
+</body>
+</html>

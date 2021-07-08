@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>React</title>
+  </head>
+
+  <body>
+    <div id="app"></div>
+    <hr>
+    <div id="app2"></div>
+    <hr>
+    <div id="app3"></div>
+
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+    <script type="text/babel">
+      function Liao() {
+        return (
+          <div>
+            <h2>撩课</h2>
+            <img src="img/logo.png" width="200" />
+          </div>
+        );
+      }
+
+      ReactDOM.render(<Liao />, document.getElementById("app"));
+    </script>
+
+    <script type="text/babel">
+      function Liao1(props) {
+        return (
+          <div>
+            <h2>我叫：{props.name}，性别:{props.gender},我有三个学科：{props.colleges}</h2>
+            {/*我在外面传的属性名是什么，在里面调就调什么 */}
+            <img src="img/logo.png" width="200" />
+          </div>
+        );
+      }
+
+      ReactDOM.render(<Liao1 name='撩课' gender='女' colleges={['H5','Java','Python']}/>, document.getElementById("app2"));
+    </script>
+
+    <script type="text/babel">
+    // 多组件
+        function Name(props){
+            return <p>我叫:{props.name}</p>
+        }
+
+         function Gender(props){
+            return <p>我的性别:{props.gender}</p>
+
+         }
+
+          function Colleges(props){
+            return <p>我的学科:{props.colleges}</p>
+
+          }
+
+          function Person(){
+            return (
+                <div>
+                    <Name name="李明"/>
+                    <Gender name="男"/>
+                    <Colleges colleges={['H5','Java','Python']} />
+                </div>
+            )
+          }
+
+          ReactDOM.render(
+              <Person/>,
+              document.getElementById('app3')
+          )
+    </script>
+  </body>
+</html>

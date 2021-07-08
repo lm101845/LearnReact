@@ -1,0 +1,44 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-05-21 16:16:16
+ * @LastEditTime: 2021-05-21 16:24:18
+ * @FilePath: \LearnReact\04-撩客学院叶建华\Day1\手敲\02-JSX语法\05-props和states的混合使用.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React</title>
+</head>
+<body>
+    <div id="app"></div>
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+    <script type="text/babel">
+        // 任务：通过组件来创建一条狗
+        // 1.组件类
+        class Dog extends React.component{
+            // component是单数！！没有s！！！
+            constructor(props){
+                super(props)
+                // 打通上下继承
+
+                // 狗：姓名(不变)、性别(不变)、年龄(变)、狗友(变)
+                // 2.初始化state
+                this.state = {
+                    // 凡是界面中需要改变的状态或者属性都写到这里
+                    // 不需要改变的就直接用props即可
+                    age:1,              //年龄
+                    dogFriends:[]       //狗友
+                }
+
+            }
+            // 3.设置props属性的默认值
+            // 这个要放到constructor外面
+            // 不可改变的东西(比如姓名、性别)放到这里
+            static defaultProps = {};
+        }
+    </script>
+</body>
+</html>

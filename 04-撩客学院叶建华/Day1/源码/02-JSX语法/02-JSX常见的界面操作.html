@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React 练习</title>
+</head>
+<body>
+    <div id="app">
+    </div>
+<script src="../js/react.development.js"></script>
+<script src="../js/react-dom.development.js"></script>
+<script src="../js/babel.min.js"></script>
+<script type="text/html">
+    // a. 多重标签嵌套
+    ReactDOM.render(
+        <div>
+            <h2>多层标签嵌套</h2>
+            <img src="img/logo.jpg" alt="撩课"  width="300" />
+            <p>测试！</p>
+        </div>
+    , document.getElementById('app'));
+</script>
+<script type="text/html">
+    // b. js中的变量, 表达式要写在{}内
+    const str = '撩课';
+    ReactDOM.render(
+        <div>
+           <span>{str}</span>
+           <p>100 + 20 * 2 /5 *3 = {100 + 20 * 2 /5 *3}</p>
+        </div>
+        , document.getElementById('app'));
+</script>
+<script type="text/babel">
+    // c. 内联样式通过对象方式引入
+
+    const myStyle = {
+      backgroundColor: 'purple',
+      color: 'yellow',
+      fontSize: 30
+    };
+
+    ReactDOM.render(
+        <div>
+            // 注释
+            /*注释*/
+            {/*真正的JSX注释*/}
+            <h2>来点颜色</h2>
+            <div style={myStyle}>客官，颜色来了！</div>
+        </div>
+        , document.getElementById('app'));
+</script>
+<script type="text/html">
+    // 1. 数据
+    /**/
+    const dataArr = [
+        {name: '周杰伦', age: 38},
+        {name: '谢霆锋', age: 40},
+        {name: '刘德华', age: 48},
+        {name: '撩课学院', age: 2}
+    ];
+
+    // 2. 创建虚拟DOM
+    const vDOM = (
+        <ul>
+            {
+                dataArr.map((data, index) =>
+                    <li key={index}>{index + 1} --- 姓名： {data.name} --- 年龄：{data.age}岁</li>
+                )
+            }
+        </ul>
+    );
+
+    ReactDOM.render(
+        vDOM
+        , document.getElementById('app'));
+</script>
+</body>
+</html>

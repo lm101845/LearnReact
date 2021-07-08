@@ -1,0 +1,33 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-06-01 12:14:19
+ * @LastEditTime: 2021-06-01 12:16:35
+ * @FilePath: \LearnReact\01-React中文文档\04-组件 & Props\01-函数组件与 class 组件.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React</title>
+</head>
+<body>
+    <div id="app"></div>
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+    <script type="text/babel">
+    // 定义组件最简单的方式就是编写 JavaScript 函数：
+    function Welcome(props){
+        return <h1>Hello,{props.name}</h1>
+        // 该函数是一个有效的 React 组件，因为它接收唯一带有数据的 “props”（代表属性）对象与并返回一个 React 元素。这类组件被称为“函数组件”，因为它本质上就是 JavaScript 函数。
+    }
+
+    // 你同时还可以使用 ES6 的 class 来定义组件：
+    class Welcome extends React.Component{
+        render(){
+            return <h1>Hello,{this.props.name}</h1>
+        }
+    }
+    </script>
+</body>
+</html>

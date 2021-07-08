@@ -1,0 +1,30 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-05-21 15:17:15
+ * @LastEditTime: 2021-05-21 15:21:26
+ * @FilePath: \LearnReact\01-React中文文档\02-JSX简介\03-JSX 也是一个表达式.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>React</title>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+    <script type="text/babel">
+        function getGreeting(user){
+            if(user){
+                return <h1>formatName(user)</h1>
+            }
+            return <h1>Hello,Stranger</h1>
+        }
+    </script>
+</body>
+
+</html>

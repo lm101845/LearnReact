@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React 练习</title>
+</head>
+<body>
+    <div id="app"></div>
+<script src="../js/react.development.js"></script>
+<script src="../js/react-dom.development.js"></script>
+<script src="../js/babel.min.js"></script>
+<script type="text/babel">
+    class Life extends React.Component{
+        // 1）初始化阶段
+        constructor(props){
+            super(props);
+            console.log('constructor(props)');
+            this.state = {
+                age: 1
+            }
+        }
+
+        componentWillMount(){
+            console.log('componentWillMount');
+        }
+
+        render(){
+            console.log('render()');
+            return (
+                <div>
+                    <h2>我是树妖，今年{this.state.age}岁了！</h2>
+                    <button
+                        onClick={()=>ReactDOM.unmountComponentAtNode(document.getElementById('app'))}>
+                        我被砍了
+                    </button>
+                </div>
+            )
+        }
+
+        componentDidMount(){
+            console.log('componentDidMount');
+            // 开启定时器
+            this.intervalId = setInterval(()=>{
+                 console.log('定时器在工作了');
+                 // 更新状态
+                this.setState({
+                    age: this.state.age + 1
+                })
+            }, 1000);
+        }
+
+        // 2) 更新阶段
+        componentWillUpdate(){
+            console.log('componentWillUpdate()');
+        }
+
+        componentDidUpdate(){
+            console.log('componentDidUpdate()');
+        }
+
+        // 3) 卸载阶段
+        componentWillUnmount(){
+            console.log('componentWillUnmount()');
+            // 清除定时器
+            clearInterval(this.intervalId);
+        }
+
+        // 4) 错误处理
+        componentDidCatch(){
+            console.log('componentDidCatch()');
+        }
+    }
+    ReactDOM.render(<Life/>, document.getElementById('app'));
+</script>
+</body>
+</html>

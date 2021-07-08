@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React 练习</title>
+</head>
+<body>
+    <div id="app"></div>
+<script src="../js/react.development.js"></script>
+<script src="../js/react-dom.development.js"></script>
+<script src="../js/prop-types.js"></script>
+<script src="../js/babel.min.js"></script>
+<script type="text/babel">
+    // 1. 组件类
+    class Dog extends React.Component{
+        constructor(props){
+            super(props);
+
+            // 狗： 姓名， 性别， 年龄， 狗友
+            // 2. 初始化state
+            this.state = {
+                 age: 1, //年龄
+                 dogFriends: [] // 狗友
+            }
+        }
+
+        // 3. 设置props属性的默认值
+        static defaultProps = {
+            name: '旺财',
+            gender: '公'
+        };
+
+        // 4. 设置props属性的类型
+        static propTypes = {
+            name: PropTypes.string.isRequired,
+            gender: PropTypes.string.isRequired
+        };
+
+        render(){
+            const {name, gender} = this.props;
+            const {age, dogFriends} = this.state;
+            return (
+                <div>
+                    <p>狗名：{name}, 性别：{gender}</p>
+                    <p>我今年{age}岁了</p>
+                    <p>我有很多狗友：</p>
+                    <ul>
+                        {dogFriends.map((friend, index)=>(
+                            <li key={index}>{friend}</li>
+                        ))}
+                    </ul>
+                    <button onClick={()=>this.addYear()}>增一岁</button>
+                </div>
+            )
+        }
+        addYear(){
+           // 1. 增加狗友
+           let tempArr = this.state.dogFriends;
+           tempArr.push('狗友'+Math.floor(Math.random()*100));
+
+           // this.props.name = '哈哈哈';
+          /* this.setProps({
+               name: '哈哈哈哈'
+           });*/
+
+           // 2. 更新状态
+            this.setState({
+                age: this.state.age + 1,
+                dogFriends: tempArr
+            })
+        }
+    }
+
+    ReactDOM.render(
+        <Dog/>,
+        document.getElementById('app')
+    );
+</script>
+</body>
+</html>

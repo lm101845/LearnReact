@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>itLike</title>
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+<div id="root">
+  <div class="todo-container">
+    <div class="todo-wrap">
+      <div class="todo-header">
+        <input type="text" placeholder="请输入今天的任务清单，按回车键确认"/>
+      </div>
+      <ul class="todo-main">
+        <li>
+          <label>
+            <input type="checkbox"/>
+            <span>Vue-拼多多项目实战-课程讲解</span>
+          </label>
+          <button class="btn btn-warning" style="display:none">删除</button>
+        </li>
+        <li>
+          <label>
+            <input type="checkbox"/>
+            <span>Vue-拼多多项目实战-作业布置</span>
+          </label>
+          <button class="btn btn-warning" style="display:none">删除</button>
+        </li>
+      </ul>
+      <div class="todo-footer">
+        <label>
+          <input type="checkbox"/>
+        </label>
+        <span>
+          <span>已完成0件</span> / 总计2件
+        </span>
+        <button class="btn btn-warning">清除已完成任务</button>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

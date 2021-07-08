@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+    <script type="text/babel">
+        // 1.获取页面真实的容器元素
+        const containerDiv = document.getElementById('app');
+
+        // 2.使用JSX语法来创建虚拟DOM对象
+        // 不过当前的浏览器无法识别出JSX语法的，所以会报错
+        // 而babel.min.js可以将高阶语法在运行的时候转换为低阶的浏览器可以执行的语法
+        // 给script加一个type="text.babel"即可
+        const vDom = <div>你好,世界!</div>;
+
+        // 3.将虚拟DOM渲染到页面元素上去
+        ReactDOM.render(vDom, containerDiv)
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-05-21 15:11:30
+ * @LastEditTime: 2021-05-21 15:16:10
+ * @FilePath: \LearnReact\01-React中文文档\02-JSX简介\02-在 JSX 中嵌入函数.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React</title>
+</head>
+<body>
+    <div id="app"></div>
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+    <script type="text/babel">
+        const user = {
+            firstName: 'Harper',
+            lastName: 'li'
+        };
+
+        function formatName(user){
+            return user.firstName + ' ' + user.lastName
+        }
+
+        const element = <h1>hello,{formatName(user)}</h1>
+        ReactDOM.render(
+            element,
+            document.getElementById('app')
+        )
+    </script>
+</body>
+</html>

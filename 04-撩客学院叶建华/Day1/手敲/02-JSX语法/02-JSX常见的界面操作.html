@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>React练习</title>
+</head>
+
+<body>
+    <div id="app"></div>
+    <hr>
+
+    <div id="app2"></div>
+    <hr>
+
+    <div id="app3"></div>
+    <hr>
+
+    <div id="app4"></div>
+    <hr>
+
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+    <script type="text/babel">
+        // a.多重标签嵌套
+        // 注意：在jsx中image一定要加闭合符号
+        ReactDOM.render(
+        <div>
+            <h2>多层标签嵌套</h2>
+            <img src="img/logo.png" alt="logo" width="200" />
+            <p>测试！</p>
+        </div>
+        ,document.getElementById('app'))
+    </script>
+
+
+
+    <script type="text/babel">
+        // b.js中的变量，表达式要写到{}内
+        const str = '撩课'
+        ReactDOM.render(
+        <div>
+            <span>{str}</span>
+            <p>100 + 20*2/5*3={100 + 20*2/5*3}</p>
+        </div>,
+        document.getElementById('app2')
+        )
+    </script>
+
+    <script type="text/babel">
+        // c.内联样式通过对象方式引入
+    const myStyle = {
+        backgroundColor:'pink',
+        color:'yellow',
+        fontSize:30
+        // 在React中不用写单位px
+    }
+    ReactDOM.render(
+       <div>
+           <h2>来点颜色</h2>
+           <div style={myStyle}>客官，颜色来了</div>
+       </div>,
+       document.getElementById('app3')
+    )
+    </script>
+
+    <script type="text/babel">
+        // 1.数据
+        const dataArr = [
+            {name:'周杰伦',age:38},
+            {name:'谢霆锋',age:40},
+            {name:'刘德华',age:48},
+            {name:'黎明',age:18},
+        ]
+
+        // 2.创建虚拟DOM
+        const vDOM = (
+            <ul>
+                {
+                    dataArr.map((item,index)=>{
+                        return <li key={index }>{index + 1}---姓名：{item.name}---年龄：{item.age}岁</li>
+                        // 不要忘了写return 
+                    })
+                }
+            </ul>
+        )
+
+        ReactDOM.render(vDOM,document.getElementById('app4'))
+    </script>
+</body>
+
+</html>

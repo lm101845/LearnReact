@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            list-style: none;
+        }
+    </style>
+</head>
+<body>
+
+<div id="app"></div>
+<script src="../../备课代码/js/react.development.js"></script>
+<script src="../../备课代码/js/react-dom.development.js"></script>
+<script src="../../备课代码/js/babel.min.js"></script>
+<script type="text/html">
+    ReactDOM.render(
+    <div>
+        <h2>多层标签嵌套</h2>
+        <img src="../../备课代码/02-JSX语法/img/logo.jpg" alt="" width="200"/>
+        <p>嵌套多个标签时，需要使用一个大标签(比如:div)将多层标签包裹起来。</p>
+    </div>,
+    document.getElementById("app")
+    );
+</script>
+<script type="text/html">
+    ReactDOM.render(
+    <div>
+        <p>100+20*2/5 = {100 + 20 * 2 / 5}</p>
+    </div>,
+    document.getElementById("app")
+    )
+</script>
+<script type="text/html">
+
+    const myStyle = {
+        backgroundColor: 'purple',
+        color: 'yellow',
+        fontSize: 30
+    };
+    ReactDOM.render(
+        <div>
+            <h2>来点颜色</h2>
+            <div style={myStyle}>客官, 颜色来了</div>
+        </div>,
+        document.getElementById("app")
+    );
+
+</script>
+<script type="text/babel">
+
+    // 1. 数据
+    const dataArr = [
+    {name: '周杰伦', age: 38},
+    {name: '谢霆锋', age: 37},
+    {name: '刘德华', age: 48},
+    {name: '撩课学院', age: 2},
+    ];
+    // 2. 创建虚拟DOM
+    const vDom = (
+    <ul>
+        {dataArr.map((data, index) =>
+           <li>{index + 1} - 姓名: {data.name}, 年龄: {data.age}岁</li>
+        )}
+    </ul>);
+    // 3. 渲染虚拟DOM
+    ReactDOM.render(vDom, document.getElementById('app'));
+
+</script>
+</body>
+</html>

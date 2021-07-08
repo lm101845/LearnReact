@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 
+    往容器中插入一个span标签, class为: "it-like", 内容为: "撩课学院"。
+    两种实现方式: a) 在React中通过典型js方式; b) JSX方式?
+    -->
+    <div id="app1"></div>
+    <div id="app2"></div>
+    
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+    <script>
+        // a:通过典型js方式——极其麻烦
+        // 1.创建变量
+        let myClass = 'it-like'
+        let myContent = '撩课学院'
+
+        // 2.创建DOM元素
+        const vDOM = React.createElement('span', {
+            className: myClass
+        }, myContent);
+
+        // 3.将虚拟DOM渲染到页面元素上去
+        ReactDOM.render(vDOM, document.getElementById('app1'))
+    </script>
+
+    <script type="text/babel">
+        // b:通过JSX方式
+        // 使用JSX语法一定要加type
+        // 不过后面用到脚手架以后就不需要了
+        const vDOM1 = <span className="{myClass.toUpperCase()}">{myContent}-JSX</span>
+        ReactDOM.render(vDOM1,document.getElementById('app2'))
+    </script>
+</body>
+
+</html>

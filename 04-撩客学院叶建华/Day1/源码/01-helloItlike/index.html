@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <div id="app"></div>
+
+<script src="../js/react.development.js"></script>
+<script src="../js/react-dom.development.js"></script>
+<script src="../js/babel.min.js"></script>
+<script type="text/html">
+    // 1.获取页面真实的容器元素
+    const containerDiv = document.getElementById('app');
+    // 2. jsx语法创建虚拟DOM对象
+    const vDom = <div>你好，撩课学院！</div>;
+    // 3. 将虚拟DOM渲染到页面元素上去
+    ReactDOM.render(vDom, containerDiv);
+</script>
+<script type="text/babel">
+    const vDom = <div>你好，撩课学院！</div>;
+    ReactDOM.render(vDom, document.getElementById('app'));
+</script>
+</body>
+</html>

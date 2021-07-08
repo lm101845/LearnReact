@@ -1,0 +1,36 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-06-01 12:05:30
+ * @LastEditTime: 2021-06-01 12:11:46
+ * @FilePath: \LearnReact\01-React中文文档\03-元素渲染\02-更新已渲染的元素.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>React</title>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+    <script type="text/babel">
+        function tick(){
+            const element = (
+                <div>
+                    <h1>Hello World</h1>
+                    <h2>It is {new Date().toLocaleTimeString()}.</h2>
+                    </div>
+                    );
+
+            ReactDOM.render(element,document.getElementById('app'))
+        };
+
+        setInterval(tick,1000);
+    </script>
+</body>
+
+</html>

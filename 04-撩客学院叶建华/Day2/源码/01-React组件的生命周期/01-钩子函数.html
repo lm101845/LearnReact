@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React 练习</title>
+</head>
+<body>
+    <div id="app"></div>
+<script src="../js/react.development.js"></script>
+<script src="../js/react-dom.development.js"></script>
+<script src="../js/babel.min.js"></script>
+<script type="text/babel">
+    class Life extends React.Component{
+        // 1）初始化阶段
+        constructor(props){
+            super(props);
+            console.log('constructor(props)');
+        }
+
+        componentWillMount(){
+            console.log('componentWillMount');
+        }
+
+        render(){
+            console.log('render()');
+            return (
+                <div>
+                    <h2>测试组件的钩子函数！</h2>
+                </div>
+            )
+        }
+
+        componentDidMount(){
+            console.log('componentDidMount');
+        }
+
+        // 2) 更新阶段
+        componentWillUpdate(){
+            console.log('componentWillUpdate()');
+        }
+
+        componentDidUpdate(){
+            console.log('componentDidUpdate()');
+        }
+
+        // 3) 卸载阶段
+        componentWillUnmount(){
+            console.log('componentWillUnmount()');
+        }
+
+        // 4) 错误处理
+        componentDidCatch(){
+            console.log('componentDidCatch()');
+        }
+    }
+    ReactDOM.render(<Life/>, document.getElementById('app'));
+</script>
+</body>
+</html>

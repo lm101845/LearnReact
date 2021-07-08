@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React 练习</title>
+</head>
+<body>
+    <div id="app"></div>
+<script src="../js/react.development.js"></script>
+<script src="../js/react-dom.development.js"></script>
+<script src="../js/babel.min.js"></script>
+<script type="text/babel">
+    class CustomTextInput extends React.Component {
+        constructor(props){
+            super(props);
+
+            // 绑定ref
+            this.myInput = React.createRef();
+            this.myBtn = React.createRef();
+        }
+
+        render(){
+            return (
+                <div>
+                    <input ref={this.myInput} type="text" placeholder="请输入内容"/>
+                    <input ref={this.myBtn} type="button" value="获取焦点" onClick={()=>this.focusTextInput()}/>
+                </div>
+            )
+        }
+
+        focusTextInput(){
+            // console.log(this.myInput);
+            this.myInput.current.focus(); // 获取焦点
+            console.log(this.myBtn);
+        }
+    }
+
+    ReactDOM.render(
+        <CustomTextInput/>,
+        document.getElementById("app")
+    );
+</script>
+</body>
+</html>
