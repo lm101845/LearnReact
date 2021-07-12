@@ -1,0 +1,47 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-07-12 21:01:20
+ * @LastEditTime: 2021-07-12 21:16:52
+ * @FilePath: \LearnReact\03-尚硅谷张天禹\02-代码手敲\react_basic\02_虚拟DOM的2种创建方式\02_使用js创建虚拟DOM.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>hello_react</title>
+</head>
+
+<body>
+    <!-- 准备好一个“容器” -->
+    <div id="test"></div>
+
+    <!-- 引入react核心库 -->
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <!-- 引入react-dom，用于支持react操作DOM -->
+    <script type="text/javascript" src="../js/react-dom.development.js"></script>
+
+    <script type="text/javascript"> /* 此处一定要写babel */
+		//1.创建虚拟DOM
+        //不管你用什么方式，只要你创建出了虚拟DOM,这句话都得这么写
+        // document.createElement是用来创建真实DOM的
+        // React.createElement是用来创建虚拟DOM的
+        // const VDOM = React.createElement(标签名，标签属性，标签内容)
+        const VDOM = React.createElement('h1',{id:'title'},'Hello React')
+        
+        //需求改变，让你体会到jsx的好处:h1里面写一个span标签
+        // 这样写是不行的
+        //const VDOM2 = React.createElement('h1',{id:'title'},'<span>Hello React</span>')
+        
+        //span标签也要进行创建
+        const VDOM2 = React.createElement('h1',{id:'title'},React.createElement('span',{},'Hello React'))
+        // 注意：其实最终你要Jsx写的语法最终还是转换为了原始js的这种写法
+        // 所以，我们可以这样说：jsx其实就是原始js这种写法的语法糖
+
+		//2.渲染虚拟DOM到页面
+		// ReactDOM.render(VDOM,document.getElementById('test'))
+		ReactDOM.render(VDOM2,document.getElementById('test'))
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,86 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-07-12 22:14:37
+ * @LastEditTime: 2021-07-12 22:34:27
+ * @FilePath: \LearnReact\03-尚硅谷张天禹\02-代码手敲\react_basic\03_jsx语法规则\jsx语法规则.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>hello_react</title>
+    <style>
+        .title{
+            background-color: orange;
+            width: 200px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 准备好一个“容器” -->
+    <div id="test"></div>
+
+    <!-- 引入react核心库 -->
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <!-- 引入react-dom，用于支持react操作DOM -->
+    <script type="text/javascript" src="../js/react-dom.development.js"></script>
+    <!-- 引入babel，用于将jsx转为js -->
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+
+    <script type="text/babel"> /* 此处一定要写babel */
+        const myId = 'aTgUiGu'
+        const myData = 'heLlo,rEaCt'
+		//1.创建虚拟DOM
+		// const VDOM = (
+        //     <h2 id="atguigu">
+        //         <span>Hello,React</span>
+        //     </h2>
+        // )
+
+            // 错误写法
+        	// const VDOM = (
+        	// <h2 id="myId">
+        	//     <span>myData</span>
+        	// </h2>
+        	// )
+
+            // 混写js的正确写法：使用{}进行包裹
+            // 而读CSS里面的内容，直接写就行，不用这样写：className = {'title'}
+            const VDOM = (
+                <div>
+                    <h2 className='title' id={myId.toLowerCase()}>
+                        <span style={{color:'white',fontSize:'29px'}}>{myData.toLowerCase()}</span>
+                    </h2>
+
+                    <h2 className='title' id={myId.toUpperCase()}>
+                        <span>{myData.toLowerCase()}</span>
+                    </h2>
+                    <input type="text"/>
+                    <good>123</good>
+                </div>
+                // <input type="text">
+                // jsx只能有一个根标签！！！这里div是根标签
+                // input标签后面必须要加上闭合标签
+            )
+        
+		//2.渲染虚拟DOM到页面
+		ReactDOM.render(VDOM,document.getElementById('test'))
+
+        	/*
+        	jsx语法规则：
+        	1.定义虚拟DOM时，不要写引号。
+        	2.标签中混入JS表达式时要用{}。
+        	3.样式的类名指定不要用class，要用className。——原因：class是ES6中类的关键字，为了避开这个，所以用的className 
+        	4.内联样式，要用style={{key:value}}的形式去写。
+        	5.只有一个根标签
+        	6.标签必须闭合
+        	7.标签首字母
+        	(1).若小写字母开头，则将该标签转为html中同名元素，若html中无该标签对应的同名元素，则报错。
+        	(2).若大写字母开头，react就去渲染对应的组件，若组件没有定义，则报错。
+        	*/
+	</script>
+</body>
+
+</html>

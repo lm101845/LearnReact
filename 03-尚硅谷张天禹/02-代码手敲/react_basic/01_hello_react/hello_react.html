@@ -1,7 +1,7 @@
 <!--
  * @Author: liming
  * @Date: 2021-07-12 19:11:45
- * @LastEditTime: 2021-07-12 19:35:29
+ * @LastEditTime: 2021-07-12 19:38:44
  * @FilePath: \LearnReact\03-尚硅谷张天禹\02-代码手敲\react_basic\01_hello_react\hello_react.html
 -->
 <!DOCTYPE html>
@@ -31,10 +31,13 @@
             // 注意：jsx和js就是差了几条规矩而已，之前的js是可以写的
             // 这里面是jsx，不是js，千万不要在前面加上单引号
             const VDOM = <h1>Hello,React</h1> /* 此处一定不要写引号，因为不是字符串(它是虚拟DOM) */
+            const VDOM2 = <h1>Hello,atguigu</h1> /* 此处一定不要写引号，因为不是字符串(它是虚拟DOM) */
 
             //2.渲染虚拟DOM到页面
             //学习任何一个东西的时候，API没人能帮得了你，就得自己慢慢记
             ReactDOM.render(VDOM,document.getElementById('test'))
+            ReactDOM.render(VDOM2,document.getElementById('test'))  /*注意：这句话不是一句追加的动作，这是一句替换的动作*/
+            // ReactDOM.render(虚拟DOM,容器)
             // ReactDOM.render(虚拟DOM,容器)
             //第一个参数：渲染哪个虚拟DOM
             //第二个参数：将渲染完成的虚拟DOM存放到哪个容器中去
