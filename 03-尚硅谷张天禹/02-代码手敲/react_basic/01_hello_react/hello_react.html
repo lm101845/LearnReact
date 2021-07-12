@@ -1,0 +1,47 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-07-12 19:11:45
+ * @LastEditTime: 2021-07-12 19:35:29
+ * @FilePath: \LearnReact\03-尚硅谷张天禹\02-代码手敲\react_basic\01_hello_react\hello_react.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hello_react</title>
+</head>
+
+<body>
+    <!-- 准备好一个“容器”,必须要写 --> 
+    <div id="test"></div>
+
+    <!-- 引入js文件夹里面的3个js是有顺序的，要先引入核心库 -->
+    <!-- 引入react核心库,此时全局有React关键字了-->
+    <script src="../js/react.development.js"></script>
+    <!-- 引入react-dom，用于支持react操作DOM，此时全局有ReactDOM关键字了 -->
+    <script type="text/javascript" src="../js/react-dom.development.js"></script>
+    <!-- 引入babel，用于将jsx转为js -->
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+
+    <script type="text/babel">/* 此处一定要写babel,表示我这里面写的不是js,而是jsx,且靠的是babel翻译为js */
+        	//1.创建虚拟DOM
+            // 注意：jsx和js就是差了几条规矩而已，之前的js是可以写的
+            // 这里面是jsx，不是js，千万不要在前面加上单引号
+            const VDOM = <h1>Hello,React</h1> /* 此处一定不要写引号，因为不是字符串(它是虚拟DOM) */
+
+            //2.渲染虚拟DOM到页面
+            //学习任何一个东西的时候，API没人能帮得了你，就得自己慢慢记
+            ReactDOM.render(VDOM,document.getElementById('test'))
+            // ReactDOM.render(虚拟DOM,容器)
+            //第一个参数：渲染哪个虚拟DOM
+            //第二个参数：将渲染完成的虚拟DOM存放到哪个容器中去
+            //注意：React并没有给你提供选择器的写法，所以需要你写document.getElementById这种原生写法来指定选择器
+            //学生：我可以再引入jquery，然后用$这种方式来指定选择器吗？——没有这么玩的。。。。不合适
+            //我们整个应用里面，也就这里我们能用一下document.getElementById，以后基本上都要避免这些
+    </script>
+</body>
+
+</html>
