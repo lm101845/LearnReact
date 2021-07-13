@@ -1,0 +1,79 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-07-13 16:05:53
+ * @LastEditTime: 2021-07-13 16:24:18
+ * @FilePath: \03-尚硅谷张天禹\02-代码手敲\react_basic\复习\02_类的基础知识之继承.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class Person {
+            //构造器方法——Java里面是构造方法public Person{}这样写
+            //构造器方法：当你创建实例的时候自动调用
+            constructor(name, age) {
+                //构造器中的this是谁？——类的实例对象
+                this.name = name;
+                this.age = age;
+            }
+            //一般方法——除了构造器方法外的其他方法
+            speak() {
+                //思考：
+                //speak方法放在了哪里？——类的原型对象上，供实例使用
+                //通过Person实例调用speak时，speak中的this就是Person实例
+                console.log(`我叫${this.name},我年龄是${this.age}`);
+            }
+
+        }
+
+        //创建一个Student类，继承于Person类
+        class Student extends Person {
+            //构造器不是必须要写的——因为你继承了Person,就直接用的父类Person的构造器了
+            constructor(name, age, grade) {
+                // 类中的一个语法：你定义了Student类，你继承了Person类，并且你里面写了构造器，那么你的构造器中必须要调用super函数
+                // 如果你这个子类不写构造器的话，那你赢了，可以不写super函数 
+                //我这里写构造器就是想接住学生这个类中独有的那个年级grade
+                //super主要用于帮你调用父类的构造器的
+                super(name, age) //注意：super必须放到所有人之前
+                // super(name,age)就相当于this.name = name;和this.age = age;
+                // this.name = name;
+                // this.age = age;
+                // 父类构造器中也有这2句话，重复了
+                this.grade = grade;
+            }
+
+            //重写从父类继承过来的方法
+            speak() {
+                //这就相当于是Java中方法的重写
+                console.log(`大家好，我叫${this.name},我年龄是${this.age},我读${this.grade}了`);
+            }
+
+            //学生独有的方法：学习
+            study(){
+                console.log('我很努力的学习');
+            }
+        }
+
+
+        // const s1 = new Student('小张',15)
+        const s1 = new Student('小张', 15, '高一')
+        console.log(s1);
+        //但是我还想让学生多说几句，还想说我读几年级
+        s1.speak() //我叫小张,我年龄是15 //大家好，我叫小张,我年龄是15,我读高一了
+        //学生类自身没有speak这个方法，找它的原型链Person类
+        
+        //study方法放在了哪里？——类的原型对象上，供实例使用
+        //通过Student实例调用study时，study中的this就是Student实例
+        s1.study() 
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,39 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-07-13 23:17:22
+ * @LastEditTime: 2021-07-13 23:30:20
+ * @FilePath: \03-尚硅谷张天禹\02-代码手敲\react_basic\复习\03_类中方法this的指向.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class Person{
+            constructor(name, age){
+                this.name = name
+                this.age = age
+            }
+
+            speak(){
+                //speak方法放在了哪里？——类的原型对象上，供实例使用
+                //通过Person实例调用speak时，speak中的this就是Person实例
+                console.log(this);
+            }
+        }
+
+        const p1 = new Person('tom',18)
+        p1.speak()  //通过实例调用speak方法
+
+        const x = p1.speak //
+        x()  //undefined !!!
+
+        //类中你所定义的方法，已经在局部开好了严格模式了！！！
+    </script>
+</body>
+</html>

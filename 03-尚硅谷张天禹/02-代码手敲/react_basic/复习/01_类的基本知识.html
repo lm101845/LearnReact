@@ -1,0 +1,60 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-07-13 15:40:58
+ * @LastEditTime: 2021-07-13 16:26:49
+ * @FilePath: \03-尚硅谷张天禹\02-代码手敲\react_basic\复习\01_类的基本知识.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        	/*
+        	总结：
+        	1.类中的构造器不是必须要写的，要对实例进行一些初始化的操作，如添加指定属性时才写。
+        	2.如果A类继承了B类，【且】A类中写了构造器，那么A类构造器中的super是【必须】要调用的。
+        	3.类中所定义的方法，都放在了类的原型对象上，供实例去使用。
+        	*/
+        	//创建一个Person类
+        class Person{
+            //构造器方法——Java里面是构造方法public Person{}这样写
+            //构造器方法：当你创建实例的时候自动调用
+            constructor(name,age){
+                //构造器中的this是谁？——类的实例对象
+                this.name = name;
+                this.age = age;
+            }
+            //一般方法——除了构造器方法外的其他方法
+            speak(){
+                //思考：
+                //speak方法放在了哪里？——类的原型对象上，供实例使用
+                //通过Person实例调用speak时，speak中的this就是Person实例
+                console.log(`我叫${this.name},我年龄是${this.age}`);
+            }
+
+        }
+
+        class Dog {
+            
+        }
+        //创建一个Person的实例对象
+        const p1 = new Person('tom',8);
+        const p2 = new Person('jerry',9);
+        console.log(p1);
+        console.log(p2);
+        p1.speak()
+        p2.speak()
+        p1.speak.call({a:1,b:2}) //我叫undefined,我年龄是undefined
+        //通过call来调用speak
+        //call有一个重要功能，就是更改函数中this指向 
+
+        const d1 = new Dog();
+        console.log(d1);
+    </script>
+</body>
+</html>

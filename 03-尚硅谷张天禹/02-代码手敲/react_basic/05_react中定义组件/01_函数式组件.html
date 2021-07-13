@@ -1,0 +1,58 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-07-13 15:06:30
+ * @LastEditTime: 2021-07-13 15:37:57
+ * @FilePath: \03-尚硅谷张天禹\02-代码手敲\react_basic\05_react中定义组件\01_函数式组件.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>hello_react</title>
+</head>
+
+<body>
+    <!-- 准备好一个“容器” -->
+    <div id="test"></div>
+
+    <!-- 引入react核心库 -->
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <!-- 引入react-dom，用于支持react操作DOM -->
+    <script type="text/javascript" src="../js/react-dom.development.js"></script>
+    <!-- 引入babel，用于将jsx转为js -->
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+
+    <script type="text/babel">
+        //之前我们的第一步都是创建虚拟DOM
+    //这回换了,换成创建组件了
+    // 组件的定义:包含页面局部功能全部代码和资源的集合叫组件
+    // 1.创建函数式组件——把组件里面的资源通过函数来进行保存和展示
+    function Demo(){
+        console.log(this); //undefined //此处的this是undefined，因为babel编译后开启了严格模式
+        //因为这个函数是通过babel进行翻译解析的(script type="text/babel")
+        //babel会开启严格模式，禁止this指向window,于是就变成了undefined
+        return <h2>我是用函数定义的组件(适用于【简单组件】的定义 )</h2>
+    }
+    //2.渲染组件到页面——之前是渲染虚拟DOM到页面
+    // ReactDOM.render(demo,document.getElementById('test'))
+    // ReactDOM.render(<demo/>,document.getElementById('test'))
+    // 小写不行，要大写，否则浏览器把它当成标签，而不是组件了
+    ReactDOM.render(<Demo/>,document.getElementById('test'))
+    // jsx有规定，组件和标签必须要闭合
+
+    	/*
+    	执行了ReactDOM.render(
+    	<MyComponent />.......之后，发生了什么？
+    	1.React解析组件标签，找到了MyComponent组件。
+    	2.发现组件是使用函数定义的，随后调用该函数，将返回的虚拟DOM转为真实DOM，随后呈现在页面中。
+    	*/
+
+        //总结：
+        //1.首字母必须大写
+        //2.函数必须有返回值
+        //3.必须要写组件标签，不要直接写组件的名字
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,61 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-07-13 16:29:58
+ * @LastEditTime: 2021-07-13 16:50:20
+ * @FilePath: \03-尚硅谷张天禹\02-代码手敲\react_basic\05_react中定义组件\02_类式组件.html
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>hello_react</title>
+</head>
+
+<body>
+    <!-- 准备好一个“容器” -->
+    <div id="test"></div>
+
+    <!-- 引入react核心库 -->
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <!-- 引入react-dom，用于支持react操作DOM -->
+    <script type="text/javascript" src="../js/react-dom.development.js"></script>
+    <!-- 引入babel，用于将jsx转为js -->
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+
+    <script type="text/babel">
+        //1.创建类式组件
+        //函数式组件，函数名就是组件名；同理，类式组件，类名就是组件名
+        //React中有一个要求，如果你用类的形式来定义一个组件，那么你的类必须要继承React中一个内置的类
+        class MyComponent extends React.Component{
+            //构造器可写可不写，那么这里写不写呢？
+            //我们这里先不写
+            //但是类式组件也必须要有返回值
+            render(){
+                //render是放在哪里的？—— MyComponent的原型对象上，供实例使用。——那React中的实例呢？？？？
+                        // 你没有写new MyComponent()啊！！！！你自己没有创建这个类的实例，是React自己帮你创建的
+                //render中的this是谁？—— MyComponent的实例对象 <=> MyComponent组件实例对象。
+                console.log('render中的this:',this);
+                return <h2>我是用类定义的组件(适用于【复杂组件】的定义 )</h2>
+
+                // 注意：这个函数名必须要叫render！！！
+            }    
+        } 
+
+        //2.渲染组件到页面
+        ReactDOM.render(<MyComponent/>,document.getElementById('test')) 
+        //注意：这里的render()和类里面的render()函数一毛钱关系没有，只是重名了而已
+        // 你虽然没有写MyComponent实例对象，但是你写了组件标签，你一写组件标签，React就帮你new了一个实例
+
+        /*
+        执行了ReactDOM.render(
+        <MyComponent />.......之后，发生了什么？
+                1.React解析组件标签，找到了MyComponent组件。
+                2.发现组件是使用类定义的，随后new出来该类的实例，并通过该实例调用到原型上的render方法。
+                3.将render返回的虚拟DOM转为真实DOM，随后呈现在页面中。
+        */
+    </script>
+</body>
+
+</html>
