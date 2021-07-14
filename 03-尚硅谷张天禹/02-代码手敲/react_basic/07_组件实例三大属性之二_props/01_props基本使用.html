@@ -1,0 +1,68 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-07-14 18:16:49
+ * @LastEditTime: 2021-07-14 18:38:06
+ * @FilePath: \03-尚硅谷张天禹\02-代码手敲\react_basic\07_组件实例三大属性之二_props\01_props基本使用.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>hello_react</title>
+</head>
+
+<body>
+    <!-- 准备好一个“容器” -->
+    <!-- html标签本身就能写多组key-value组合 -->
+    <div id="test1"></div>
+    <div id="test2"></div>
+    <div id="test3"></div>
+
+    <!-- 引入react核心库 -->
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <!-- 引入react-dom，用于支持react操作DOM -->
+    <script type="text/javascript" src="../js/react-dom.development.js"></script>
+    <!-- 引入babel，用于将jsx转为js -->
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+
+    <script type="text/babel">
+    //创建组件
+    class Person extends React.Component {
+        // state = {name:'TOM',age:8,sex:'男'}
+        render() {
+            // return里面内容 是多级结构的，包一个小括号更加规整一些
+            console.log(this);
+            const {name,age,sex} = this.props
+            return(
+                <ul>
+                 {/*   <li>姓名:{this.state.name}</li>
+                    <li>年龄:{this.state.age}</li>
+                    <li>性别:{this.state.sex}</li>*/}
+
+                    {/*<li>姓名：tom</li>
+                    <li>年龄：8</li>
+                    <li>性别：男</li>*/}
+                    
+                    {/*<li>姓名：{this.props.name}</li>
+                    <li>年龄：{this.props.age}</li>
+                    <li>性别：{this.props.sex}</li>*/}
+
+                    <li>姓名：{name}</li>
+                    <li>年龄：{age}</li>
+                    <li>性别：{sex}</li>
+                </ul>
+            )
+        }
+    }
+ 
+    //渲染组件到页面
+    // 你写了三个标签，人家帮你干活的时候，就会new了3个Person实例
+    // 真实开发中人的信息肯定是服务器返回的
+    ReactDOM.render(<Person name="tom" age="30" sex="女"/>, document.getElementById('test1'))
+    ReactDOM.render(<Person  name="jerry" age="10" sex="男"/>, document.getElementById('test2'))
+    ReactDOM.render(<Person  name="老刘" age="30" sex="女"/>, document.getElementById('test3'))
+    </script>
+</body>
+
+</html>

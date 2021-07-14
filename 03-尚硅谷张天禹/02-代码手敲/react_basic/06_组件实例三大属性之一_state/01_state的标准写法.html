@@ -1,0 +1,164 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-07-13 21:30:10
+ * @LastEditTime: 2021-07-14 17:21:53
+ * @FilePath: \03-尚硅谷张天禹\02-代码手敲\react_basic\06_组件实例三大属性之一_state\state.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>hello_react</title>
+  </head>
+
+  <body>
+    <!-- 准备好一个“容器” -->
+    <div id="test"></div>
+
+    <!-- 引入react核心库 -->
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <!-- 引入react-dom，用于支持react操作DOM -->
+    <script
+      type="text/javascript"
+      src="../js/react-dom.development.js"
+    ></script>
+    <!-- 引入babel，用于将jsx转为js -->
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+
+    <script type="text/babel">
+      // 解决demo函数中this丢失，不指向组件实例对象的问题之最笨的解决方法：
+      // let that
+
+      //1.创建组件——组件实例的三大属性，只能通过类组件进行创建，不能通过函数组件进行创建
+      class Weather extends React.Component {
+        // 之前不需要写构造器，但是这里需要写构造器了
+        constructor(props) {
+          //构造器调用几次？ ———— 1次——只创建了一个Weather实例
+          console.log("constructor执行了一次");
+          super(props);
+          // 如果A继承了B，且A写了构造器，那么A类构造器中必须调用super！！！
+          // this.state = true
+          // 一个组件可能有多个数据，所以不能直接写true或false
+          //React官方要求写成一个对象(默认是null)
+
+          // 初始化状态——这个必须要在构造器里完成，而且也按照要求写的是对象
+          this.state = { isHot: true, isWind: false, mood: "心情不错" };
+          // that = this
+          // 缓存this，以后给外面的demo函数去用
+          
+          //构造器还能解决this指向问题
+          this.changeWeather = this.changeWeather.bind(this);
+          // 加了这句话，可以解决changeWeather中this指向的问题
+        }
+
+        // render(){
+        //     console.log(this);
+        // //    return <h1>今天天气很炎热,今天有大风</h1>
+        //    return <h1>今天天气很{this.state.isHot?'炎热' : '凉爽'},并且今天{this.state.isWind?'有风':'无风'}</h1>
+        // }
+
+        //可以通过对象解构赋值的方式优化一下render代码
+        //render调用几次？ ———— 1+n次 1是初始化的那次 n是状态更新的次数
+        render() {
+        //   console.log(this);
+          console.log('render函数调用了一次');
+          // render里面的this是组件实例对象
+
+          // 对象解构写法
+          /**
+             * let person={name:'yimi ',age:20}
+             let{name,age}=person
+             console.log(name); // 'zhangsan'
+             console.log(age); // 20
+
+             let {name: myName, age: myAge} = person; // myName myAge 属于别名
+             console.log(myName); // 'zhangsan'
+             console.log(myAge); // 20
+             */
+          const { isHot, isWind, mood } = this.state;
+          // this.state是一个对象,它有2个属性，分别是isHot和isWind
+          // return <h1 id="title" onclick="demo()">今天天气很{isHot?'炎热' : '凉爽'},并且今天{isWind?'有风':'无风'}</h1>
+          // onclick不对！onClick对！！
+
+          // return <h1 id="title" onClick="demo()">今天天气很{isHot?'炎热' : '凉爽'},并且今天{isWind?'有风':'无风'}</h1>
+          // 报错 Expected `onClick` listener to be a function, instead got a value of `string` type.要写花括号
+
+          // return <h1 id="title" onClick={demo()}>今天天气很{isHot?'炎热' : '凉爽'},并且今天{isWind?'有风':'无风'}</h1>
+          // 这样写也不行,老师解释过，写了小括号会直接进行调用，并将返回值undefined传给onClick
+
+          // return <h1 id="title" onClick={demo}>今天天气很{isHot?'炎热' : '凉爽'},并且今天{isWind?'有风':'无风'}</h1>
+          // 改一下函数名
+
+          // return <h1 id="title" onClick={changeWeather}>今天天气很{isHot?'炎热' : '凉爽'},并且今天{isWind?'有风':'无风'}</h1>
+
+          return (
+            <h1 id="title" onClick={this.changeWeather}>
+              今天天气很{isHot ? "炎热" : "凉爽"},并且今天
+              {isWind ? "有风" : "无风"},{mood}
+            </h1>
+          );
+          // changeWeather不能直接调用，只能通过Weather实例进行调用！！！！
+        }
+
+        changeWeather() {
+          //changeWeather放在哪里了？——放到了Weather原型对象上面了！！！非常好
+          //通过Person实例调用study时，study中的this就是Person实例
+          //通过Weather实例调用changeWeather时，changeWeather中的this就是Weather实例
+          //   console.log(this);
+          //居然是undefined？？？？？？？？？
+          //这好像挺不讲理的，构造器中的this是Weather实例对象，而这里的this却是undefined
+          // console.log(this.state.isHot);
+          // 但是这里又报错了changeWeather is not defined
+
+          //由于changeWeather是作为onClick的回调，所以不是通过实例调用的，是直接调用
+          //类中的方法默认开启了局部的严格模式，所以changeWeather中的this为undefined
+
+          //获取原来的isHot和isWind值
+          const isHot = this.state.isHot;
+          const isWind = this.state.isWind;
+          //严重注意：状态(state)不可直接更改，下面这行就是直接更改！！！要借助一个内置的API去更改
+          //this.state.isHot = !isHot;
+          // 注意：状态里面的数据是不可以进行直接更改的！！！你这种更改React不认可！！
+          // 即使从代码层面上来说你改成功了，但是React依旧不认可，它当作你没有改！！！
+          // console.log(this.state.isHot);
+          //严重注意：状态必须通过setState进行更新,且更新是一种合并，不是替换。
+          this.setState({
+            // 为什么参数要是对象形式呢？因为你的状态里面有多组Key-value，所以用对象最合适
+            isHot: !isHot,
+            isWind: !isWind,
+          });
+        }
+      }
+
+      //2.渲染组件到页面
+      ReactDOM.render(<Weather />, document.getElementById("test"));
+
+      // const title = document.getElementById('title')
+      // 写法1：不推荐
+      // title.addEventListener('click',()=>{
+      //     console.log('标题被点击了');
+      // })
+
+      // 写法2：不推荐
+      // title.onclick = ()=>{
+      //     console.log('标题被点击了呀');
+      // }
+
+      // 写法3：推荐
+      // 但是这个函数单独在外面，而且最上面还有个let that，很不好，我们应该想办法把changeWeather挪到里面去
+      // function changeWeather(){
+      //     console.log('此处要修改isHot和isWind的值');
+      //     // const {isHot,isWind} = this.state
+      //     // console.log(isHot);
+
+      //     //报错！！Cannot read property 'state' of undefined
+      //     // 因为babel在渲染自定义函数的时候，禁止this指向window,所以这里的this是undefined
+      //     const {isHot,isWind} = that.state
+      //     console.log(isHot + ',' + isWind);
+      // }
+
+      // const w = new Weather()
+      // w.changeWeather()
+    </script>
+  </body>
+</html>

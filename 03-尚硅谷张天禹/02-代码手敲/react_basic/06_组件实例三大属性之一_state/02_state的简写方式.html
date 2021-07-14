@@ -1,0 +1,78 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-07-13 21:30:10
+ * @LastEditTime: 2021-07-14 17:52:02
+ * @FilePath: \03-尚硅谷张天禹\02-代码手敲\react_basic\06_组件实例三大属性之一_state\02_state的简写方式.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>hello_react</title>
+  </head>
+
+  <body>
+    <!-- 准备好一个“容器” -->
+    <div id="test"></div>
+
+    <!-- 引入react核心库 -->
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <!-- 引入react-dom，用于支持react操作DOM -->
+    <script
+      type="text/javascript"
+      src="../js/react-dom.development.js"
+    ></script>
+    <!-- 引入babel，用于将jsx转为js -->
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+
+    <script type="text/babel">
+      //1.创建组件——组件实例的三大属性，只能通过类组件进行创建，不能通过函数组件进行创建
+      class Weather extends React.Component {
+        // 之前不需要写构造器，但是这里需要写构造器了
+        // 所有东西都写到外面了，构造器就不需要写了
+        // constructor(props) {
+        //   super(props);
+        //   //   this.state = { isHot: true, isWind: false, mood: "心情不错" };
+        //   //   this.changeWeather = this.changeWeather.bind(this);
+        // }
+
+        // 拎出来写，不放到构造器里面写
+        //初始化状态
+        state = { isHot: true, isWind: false, mood: "心情不错" };
+
+        render() {
+          console.log(this);
+          const { isHot, isWind, mood } = this.state;
+          return (
+            <h1 id="title" onClick={this.changeWeather}>
+              今天天气很{isHot ? "炎热" : "凉爽"},并且今天
+              {isWind ? "有风" : "无风"},{mood}
+            </h1>
+          );
+        }
+
+        //这个属于在类里面直接定义一个方法
+        // changeWeather() {
+        // 我这么一写changeWeather就相当于放到实例自身身上了！！完美解决this的问题
+        // 把它写成赋值语句，此时Weather原型对象上没有changeWeather了，直接放到实例自身了！！！
+        // changeWeather = function() {
+        // 你写的这些自定义方法基本上都是给事件作为回调来使用的
+        // 以后React里面的自定义方法都要写成赋值语句+箭头函数这样一种形式
+        changeWeather = () => {
+          //不要写普通函数，写箭头函数，问题解决!!
+          //箭头函数一大特定，它没有自己的this，但是如果你在箭头函数里面使用了this关键字，它不报错，它会找外层的this当成它自己的this
+          console.log(this);
+          const isHot = this.state.isHot;
+          const isWind = this.state.isWind;
+          this.setState({
+            isHot: !isHot,
+            isWind: !isWind,
+          });
+        };
+      }
+
+      //2.渲染组件到页面
+      ReactDOM.render(<Weather />, document.getElementById("test"));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,117 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-07-14 18:16:49
+ * @LastEditTime: 2021-07-14 22:03:40
+ * @FilePath: \03-尚硅谷张天禹\02-代码手敲\react_basic\07_组件实例三大属性之二_props\02_对props进行限制.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>hello_react</title>
+  </head>
+
+  <body>
+    <!-- 准备好一个“容器” -->
+    <!-- html标签本身就能写多组key-value组合 -->
+    <div id="test1"></div>
+    <div id="test2"></div>
+    <div id="test3"></div>
+
+    <!-- 引入react核心库 -->
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <!-- 引入react-dom，用于支持react操作DOM -->
+    <script type="text/javascript" src="../js/react-dom.development.js"></script>
+    <!-- 引入babel，用于将jsx转为js -->
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+    <!-- 引入prop-types，用于对组件标签属性进行限制 -->
+    <script type="text/javascript" src="../js/prop-types.js"></script>
+
+    <script type="text/babel">
+      //创建组件
+      class Person extends React.Component {
+        // state = {name:'TOM',age:8,sex:'男'}
+        render() {
+          // return里面内容 是多级结构的，包一个小括号更加规整一些
+          console.log(this);
+          const { name, age, sex } = this.props;
+          // 表明name,age,sex是this.props这个对象的3个属性，下面直接写name,age,sex就行了，更加方便
+
+          //props是只读的
+          //this.props.name = 'jack'
+          //不能这么写，会报错！
+          return (
+            <ul>
+              {/*   <li>姓名:{this.state.name}</li>
+                    <li>年龄:{this.state.age}</li>
+                    <li>性别:{this.state.sex}</li>*/}
+
+              {/*<li>姓名：tom</li>
+                    <li>年龄：8</li>
+                    <li>性别：男</li>*/}
+
+              {/*<li>姓名：{this.props.name}</li>
+                    <li>年龄：{this.props.age}</li>
+                    <li>性别：{this.props.sex}</li>*/}
+
+              <li>姓名：{name}</li>
+              <li>年龄：{age + 1}</li>
+              <li>性别：{sex}</li>
+            </ul>
+          );
+        }
+      }
+
+      //伪代码
+      // Person.属性规则 = {
+      //     name:'必传,字符串'
+      // }
+      
+      //对标签属性进行类型、必要性的限制
+      Person.propTypes = {
+        // propTypes名字不允许改，是React写死的,而且这个p是小写的，和下面的PropTypes(这个P大写)不是一个东西
+        // 你只要敢给类自身加上这个属性，我就认为你在加规则
+        // name:React.PropTypes.string  //这种写法V16以后被弃用了
+        //注意这个PropTypes第一个字母P是大写的！！！！
+        //PropTypes是React里面的内置对象
+        //不过React16以后，这种写法被弃用了，会报错！！因为设计者发现这个约束直接挂载React身上不太合适，因为有些时候不需要
+        //专门弄了一个prop-types.js这个库专门用于对标签属性进行限制，我们来引入这个库
+		name:PropTypes.string.isRequired, //限制name必传，且为字符串
+        sex:PropTypes.string,//限制sex为字符串
+		age:PropTypes.number,//限制age为数值
+		speak:PropTypes.func,//限制speak为函数
+      };
+
+      //指定默认标签属性值
+      Person.defaultProps = {
+          sex:'男男男',//sex默认值为男
+		  age:18 //age默认值为18
+      }
+      //渲染组件到页面
+      // 你写了三个标签，人家帮你干活的时候，就会new了3个Person实例
+      // 真实开发中人的信息肯定是服务器返回的
+
+      // ReactDOM.render(<Person name="tom" age="30" sex="女"/>, document.getElementById('test1'))
+      ReactDOM.render(<Person name='tom' age={30} sex="女" speak = {speak}/>,document.getElementById("test1"));
+      ReactDOM.render(<Person name="jerry" age={19}/>,document.getElementById("test2"));
+      // 我们应该对标签属性的类型进行一些限制，不然别人用你这个组件的时候就会犯错
+
+      // const p = {name:'老刘',age:18,sex:'男'}
+      // 这里的age是数值的18，上面的age是字符串格式
+      const p = { name: "老刘", age: 18, sex:  "男" };
+      console.log("@", ...p);
+      // React中展开运算符虽然有babel进行加持，但是它仅仅只适用于便签运算符中，别的地方都不行<Person{...p}/>
+
+      // ReactDOM.render(<Person  name={p.name} age={p.age} sex={p.sex}/>, document.getElementById('test3'))
+      //如果信息特别多的话，最好让信息批量传进去，而不是一个一个传
+      //简写方式如下：这属于语法糖写法
+      // 不过这么写的一个前提是发AJAX请求捞回来的数据，要保证和name,age,sex一样
+      ReactDOM.render(<Person {...p} />, document.getElementById("test3"));
+      // 注意：...展开运算符是不能够展开对象的
+
+      function speak(){
+          console.log('我说话了');
+      }
+    </script>
+  </body>
+</html>

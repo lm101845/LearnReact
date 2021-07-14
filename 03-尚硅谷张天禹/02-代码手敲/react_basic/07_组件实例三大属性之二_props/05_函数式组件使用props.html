@@ -1,0 +1,58 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-07-14 22:02:15
+ * @LastEditTime: 2021-07-14 22:45:58
+ * @FilePath: \03-尚硅谷张天禹\02-代码手敲\react_basic\07_组件实例三大属性之二_props\05_函数式组件使用props.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>hello_react</title>
+  </head>
+
+  <body>
+    <!-- 准备好一个“容器” -->
+    <!-- html标签本身就能写多组key-value组合 -->
+    <div id="test1"></div>
+
+    <!-- 引入react核心库 -->
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <!-- 引入react-dom，用于支持react操作DOM -->
+    <script type="text/javascript" src="../js/react-dom.development.js"></script>
+    <!-- 引入babel，用于将jsx转为js -->
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+    <!-- 引入prop-types，用于对组件标签属性进行限制 -->
+    <script type="text/javascript" src="../js/prop-types.js"></script>
+
+    <script type="text/babel">
+      //创建组件
+    //   注意：函数式组件可以玩玩props(因为它自己是函数，可以带参数，所以它才能玩props)，但是state和ref是玩不了的(除非用React的最新版本hooks才行)
+        function Person(props){
+            console.log(this);  //undefined
+            console.log(props);
+            const {name,age,sex} = props
+            return (
+                <ul>
+						<li>姓名:{name}</li>
+						<li>性别:{sex}</li>
+						<li>年龄:{age}</li>
+					</ul>
+            ) 
+        }
+        
+        Person.propTypes = {
+		name:PropTypes.string.isRequired, //限制name必传，且为字符串
+        sex:PropTypes.string,//限制sex为字符串
+		age:PropTypes.number,//限制age为数值
+      };
+
+      //指定默认标签属性值
+      Person.defaultProps = {
+          sex:'男男男',//sex默认值为男
+		  age:18 //age默认值为18
+      }
+      ReactDOM.render(<Person name='tom'/>,document.getElementById("test1"));
+    </script>
+  </body>
+</html>

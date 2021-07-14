@@ -1,0 +1,59 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-07-14 18:51:05
+ * @LastEditTime: 2021-07-14 20:41:17
+ * @FilePath: \03-尚硅谷张天禹\02-代码手敲\react_basic\复习\04_展开运算符.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   <script>
+       let arr1 = [1,3,5,7,9]
+       let arr2 = [2,4,6,8,10]
+       console.log(arr1);
+       console.log(...arr1);  
+       //...运算符作用1：可以用于展开一个数组
+
+       let arr3 = [...arr1,...arr2]
+       //...运算符作用2:连接数组(把ar1)
+       console.log(arr3);
+       console.log(...arr3);
+
+     //...运算符作用3：函数传参
+     function sum(...numbers){
+         console.log('@',numbers);
+         return numbers.reduce((preValue,currentValue)=>{
+             return preValue + currentValue
+         })
+     }
+     console.log(sum(1,2,3,4,5,6));
+    //  console.log(sum(1,2));
+
+    let person = {name:'tom',age:18}
+    // let person2 = person
+    //这个不叫复制一个对象，这只是引用关系的一种传递而已 
+
+    //应该这样写
+    //构造字面量对象时使用展开语法
+    let person2 = {...person}
+    // 展开运算符不能展开一个对象
+    //但是如果你外侧写了花括号{}这种形式的话，那就是可以复制一个对象的！！！
+
+    //console.log(...person);
+    // 报错Uncaught TypeError: Found non-callable @@iterator
+
+    person.name = 'jerry'
+    console.log(person2.name);  //此时是tom！！
+
+    //合并
+    let person3 = {...person,name:'jack',address:'地球'}
+    console.log(person3);
+   </script>
+</body>
+</html>

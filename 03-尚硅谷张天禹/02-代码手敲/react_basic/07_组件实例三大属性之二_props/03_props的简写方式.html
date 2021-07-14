@@ -1,0 +1,75 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-07-14 22:02:15
+ * @LastEditTime: 2021-07-14 22:10:52
+ * @FilePath: \03-尚硅谷张天禹\02-代码手敲\react_basic\07_组件实例三大属性之二_props\03_props的简写方式.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>hello_react</title>
+  </head>
+
+  <body>
+    <!-- 准备好一个“容器” -->
+    <!-- html标签本身就能写多组key-value组合 -->
+    <div id="test1"></div>
+    <div id="test2"></div>
+    <div id="test3"></div>
+
+    <!-- 引入react核心库 -->
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <!-- 引入react-dom，用于支持react操作DOM -->
+    <script type="text/javascript" src="../js/react-dom.development.js"></script>
+    <!-- 引入babel，用于将jsx转为js -->
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+    <!-- 引入prop-types，用于对组件标签属性进行限制 -->
+    <script type="text/javascript" src="../js/prop-types.js"></script>
+
+    <script type="text/babel">
+      //创建组件
+      class Person extends React.Component {
+        // state = {name:'TOM',age:8,sex:'男'}
+        render() {
+          // return里面内容 是多级结构的，包一个小括号更加规整一些
+          console.log(this);
+          const { name, age, sex } = this.props;
+          return (
+            <ul>
+              <li>姓名：{name}</li>
+              <li>年龄：{age + 1}</li>
+              <li>性别：{sex}</li>
+            </ul>
+          );
+        }
+
+          //对标签属性进行类型、必要性的限制
+     static propTypes = {
+		name:PropTypes.string.isRequired, //限制name必传，且为字符串
+        sex:PropTypes.string,//限制sex为字符串
+		age:PropTypes.number,//限制age为数值
+		speak:PropTypes.func,//限制speak为函数
+      };
+
+      //指定默认标签属性值
+      static defaultProps = {
+          sex:'男男男',//sex默认值为男
+		  age:18 //age默认值为18
+      }
+      }
+
+    
+      
+      ReactDOM.render(<Person name='tom' age={30} sex="女" speak = {speak}/>,document.getElementById("test1"));
+      ReactDOM.render(<Person name="jerry" age={19}/>,document.getElementById("test2"));
+      const p = { name: "老刘", age: 18, sex:  "男" };
+      console.log("@", ...p);
+      ReactDOM.render(<Person {...p} />, document.getElementById("test3"));
+     
+      function speak(){
+          console.log('我说话了');
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,36 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-07-14 17:33:42
+ * @LastEditTime: 2021-07-14 17:40:43
+ * @FilePath: \03-尚硅谷张天禹\02-代码手敲\react_basic\复习\01_类的基本知识之3.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class Car{
+            constructor(name, price){
+                this.name = name;
+                this.price = price;
+                // this.wheel = 4
+                // 写死，都是4个轮子
+            }
+            //类中可以直接写赋值语句(相当于Java当中的成员变量，静态变量)
+            // 类中可以直接写赋值语句，如下代码的含义是：给Car的实例对象添加一个属性，名为a，值为1 
+            a = 1;
+            wheel = 4;
+        }
+
+        const c1 = new Car('奔驰c63',199);
+        const c2 = new Car('宝马',299);
+        console.log(c1);
+        console.log(c2);
+    </script>
+</body>
+</html>
