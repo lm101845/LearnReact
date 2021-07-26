@@ -1,0 +1,62 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-07-24 16:43:42
+ * @LastEditTime: 2021-07-24 18:10:33
+ * @FilePath: \03-尚硅谷张天禹\02-代码手敲\react_basic\10_react中的收集表单数据\01_非受控组件.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>hello_react</title>
+</head>
+
+<body>
+    <!-- 现用现取就是非受控 -->
+    <!-- 准备好一个“容器” -->
+    <div id="test"></div>
+
+    <!-- 引入react核心库 -->
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <!-- 引入react-dom，用于支持react操作DOM -->
+    <script type="text/javascript" src="../js/react-dom.development.js"></script>
+    <!-- 引入babel，用于将jsx转为js -->
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+
+    <script type="text/babel">
+        //创建组件
+        class Login extends React.Component{
+            handleSubmit = (event)=>{
+                event.preventDefault();
+                //阻止表单的提交
+                //给表单绑定onSubmit，但是要拿的确是用户名和密码的值
+                //从this身上获取节点
+                const{username,password} = this
+                // alert(username)
+                //username是挂载到input输入框的节点，展示的是它的value值！！
+                // alert(username.value)
+                alert(`你输入的用户名的是：${username.value},你输入的密码是：${password.value}`)
+                //这个是可以完成任务的，但是我的要求是：点击后有显示，但是页面并不真正的提交(不调到尚硅谷官网上去)
+                //我通过ajax来提交这些数据(这样可以做到页面不动)
+            }
+            render() {
+                return(
+                    <form action="http://atguigu.com" onSubmit={this.handleSubmit}>
+                        {/* 表单最后要提交，表单提交给谁，action就写谁*/}
+                        {/*form表单默认发出的是get请求，默认带的是query参数*/}
+                        用户名：<input ref={c=>this.username = c}type="text" name='username'/>
+                        密码：<input ref={c=>this.password = c}type="password" name='password'/>
+                        <button>登陆</button>
+                    </form>
+                   
+                )
+            }
+        }
+
+        //渲染组件到页面
+        ReactDOM.render(<Login/>,document.getElementById('test'))
+    </script>
+</body>
+
+</html>

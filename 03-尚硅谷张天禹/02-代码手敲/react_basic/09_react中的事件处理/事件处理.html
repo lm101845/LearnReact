@@ -1,0 +1,75 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-07-22 19:52:24
+ * @LastEditTime: 2021-07-22 20:03:18
+ * @FilePath: \03-尚硅谷张天禹\02-代码手敲\react_basic\09_react中的事件处理\事件处理.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>hello_react</title>
+</head>
+
+<body>
+    <!-- 准备好一个“容器” -->
+    <div id="test">
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+
+    <!-- 引入react核心库 -->
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <!-- 引入react-dom，用于支持react操作DOM -->
+    <script type="text/javascript" src="../js/react-dom.development.js"></script>
+    <!-- 引入babel，用于将jsx转为js -->
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+
+    <script type="text/babel">
+        //创建组件
+    class Demo extends React.Component{
+
+        	/* 
+				(1).通过onXxx属性指定事件处理函数(注意大小写)
+					a.React使用的是自定义(合成)事件, 而不是使用的原生DOM事件 —————— 为了更好的兼容性
+					b.React中的事件是通过【事件委托】方式处理的(委托给组件最外层的元素:比如给ul加事件，而不给里面的li加事件) ————————为了更高效
+				(2).通过event.target得到发生事件的DOM元素对象 ——————————不要过度使用ref
+			 */
+       //创建ref容器
+        myRef = React.createRef()
+        // 这种写法是目前React最推荐的一种写法了
+        
+        showData = (event)=>{
+          console.log(event.target);
+        }
+        
+        //展示左侧输入框的数据
+        showData2 = ()=>{
+            alert(event.target.value);
+            //   当发生事件的元素正好是你要操作的那个元素，则ref是可以避免去写的
+        }
+
+        render(){
+            return(
+                <div>
+                    <input  ref={this.myRef}  type="text" placeholder="点击按钮提示数据"/>&nbsp;
+                    {/*这里的ref=this.myRef省略不了，因为你给按钮添加的click事件，但是你想拿的确实input里面的数据，所以无法省略*/}
+                    <button onClick={this.showData}>点我提示左侧数据</button>&nbsp; 
+                    <input onBlur={this.showData2}type="text" placeholder="失去焦点提示数据"/>
+                </div>
+            )
+        }
+    }
+
+        //渲染组件到页面
+        ReactDOM.render(<Demo a='1' b='2'/>,document.getElementById('test'))
+    </script>
+</body>
+
+</html>

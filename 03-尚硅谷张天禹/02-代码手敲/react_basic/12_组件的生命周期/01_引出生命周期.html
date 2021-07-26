@@ -1,0 +1,129 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-07-26 14:41:54
+ * @LastEditTime: 2021-07-26 16:36:37
+ * @FilePath: \03-尚硅谷张天禹\02-代码手敲\react_basic\12_组件的生命周期\01_引出生命周期.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>hello_react</title>
+</head>
+
+<body>
+    <!-- 准备好一个“容器” -->
+    <div id="test"></div>
+
+    <!-- 引入react核心库 -->
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <!-- 引入react-dom，用于支持react操作DOM -->
+    <script type="text/javascript" src="../js/react-dom.development.js"></script>
+    <!-- 引入babel，用于将jsx转为js -->
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+
+    <script type="text/babel">
+    //创建组件
+    //生命周期回调函数<=>生命周期钩子函数<=>生命周期函数<=>生命周期钩子
+    class Life extends React.Component{
+        state = {opacity:1}
+        // 状态里面的透明度一直在变
+        death = ()=>{
+            //death这个函数作为事件的回调在用
+            //把组件从页面上干掉
+            //挂载mount
+            //卸载unmount
+
+            //注意：你把组件卸载之前记得把定时器给清除一下
+            // clearInterval(this.timer) 
+            //记得this不能丢！！！！
+            //卸载组件
+            ReactDOM.unmountComponentAtNode(document.getElementById('test'))
+        }
+
+        // action = ()=>{
+        //     setInterval(()=>{
+        //         //获取原状态
+        //         let {opacity} = this.state
+        //               //减小0.1
+        //         opacity-=0.1
+        //           if(opacity <= 0) opacity= 1
+        //         //设置新的透明度(更新状态)
+        //         this.setState({
+        //             // opacity:opacity,
+        //             //改了状态后会调用render函数！！
+        //             opacity
+        //         })
+        //     },200)
+            
+        // }
+        
+        //render还有一个兄弟叫componentDid
+        //因为这个函数和render是兄弟，后期通过Life的实例对象点调用的，所以不需要写箭头函数和赋值语句了
+        //componentDidMount调用的时机：组件挂载完毕时调用——意味着它只调用一次
+        componentDidMount() {
+            console.log('componentDidMount');
+            this.timer = setInterval(()=>{
+                //获取原状态
+                let {opacity} = this.state
+                      //减小0.1
+                opacity-=0.1
+                  if(opacity <= 0) opacity= 1
+                //设置新的透明度(更新状态)
+                this.setState({
+                    // opacity:opacity,
+                    //改了状态后会调用render函数！！
+                    opacity
+                })
+            },200)
+        }
+
+        //组件知道自己马上要被卸载了，在卸载之前(人临终前)做一些事情
+        //组件将要卸载
+        componentWillUnmount() {
+              console.log('componentWillUnmount');
+              clearInterval(this.timer)
+              //把清除定时器这个动作放在这里也是可以的
+        }
+        render(){
+            //render调用的时机：初始化渲染、状态更新之后
+            //render总共只调用1+n次
+            console.log('render输出了一次');
+            //类里面的函数不能随便写，现在只能在这里写
+            //最终结论：定时器放到这里不合适
+            // setInterval(()=>{
+            //     //这个定时器是循环定时器，每隔200s执行一次。 
+            //     //每隔200毫秒，从状态里取一下透明度是多少，把当前透明度减小0.1，然后再使用setState把减小后的值再赋回去
+            //     //获取原状态
+            //     // const {opacity} = this.state
+            //     //不能用const，要用let
+            //     let {opacity} = this.state
+            //     //减小0.1
+            //     opacity-=0.1
+            //     // if(opacity === 0) opacity= 1
+            //     // 不好，Js操作小数有瑕疵
+            //     if(opacity <= 0) opacity= 1
+            //     //设置新的透明度(更新状态)
+            //     this.setState({
+            //         // opacity:opacity,
+            //         //改了状态后会调用render函数！！
+            //         opacity
+            //     })
+            // },200)
+            return(
+                <div>
+                    <h2 style={{opacity:this.state.opacity}}>React学不会怎么办</h2>
+                    <button onClick={this.death}>不活了</button>
+                    {/*<button onClick={this.action}>开始变化</button>*/}
+                </div>
+            )
+        }
+    }
+
+    //渲染组件
+    ReactDOM.render(<Life/>,document.getElementById('test'))
+    </script>
+</body>
+
+</html>

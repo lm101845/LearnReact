@@ -1,7 +1,7 @@
 <!--
  * @Author: liming
  * @Date: 2021-07-13 21:30:10
- * @LastEditTime: 2021-07-14 17:52:02
+ * @LastEditTime: 2021-07-21 16:39:52
  * @FilePath: \03-尚硅谷张天禹\02-代码手敲\react_basic\06_组件实例三大属性之一_state\02_state的简写方式.html
 -->
 <!DOCTYPE html>
@@ -54,10 +54,10 @@
         //这个属于在类里面直接定义一个方法
         // changeWeather() {
         // 我这么一写changeWeather就相当于放到实例自身身上了！！完美解决this的问题
-        // 把它写成赋值语句，此时Weather原型对象上没有changeWeather了，直接放到实例自身了！！！
+        // 把它写成【赋值语句】，此时Weather原型对象上没有changeWeather了，直接放到实例自身了！！！
         // changeWeather = function() {
         // 你写的这些自定义方法基本上都是给事件作为回调来使用的
-        // 以后React里面的自定义方法都要写成赋值语句+箭头函数这样一种形式
+        // 以后React里面的自定义方法都要写成【赋值语句+箭头函数】这样一种形式
         changeWeather = () => {
           //不要写普通函数，写箭头函数，问题解决!!
           //箭头函数一大特定，它没有自己的this，但是如果你在箭头函数里面使用了this关键字，它不报错，它会找外层的this当成它自己的this

@@ -1,0 +1,74 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-07-21 16:18:58
+ * @LastEditTime: 2021-07-21 18:12:29
+ * @FilePath: \03-尚硅谷张天禹\02-代码手敲\react_basic\08_组件实例三大属性之三_refs\03_回调ref中回调执行次数的问题.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>03_回调ref中回调执行次数的问题</title>
+    <!-- 字符串形式的ref现在已经不被官方推荐使用了 -->
+</head>
+
+<body>
+    <!-- 准备好一个“容器” -->
+    <div id="test"></div>
+
+    <!-- 引入react核心库 -->
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <!-- 引入react-dom，用于支持react操作DOM -->
+    <script type="text/javascript" src="../js/react-dom.development.js"></script>
+    <!-- 引入babel，用于将jsx转为js -->
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+
+    <script type="text/babel">
+    //创建组件
+    class Demo extends React.Component{ 
+        state = {isHot:true}
+        showInfo = ()=>{
+            const {input1} = this
+            alert(input1.value)
+        }
+        changeWeather = ()=>{
+            //获取原来的状态——解构赋值
+            const {isHot} = this.state
+            //更新状态
+            this.setState({isHot:!isHot})
+        }
+        saveInput = (c)=>{
+            this.input1 = c;
+            console.log('@',c);
+        }
+       render(){
+           const {isHot} = this.state
+           return(
+               <div>
+                <h2>今天天气很{isHot?'炎热' : '凉爽'}</h2>
+                {/*<input ref={(currentNode)=>{this.input1 = currentNode;console.log('@',currentNode)}}type="text"/><br/><br/>*/}
+                {/*这里面的函数就叫做内联函数*/}
+                {/*含义：拿到当前ref所在的节点，React帮你调用这个函数，然后帮你传进来了，传进来之后挂载到实例自身，放在input1这个属性上了*/}
+                {/*探讨这个函数它执行几次的问题：首先它肯定会执行一次*/}
+                {/*我把这里面写2个函数，第二个函数用来统计到底执行了几次*/}
+                {/*如果 ref 回调函数是以内联函数的方式定义的，在更新过程中(即render函数要调用第二次)它会被执行两次，第一次传入参数 null，
+                然后第二次会传入参数 DOM 元素(即我们那个DOM节点)。这是因为在每次渲染时会创建一个新的函数实例，所以 React 清空旧的
+                ref 并且设置新的。通过将 ref 的回调函数定义成 class 的绑定函数的方式可以避免上述问题，
+                但是大多数情况下它是无关紧要的。*/}
+                <input type="text" ref={this.saveInput}/><br/><br/>
+                {/*以后就写内联的就行，没有什么大的影响*/}
+                <button onClick={this.showInfo}>点我提示输入数据</button>
+                <button onClick={this.changeWeather}>点我切换天气</button>
+              </div>
+           )
+       }
+    }
+
+        //渲染组件到页面
+        ReactDOM.render(<Demo/>,document.getElementById('test'))
+    
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,33 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-07-24 20:43:27
+ * @LastEditTime: 2021-07-24 21:12:14
+ * @FilePath: \03-尚硅谷张天禹\02-代码手敲\react_basic\复习\06_演示函数的柯里化.html
+-->
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>Document</title>
+	</head>
+	<body>
+		<script type="text/javascript" >
+			/* function sum(a,b,c){
+				return a+b+c
+			} */
+			
+			function sum(a){
+				return(b)=>{
+
+					return (c)=>{
+                   
+						return a+b+c
+                    
+					}
+				}
+			}
+			const result = sum(1)(2)(3)
+			console.log(result);
+		</script>
+	</body>
+</html>

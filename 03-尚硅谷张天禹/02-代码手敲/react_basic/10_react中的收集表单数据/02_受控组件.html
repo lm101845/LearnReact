@@ -1,0 +1,78 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-07-24 16:43:42
+ * @LastEditTime: 2021-07-24 18:14:10
+ * @FilePath: \03-尚硅谷张天禹\02-代码手敲\react_basic\10_react中的收集表单数据\02_受控组件.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>hello_react</title>
+</head>
+
+<body>
+    <!-- 随着你的输入决定状态就是受控 -->
+    <!-- 建议大家还是写受控式组件，受控式组件里面一个ref都没有用 -->
+    <!-- 而非受控组件里面，你有几个输入项，你就有几个ref -->
+    <!-- 准备好一个“容器” -->
+    <div id="test"></div>
+
+    <!-- 引入react核心库 -->
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <!-- 引入react-dom，用于支持react操作DOM -->
+    <script type="text/javascript" src="../js/react-dom.development.js"></script>
+    <!-- 引入babel，用于将jsx转为js -->
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+
+    <script type="text/babel">
+        //创建组件
+        class Login extends React.Component{
+            //初始化状态
+            state = {
+                username:'',
+                password:'',
+            }
+            //保存用户名到状态中
+            saveUsername = (event)=>{
+                // console.log('@');
+                // console.log(event.target.value);
+                this.setState({username:event.target.value})
+            }
+
+            //保存密码到状态中
+            savePassword = (event)=>{
+                this.setState({password:event.target.value})
+            }
+
+            handleSubmit = (event)=>{ 
+                event.preventDefault();
+                // const{username,password} = this
+                const{username,password} = this.state
+                //以后取就从state里面取了，自身已经没有了
+                //这里的username,password拿到的不是节点，而是真正的值！！！
+                // 你怎么取决定了你放在哪里了，你取出来的东西是什么决定了你怎么放的
+                // alert(`你输入的用户名的是：${username.value},你输入的密码是：${password.value}`)
+                alert(`你输入的用户名的是：${username},你输入的密码是：${password}`)
+            }
+            render() {
+                return(
+                    <form onSubmit={this.handleSubmit}>
+                        {/* 表单最后要提交，表单提交给谁，action就写谁*/}
+                        {/*form表单默认发出的是get请求，默认带的是query参数*/}
+                        用户名：<input onChange = {this.saveUsername} type="text" name='username'/>
+                        密码：<input  onChange = {this.savePassword} type="password" name='password'/>
+                        <button>登陆</button>
+                    </form>
+                   
+                )
+            }
+        }
+
+        //渲染组件到页面
+        ReactDOM.render(<Login/>,document.getElementById('test'))
+    </script>
+</body>
+
+</html>

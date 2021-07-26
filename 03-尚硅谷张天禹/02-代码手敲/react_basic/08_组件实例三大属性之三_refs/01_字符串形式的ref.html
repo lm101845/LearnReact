@@ -1,0 +1,79 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-07-21 16:18:58
+ * @LastEditTime: 2021-07-21 16:52:41
+ * @FilePath: \03-尚硅谷张天禹\02-代码手敲\react_basic\08_组件实例三大属性之三_refs\01_字符串形式的ref.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>字符串形式的ref</title>
+    <!-- 字符串形式的ref现在已经不被官方推荐使用了 -->
+</head>
+
+<body>
+    <!-- 准备好一个“容器” -->
+    <div id="test"></div>
+
+    <!-- 引入react核心库 -->
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <!-- 引入react-dom，用于支持react操作DOM -->
+    <script type="text/javascript" src="../js/react-dom.development.js"></script>
+    <!-- 引入babel，用于将jsx转为js -->
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+
+    <script type="text/babel">
+    //创建组件
+    class Demo extends React.Component{
+        // 之前天气炎不炎热这个写法——需要写赋值语句和箭头函数，这样this的指向不会丢
+        //展示左侧输入框的数据
+        showData = ()=>{
+            // console.log('@');
+            //写法1：
+            console.log(this);
+            console.log(this.refs.input1);
+            const {input1} = this.refs
+            // this.refs是一个对象，里面有很多属性，其中一个属性叫input1，赋值为变量input1
+            //即等价写法为input1 = this.refs.input1
+            alert(input1.value)
+            // debugger;
+            // const input = document.getElementById('input1')
+            // alert(input.value)
+            // 这样功能是可以完成的，但是有点不太合理
+            //你都用上React了，就没必要写【document.getElementById('input1')】这种原生写法了了
+            //写法2：React里面使用ref给你封装了一个类似的东西
+            // 以后我们可以使用ref，就不用写id了
+
+        }
+
+        //展示左侧输入框的数据
+        showData2 = ()=>{
+            const {input2} = this.refs
+            alert(input2.value)
+        }
+
+        render(){
+            return(
+                <div>
+                    <input /*id='input1'*/ ref='input1' type="text" placeholder="点击按钮提示数据"/>&nbsp;
+                    {/*input标签必须要闭合，不然会飘红*/}
+                    <button ref='button1'onClick={this.showData}>点我提示左侧数据</button>&nbsp; 
+                    {/*原生的onclick不让你用，它自己封装了一套，还得把C大写*/}
+                    <input ref='input2' onBlur={this.showData2}type="text" placeholder="失去焦点提示数据"/>
+                    {/*原生失去焦点写法为onblur,jsx写法为onBlur*/}
+
+                    {/*注意：input1和input2外面都是双引号，属于字符串形式的ref*/}
+                </div>
+            )
+        }
+    }
+
+        //渲染组件到页面
+        ReactDOM.render(<Demo a='1' b='2'/>,document.getElementById('test'))
+    
+    </script>
+</body>
+
+</html>
