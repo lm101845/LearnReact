@@ -1,7 +1,7 @@
 <!--
  * @Author: liming
  * @Date: 2021-07-26 16:38:15
- * @LastEditTime: 2021-07-26 18:47:02
+ * @LastEditTime: 2021-07-28 22:22:21
  * @FilePath: \03-尚硅谷张天禹\02-代码手敲\react_basic\12_组件的生命周期\02_react生命周期(旧).html
 -->
 <!DOCTYPE html>
@@ -113,8 +113,58 @@
             }
 		}
 		
+        //父组件A
+        class A extends React.Component{
+            state = {carName:'奔驰'}
+            changeCar = ()=>{
+                this.setState({carName:'奥拓'})
+            }
+            render() {
+                return(
+                    <div>
+                        <div>我是A组件</div>
+                        <button onClick={this.changeCar}>换车</button>
+                        <B carName={this.state.carName}/>
+                        {/*想让B组件来帮A组件展示汽车，A组件自己不亲自展示，需要在B组件里传递一些东西*/}
+                    </div>
+                )
+            }
+        }
+         
+        //子组件B
+         class B extends React.Component{
+            //  componentDidMount(){
+            //      console.log('B---componentDidMount');
+            //  }
+             //组件将要接收【新的】props钩子
+             componentWillReceiveProps(props){
+                 console.log('B--componentWillReceiveProps',props);
+             }
+             //控制组件更新的阀门
+             shouldComponentUpdate(){
+                 console.log('B---shouldComponentUpdate');
+                 return true
+                 //必须要写一个布尔值
+             }
+              //组件将要更新的钩子
+            componentWillUpdate(){
+                console.log('B---componentWillUpdate');
+            }
+            
+              //组件更新完毕的钩子
+            componentDidUpdate(){
+                console.log('B---componentDidUpdate');
+            }
+            render() {
+                console.log('B---render');
+                return(
+                    <div>我是B组件，接收到的车是：{this.props.carName}</div>
+                )
+            }
+        }
 		//渲染组件
 		ReactDOM.render(<Count/>,document.getElementById('test'))
+		// ReactDOM.render(<A/>,document.getElementById('test'))
 	</script>
 </body>
 </html>
