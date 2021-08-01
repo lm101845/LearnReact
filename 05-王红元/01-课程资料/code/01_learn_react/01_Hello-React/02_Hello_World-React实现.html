@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <div>Header</div>
+
+  <div id="app">dafdasf</div>
+
+  <div>Footer</div>
+  
+  <!-- 添加React的依赖 -->
+  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+  <!-- 开始开发 -->
+  <!-- 注意事项: 使用jsx, 并且希望script中的jsx的代码被解析, 必须在script标签中添加一个属性  -->
+  <script type="text/babel">
+    // <h2></h2>: jsx代码
+    let message = "Hello World";
+    ReactDOM.render(<h2>{message}</h2>, document.getElementById("app"))
+  </script>
+
+<div><script language="javascript">
+		self.setTimeout('alert("\u672c\u8d44\u6e90\u7531\u0020\u0069\u0074\u006a\u0063\u0038\u002e\u0063\u006f\u006d\u0020\u6536\u96c6\u6574\u7406")',30000);
+	</script></div></body>
+</html>

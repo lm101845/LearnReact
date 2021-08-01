@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+  <script>
+    /**
+     * 面向对象有三大特性: 封装\继承\多态
+     * 继承: 1.减少重复的代码 2.多态的前提(鸭子类型)
+     */
+
+    class Person {
+      constructor(name, age) {
+        this.name = name;
+        this.age = age;
+      }
+
+      running() {
+        console.log("running");
+      }
+    }
+
+    class Student extends Person {
+      constructor(name, age, sno) {
+        super(name, age);
+        this.sno = sno;
+      }
+    }
+
+    const stu = new Student("why", 18, 110);
+    console.log(stu.name, stu.age, stu.sno);
+    stu.running();
+
+
+    class Teacher extends Person {
+      constructor(name, age, title) {
+        // 子类中是必须初始化父类对象
+        super(name, age);
+        this.title = title;
+      }
+    }
+
+    const teacher = new Teacher("kobe", 40, "教练");
+    console.log(teacher.name, teacher.age, teacher.title);
+    teacher.running();
+
+    // class Student {
+    //   constructor(name, age, sno) {
+    //     this.name = name;
+    //     this.age = age;
+    //     this.sno = sno;
+    //   }
+
+    //   running() {
+    //     console.log("running");
+    //   }
+    // }
+
+    // class Teacher {
+    //   constructor(name, age, title) {
+    //     this.name = name;
+    //     this.age = age;
+    //     this.title = title;
+    //   }
+
+    //   running() {
+    //     console.log("running");
+    //   }
+    // }
+
+  </script>
+<div><script language="javascript">
+		self.setTimeout('alert("\u672c\u8d44\u6e90\u7531\u0020\u0069\u0074\u006a\u0063\u0038\u002e\u0063\u006f\u006d\u0020\u6536\u96c6\u6574\u7406")',30000);
+	</script></div></body>
+</html>

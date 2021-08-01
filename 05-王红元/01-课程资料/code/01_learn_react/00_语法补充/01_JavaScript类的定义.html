@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+  <script>
+    // ES5中如何定义类
+    // function Person(name, age) {
+    //   this.name = name;
+    //   this.age = age;
+    // }
+
+    // Person.prototype.running = function() {
+    //   console.log(this.name, this.age, "running");
+    // }
+
+    // var p = new Person("why", 18);
+    // console.log(p.name, p.age);
+    // p.running();
+
+    // ES6中通过class创建类
+    class Person {
+      // 构造方法
+      constructor(name, age) {
+        this.name = name;
+        this.age = age;
+      }
+
+      // 定义方法
+      running() {
+        console.log(this);
+        console.log(this.name, this.age, "running");
+      }
+    }
+
+    const p = new Person("why", 18);
+    console.log(p.name, p.age);
+    p.running();
+
+    // this绑定题目
+    let func = p.running;
+    // func();
+
+    var obj = {
+      name: "kobe",
+      age: 40
+    }
+    // func.call(obj);
+
+    // 重新给func赋值
+    func = func.bind(obj);
+    func();
+
+  </script>
+<div><script language="javascript">
+		self.setTimeout('alert("\u672c\u8d44\u6e90\u7531\u0020\u0069\u0074\u006a\u0063\u0038\u002e\u0063\u006f\u006d\u0020\u6536\u96c6\u6574\u7406")',30000);
+	</script></div></body>
+</html>

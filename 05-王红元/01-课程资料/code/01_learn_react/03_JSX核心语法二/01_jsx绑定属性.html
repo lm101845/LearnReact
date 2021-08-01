@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <div id="app"></div>
+
+  <div style="color: red; font-size: 30px;"></div>
+
+  <script src="../react/react.development.js"></script>
+  <script src="../react/react-dom.development.js"></script>
+  <script src="../react/babel.min.js"></script>
+
+  <script type="text/babel">
+    function getSizeImage(imgUrl, size) {
+      return imgUrl + `?param=${size}x${size}`
+    }
+
+    class App extends React.Component {
+      constructor(props) {
+        super(props);
+
+        this.state = {
+          title: "标题",
+          imgUrl: "http://p2.music.126.net/L8IDEWMk_6vyT0asSkPgXw==/109951163990535633.jpg",
+          link: "http://www.baidu.com",
+          active: true
+        }
+      }
+
+      render() {
+        const { title, imgUrl, link, active } = this.state;
+        return (
+          <div>
+            {/* 1.绑定普通属性 */}
+            <h2 title={title}>我是标题</h2>
+            <img src={getSizeImage(imgUrl, 140)} alt=""/>
+            <a href={link} target="_blank">百度一下</a>
+
+            {/* 2.绑定class */}
+            <div className="box title">我是div元素</div>
+            <div className={"box title " + (active ? "active": "")}>我也是div元素</div>
+            <label htmlFor=""></label>
+
+            {/* 3.绑定style */}
+            <div style={{color: "red", fontSize: "50px"}}>我是div,绑定style属性</div>
+          </div>
+        )
+      }
+    }
+
+    ReactDOM.render(<App />, document.getElementById("app"));
+  </script>
+
+<div><script language="javascript">
+		self.setTimeout('alert("\u672c\u8d44\u6e90\u7531\u0020\u0069\u0074\u006a\u0063\u0038\u002e\u0063\u006f\u006d\u0020\u6536\u96c6\u6574\u7406")',30000);
+	</script></div></body>
+
+</html>

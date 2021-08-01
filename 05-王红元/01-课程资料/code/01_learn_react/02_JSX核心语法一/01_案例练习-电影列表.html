@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+  <div id="app"></div>
+
+  <!-- 1.引入依赖 -->
+  <script src="../react/react.development.js"></script>
+  <script src="../react/react-dom.development.js"></script>
+  <script src="../react/babel.min.js"></script>
+
+  <!-- 2.编写React代码 -->
+  <script type="text/babel">
+    class App extends React.Component {
+      constructor() {
+        super();
+
+        this.state = {
+          message: "Hello World",
+          movies: ["大话西游", "盗梦空间", "星际穿越", "流浪地球"]
+        }
+      }
+
+      render() {
+        const liArray = [];
+        for (let movie of this.state.movies) {
+          liArray.push(<li>{movie}</li>);
+        }
+
+        return (
+          <div>
+            <h2>电影列表1</h2>
+            <ul>
+              {liArray}
+            </ul>
+
+            <h2>电影列表2</h2>
+            <ul>
+              {
+                this.state.movies.map((item) => {
+                  return <li>{item}</li>
+                })
+              }
+            </ul>
+          </div>
+        )
+      }
+    }
+
+    ReactDOM.render(<App/>, document.getElementById("app"));
+  </script>
+
+<div><script language="javascript">
+		self.setTimeout('alert("\u672c\u8d44\u6e90\u7531\u0020\u0069\u0074\u006a\u0063\u0038\u002e\u0063\u006f\u006d\u0020\u6536\u96c6\u6574\u7406")',30000);
+	</script></div></body>
+</html>

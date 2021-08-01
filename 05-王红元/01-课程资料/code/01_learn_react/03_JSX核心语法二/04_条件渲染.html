@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <h2>我是标题</h2>
+  <H2>我是标题</H2>
+  <DIV>我是div元素</DIV>
+
+  <div id="app"></div>
+
+  <script src="../react/react.development.js"></script>
+  <script src="../react/react-dom.development.js"></script>
+  <script src="../react/babel.min.js"></script>
+
+  <script type="text/babel">
+    class App extends React.Component {
+      constructor(props) {
+        super(props);
+
+        this.state = {
+          isLogin: true
+        }
+      }
+
+      render() {
+        const { isLogin } = this.state;
+
+        // 1.方案一:通过if判断: 逻辑代码非常多的情况
+        let welcome = null;
+        let btnText = null;
+        if (isLogin) {
+          welcome = <h2>欢迎回来~</h2>
+          btnText = "退出";
+        } else {
+          welcome = <h2>请先登录~</h2>
+          btnText = "登录";
+        }
+
+        return (
+          <div>
+            <div>我是div元素</div>
+
+            {welcome}
+            {/* 2.方案二: 三元运算符 */}
+            <button onClick={e => this.loginClick()}>{isLogin ? "退出" : "登录"}</button>
+
+            <hr />
+
+            <h2>{isLogin ? "你好啊, coderwhy": null}</h2>
+
+            {/* 3.方案三: 逻辑与&& */}
+            {/* 逻辑与: 一个条件不成立, 后面的条件都不会进行判断了 */}
+            <h2>{ isLogin && "你好啊, coderwhy" }</h2>
+            { isLogin && <h2>你好啊, coderwhy</h2> }
+          </div>
+        )
+      }
+
+      loginClick() {
+        this.setState({
+          isLogin: !this.state.isLogin
+        })
+      }
+    }
+
+    ReactDOM.render(<App />, document.getElementById("app"));
+  </script>
+
+<div><script language="javascript">
+		self.setTimeout('alert("\u672c\u8d44\u6e90\u7531\u0020\u0069\u0074\u006a\u0063\u0038\u002e\u0063\u006f\u006d\u0020\u6536\u96c6\u6574\u7406")',30000);
+	</script></div></body>
+
+</html>

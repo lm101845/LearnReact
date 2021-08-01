@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+  <script>
+    const names = ["abc", "cba", "nba", "mba"];
+    /**
+     * 回调函数有三个参数:
+     *  参数一: 执行时的对应元素
+     *  参数二: 对应的下标值
+     *  参数三: 完整的数组对象
+     */
+    const newNames = names.map((item, index, arr) => {
+      return item + "000"
+    })
+    console.log(newNames);
+
+    // const newNames1 = names.forEach((item) => {
+    //   return item + "111";
+    // })
+
+    // console.log(newNames1);
+
+    const nums = [110, 123, 50, 32, 55, 10, 8, 333];
+    const newNums = nums.filter((item, index, arr) => {
+      return item >= 50;
+    })
+    console.log(newNums);
+
+    const newNums2 = nums.filter(item => {
+      return item % 2 === 0;
+    })
+    console.log(newNums2);
+
+    console.log(nums.slice(-2));
+    
+  </script>
+<div><script language="javascript">
+		self.setTimeout('alert("\u672c\u8d44\u6e90\u7531\u0020\u0069\u0074\u006a\u0063\u0038\u002e\u0063\u006f\u006d\u0020\u6536\u96c6\u6574\u7406")',30000);
+	</script></div></body>
+</html>
