@@ -1,0 +1,51 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-08-02 19:18:34
+ * @LastEditTime: 2021-08-02 19:37:09
+ * @FilePath: \03-尚硅谷张天禹(质量好)\02-代码手敲\react_basic\13_DOM的Diffing算法\01_验证Diffing算法.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>hello_react</title>
+</head>
+
+<body>
+    <!-- 准备好一个“容器” -->
+    <div id="test"></div>
+
+    <!-- 引入react核心库 -->
+    <script type="text/javascript" src="../js/17.0.1/react.development.js"></script>
+    <!-- 引入react-dom，用于支持react操作DOM -->
+    <script type="text/javascript" src="../js/17.0.1/react-dom.development.js"></script>
+    <!-- 引入babel，用于将jsx转为js -->
+    <script type="text/javascript" src="../js/17.0.1/babel.min.js"></script>
+
+    <script type="text/babel">
+    class Time extends React.Component {
+        state = {date:new Date()}
+        componentDidMount(){
+            setInterval(()=>{
+                this.setState({date:new Date})
+            },1000)
+        }
+        render() {
+           return(
+                <div>
+                <h1>hello</h1>
+                <input type="text"/>
+                <span>现在是:{this.state.date.toTimeString()}</span>
+                <input type="text"/>
+                {/*Diffing算法最小的力度是标签，而且不止遍历了一层，有多少层就遍历多少层*/}
+            </div>
+           )
+        }
+    }
+
+    ReactDOM.render(<Time/>,document.getElementById('test'))
+    </script>
+</body>
+
+</html>
