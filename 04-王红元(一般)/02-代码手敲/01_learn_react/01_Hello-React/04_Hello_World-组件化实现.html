@@ -1,0 +1,72 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-08-04 23:31:36
+ * @LastEditTime: 2021-08-05 00:48:19
+ * @FilePath: \04-王红元(一般)\02-代码手敲\01_learn_react\01_Hello-React\04_Hello_World-组件化实现.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width , initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <!-- 添加React的依赖 -->
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+
+    <script type="text/babel">
+      // 封装App组件
+        class App extends React.Component {
+            //ES6的类里面，如果我们想要定义一个属性，一般在constructor里面
+            constructor(){
+                super()
+                console.log(this);
+                //因为类App继承了React的Component类，要求必须调用一下super函数——目的是为了初始化父类的实例(才能使用this)
+                // message2 = 'Hello World2'
+                // 这样写报错，提示未定义
+                //这里的this指的是组件的实例对象
+                // this.message = 'Hello World'
+                // 数据不能直接这么写
+                this.state = {
+                    message:'Hello World'
+                }
+            }
+            render() {
+                // 永远不要手动调用render函数，要由React框架来调用
+                return(
+                    <div>
+                        {/*jsx只能有一个根，所以外面给它写个div*/}
+                        {/*<h2>Hello World写死了</h2> */}
+                        {/*<h2>{this.message}</h2>*/}
+                        <h2>{this.state.message}</h2>
+                        {/*<h2>{this.message2}</h2>*/}
+                        <button onClick={this.btnClick.bind(this)}>改变文本</button>
+                    </div>
+                )
+            }
+
+            btnClick(){
+                console.log('按钮发生了点击');
+                console.log(this);
+                // this.message = 'Hello React'
+                // message改是改了，但是你没有告诉React框架需要重新渲染，所以页面还是没有更新
+                // 所以需要通过一个函数来修改数据
+                this.setState({
+                    message:'Hello React'
+                })
+            }
+        }
+      // ReactDOM.render(渲染的内容(把它封装为一个组件),document.getElementById('app'))
+      ReactDOM.render(
+        <App/>,
+        document.getElementById("app")
+      );
+    </script>
+  </body>
+</html>
