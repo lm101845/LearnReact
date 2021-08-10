@@ -1,0 +1,78 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-08-10 16:55:31
+ * @LastEditTime: 2021-08-10 23:34:31
+ * @FilePath: \04-王红元(一般)\02-代码手敲\01_learn_react\02_JSX的核心语法一\01_案例练习-电影列表.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <!-- 1.添加React的依赖 -->
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+
+    <!-- 2.编写react代码 -->
+    <script type="text/babel">
+      class App extends React.Component {
+        //类里面是可以有构造方法的
+        constructor() {
+          super();
+          this.state = {
+            //在构造器里面可以搞一个state
+            message: "构造器里面的Hello World",
+            movies: ["星际穿越", "无姓之人", "纸牌屋", "黑客军团"],
+          };
+        }
+        render() {
+          //组件里面必须要实现一个方法，这个是所有组件都必须要实现的，就是render方法
+          // for(let movie of movies){
+          const liArray = [];
+          for (let movie of this.state.movies) {
+            liArray.push(<li>{movie}</li>);
+          }
+          return (
+            <div>
+              {/* <h2>Hello World</h2>*/}
+              {/* <h2>{this.state.message}</h2>*/}
+              <h2>电影列表1</h2>
+              <ul>
+                {/*<li>电影1</li>
+                           <li>电影2</li>
+                           <li>电影3</li>
+                           <li>电影4</li>
+                           <li>电影5</li>*/}
+                {/*方法1——很傻的方法*/}
+                {/*      <li>{this.state.movies[0]}</li>
+                           <li>{this.state.movies[1]}</li>
+                           <li>{this.state.movies[2]}</li>
+                           <li>{this.state.movies[3]}</li>*/}
+                {/*方法2——for循环*/}
+                {liArray}
+                {/*把一个数组放到ul里面了，但是这个数组里面又有多个li*/}
+              </ul>
+
+                <h2>电影列表2</h2>
+                <ul>
+                  {this.state.movies.map((item) => {
+                    // return <li>item</li>;
+                    // 注意：外面不用写引号的
+                    return <li>{item}</li>;
+                    //注意：item是变量，外面要写大括号
+                  })}
+                </ul>
+            </div>
+          );
+        }
+      }
+      ReactDOM.render(<App />, document.getElementById("app"));
+    </script>
+  </body>
+</html>

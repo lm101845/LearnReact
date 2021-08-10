@@ -1,0 +1,78 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-08-10 14:46:30
+ * @LastEditTime: 2021-08-10 16:11:52
+ * @FilePath: \04-王红元(一般)\02-代码手敲\01_learn_react\00_语法补充\01_JS中类的定义.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //ES5中如何定义类——构造函数(习惯首字母大写)
+      function Person(name, age) {
+        this.name = name;
+        //把传进来的参数赋值给对象
+        this.age = age;
+      }
+
+      Person.prototype.running = function () {
+          //running方法要写到原型上比较合适，比较节省内存
+        console.log(this.name, this.age, "running");
+      };
+      //如果不用new 关键字调用，它就是普通的函数
+      //加了new关键字，它就是构造函数
+      const p = new Person("why", 18);
+      console.log(p.name);
+      console.log(p.age);
+      p.running();
+
+      console.log("=======================");
+      // ES6中通过class创建类
+      class People {
+        //在ES6里面，所有的类都可以实现一个方法，叫构造方法
+        constructor(name, age) {
+            // 名字constructor是固定的，不能改
+            //构造方法在创建实例的时候会自动执行
+            //这个构造方法我们不是手动调用的，是自动调用的
+          this.name = name;
+          this.age = age;
+        }
+
+        //定义方法——这里在构建实例的时候是不会重复定义的
+        //和ES5里面在原型里面定义方法效果是一样的
+        running(){
+            console.log(this);
+            console.log(this.name, this.age, "running");
+        }
+      }
+
+      const p1 = new People("tom", 20);
+      console.log(p1);
+      p1.running();
+      console.log(this);
+      //this绑定题目
+      let  func = p1.running
+    //   func()
+    // func()就相当于p1.running(),它是可以正常调用的
+    //不过调用会报错：Cannot read property 'name' of undefined
+    //显示的this是undefined，因为没有给this绑定任何东西——this指向的是window(懂)
+
+      const obj = {
+          name:'Kobe',
+          age:40
+      }
+
+      func.apply(obj)
+
+      //重新给func赋值
+      func = func.bind(obj)
+      func()
+    </script>
+  </body>
+</html>
