@@ -1,3 +1,9 @@
+/*
+ * @Author: liming
+ * @Date: 2020-12-07 16:43:34
+ * @LastEditTime: 2021-08-11 20:35:04
+ * @FilePath: \03-尚硅谷张天禹(好)\01-课程资料\源码\react_staging\03_src_TodoList案例\components\Item\index.jsx
+ */
 import React, { Component } from 'react'
 import './index.css'
 

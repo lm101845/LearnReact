@@ -1,6 +1,81 @@
 <!--
  * @Author: liming
  * @Date: 2021-08-10 23:40:53
- * @LastEditTime: 2021-08-10 23:40:53
- * @FilePath: \04-王红元(一般)\02-代码手敲\01_learn_react\02_JSX的核心语法一\02_案例练习_计数器.html
+ * @LastEditTime: 2021-08-11 08:33:55
+ * @FilePath: \04-王红元\02-代码手敲\01_learn_react\02_JSX的核心语法一\02_案例练习_计数器.html
 -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width",initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+        
+    </div>
+
+    <!-- 1.添加React的依赖 -->
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+
+    <!-- 2.编写React代码 -->
+    <script type="text/babel">
+      class App extends React.Component {
+        constructor(props) {
+          super(props);
+
+          this.state = {
+            //这个state是异步的
+                counter:0,
+          }
+        }
+
+        render() {
+          return(
+            //   写了小括号可以换行，不写也行，但是不能换行
+              <div>
+                {/*<h2>当前计数：{counter}</h2>*/}
+                {/*我们以后用Hooks的话才不需要写this.state,现在都要写*/}
+                <h2>当前计数：{this.state.counter}</h2>
+                <button onClick={this.increment.bind(this)}>+1</button>
+                {/*<button onClick={this.increment}>+1</button>*/}
+                <button onClick={this.decrement.bind(this)}>-1</button>
+               {/* <button onClick={this.decrement}>-1</button>*/}
+               {/*<div></div>最外层只能有一个根元素，你再写一个根元素会报错*/}
+              </div>
+              )
+        }
+
+        //在class类里面定义点击加1和减1的事件
+        increment(){
+            // 这个函数不是我们在调用，是React内部在调用的
+            // 而React内部在调用的时候，它并不清楚我们绑定的是怎么样的this,所以它先给你定义的this是undefined
+            // console.log('+1');
+            // 这个this是正确的this吗？——不是
+            // console.log(this);  
+            //<button onClick={this.increment}>+1</button>——这里的this是undefined!!
+            //  <button onClick={this.increment.bind(this)}>+1</button>——这里的this才是实例！！！
+            this.setState({
+                // 为什么我这里可以调用setState函数？？我自己是没有定义过这个函数的
+                //愿意：我们App继承自父类，这个父类原型里面是有setState的，我们是相当于在父类里面继承来的这个函数
+                // counter:this.state.counter++
+                // 这样写不起效果
+                counter:this.state.counter + 1
+            })
+        }
+
+        decrement(){
+            // console.log('-1');
+           this.setState({
+                counter:this.state.counter - 1
+           })
+        }
+      }
+      ReactDOM.render(<App />,document.getElementById("app"));
+    </script>
+  </body>
+</html>

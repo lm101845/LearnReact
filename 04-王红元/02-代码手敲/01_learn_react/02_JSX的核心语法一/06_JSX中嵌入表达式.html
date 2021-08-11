@@ -1,0 +1,63 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-08-11 08:50:09
+ * @LastEditTime: 2021-08-11 08:58:09
+ * @FilePath: \04-王红元\02-代码手敲\01_learn_react\02_JSX的核心语法一\06_JSX中嵌入表达式.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width",initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <!-- 1.添加React的依赖 -->
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+
+    <!-- 2.编写React代码 -->
+    <script type="text/babel">
+      class App extends React.Component {
+        constructor(props) {
+          super(props);
+
+          this.state = {
+            firstname: "Kobe",
+            lastname: "bryant",
+            isLogin:true
+          };
+        }
+
+        render() {
+            // 对象的解构，右边放入解构的对象
+          const {firstname,lastname,isLogin} = this.state
+          return(
+              <div>
+            {/*1.运算符表达式*/}
+            <h2>{ firstname + ' ' + lastname}</h2>
+            <h2>{20*50}</h2>
+
+            {/*2.三元表达式*/}
+            <h2>{isLogin?'欢迎回来~':'请先登陆~'}</h2>
+
+            {/*3.进行函数调用*/}
+             <h2>{this.getFullName()}</h2>
+             {/*这里的this没有问题，因为我自己在调用函数，给它做了一个隐式绑定*/}
+          </div>
+          )
+        }
+
+        getFullName(){
+            // return this.firstname + '-' + this.lastname 
+            return this.state.firstname + '-' + this.state.lastname 
+        }
+      }
+      ReactDOM.render(<App />, document.getElementById("app"));
+    </script>
+  </body>
+</html>
