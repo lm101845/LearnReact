@@ -1,0 +1,95 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-08-19 03:33:13
+ * @LastEditTime: 2021-08-19 04:04:32
+ * @FilePath: \04-王红元\02-代码手敲\01_learn_react\03_JSX核心语法二\04_条件渲染.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width",initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <!-- 1.添加React的依赖 -->
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+
+    <!-- 2.编写React代码 -->
+    <script type="text/babel">
+      class App extends React.Component {
+        constructor(props) {
+          super(props);
+
+          this.state = {
+            isLogin: true,
+            //   isLogin:false
+          };
+        }
+
+        render() {
+            // 写一下解构，不然后面有点麻烦，写的有点多
+          const {isLogin} = this.state
+          //通过if判断进行条件渲染——适合逻辑代码非常多的情况
+          //如果代码很多的话，可以做一个函数的封装
+          let welcome = null;
+          let btnText = null;
+          //React中变量为null或undefined，则页面中不会显示任何东西的
+        //   if (this.state.isLogin) {
+            // 方案1：
+          if (isLogin) {
+            //注意：前面记得加this.state
+            welcome = <h2>欢迎回来~</h2>;
+            btnText = "退出";
+          } else {
+            welcome = <h2>请先登陆~</h2>;
+            btnText = "登陆";
+          }
+
+          return (
+            <div>
+              {welcome}
+              {/*<h2>欢迎回来~</h2>*/}
+              {/*<h2>请先登陆~</h2>*/}
+              {/*welcome是一个变量，所以外面加一个大括号*/}
+              {/**/}
+              
+              {/*<button>登陆/退出</button>*/}
+              <button>{btnText}</button>
+              {/*还可以使用三目运算符*/}
+              {/*方案2：三元运算符*/}
+              <h2>{isLogin ? "好嗨哟" : "呜呜呜"}</h2>
+              <button onClick={e=>this.loginClick()}>{isLogin ? "退出":"登陆"}</button>
+              <hr/>
+              {/*<h2>你好啊，coderwhy</h2>*/}
+              <h2>{isLogin?'你好啊，coderwhy':null}</h2>
+              {/*要求：当你登陆成功的时候，你才显示这句话，当你没有登陆的时候，【什么都不显示】*/}
+              {/*可以实现效果，但是后面总是跟着一个null或者空字符串,让代码看起来有点冗余*/}
+              {/*方案3：逻辑与*/}
+              <h2>{isLogin && '你好啊，coderwhy'}</h2>
+              {/*这样写很明显更加简单*/}
+              {/*&&特点：前面条件不成立，后面条件就不会再判断了*/}
+             {isLogin &&  <h2>'你好啊，coderwhy'</h2>}
+             {/*这样写，h2都不会被渲染了*/}
+            </div>
+          ); 
+        }
+
+        loginClick(){
+            console.log('按钮发生了点击');
+            console.log(this);   //组件实例对象
+            this.setState({
+                // isLogin:!isLogin
+                isLogin:!this.state.isLogin
+            })
+        }
+      }
+      ReactDOM.render(<App />, document.getElementById("app"));
+    </script>
+  </body>
+</html>

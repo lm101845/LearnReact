@@ -1,0 +1,82 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-08-19 05:20:42
+ * @LastEditTime: 2021-08-19 07:00:50
+ * @FilePath: \04-王红元\02-代码手敲\01_learn_react\03_JSX核心语法二\06_列表渲染.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width",initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <!-- 1.添加React的依赖 -->
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+
+    <!-- 2.编写React代码 -->
+    <script type="text/babel">
+      class App extends React.Component {
+        constructor() {
+          super();
+          this.state = {
+            names: ["abc", "bbc", "cia", "fbi", "dna"],
+            numbers: [110, 123, 50, 32, 55, 10, 8, 333],
+          };
+        }
+
+        render() {
+          const { names, numbers } = this.state;
+          return (
+            <div>
+              <h2>名字列表</h2>
+              <ul>
+                {names.map((item, index) => {
+                  {
+                    /*注意：这里不能用forEach，就得用map，map它是映射*/
+                  }
+                  return <li key={index}>{item}</li>;
+                })}
+              </ul>
+              <h2>数组列表(展示大于等于50的数子)——过滤</h2>
+              <ul>
+                {/*filter函数要求我们返回的必须是布尔值，最终会生成是一个新的数组*/}
+                {numbers
+                  .filter((item) => {
+                    return item >= 50;
+                  })
+                  .map((item) => {
+                    return <li>{item}</li>;
+                  })}
+                  </ul>
+
+                    {/*代码优化后如下*/}
+                   <h2>数组列表(展示大于等于50的数子)——过滤简化版</h2>
+                  <ul>
+                  {numbers
+                    .filter((item) => item >= 50)
+                    .map((item) => (
+                      <li>{item}</li>
+                    ))}
+                </ul>
+
+                   {/*代码优化后如下*/}
+                   <h2>数组列表——数组截取</h2>
+                  <ul>
+                  {numbers.slice(0,4).map(item=><li>{item}</li>)}
+                  {/*slice2个参数都是索引值，左闭右开*/}
+                </ul>
+            </div>
+          );
+        }
+      }
+      ReactDOM.render(<App />, document.getElementById("app"));
+    </script>
+  </body>
+</html>

@@ -1,8 +1,8 @@
 <!--
  * @Author: liming
  * @Date: 2021-07-13 21:30:10
- * @LastEditTime: 2021-07-14 17:21:53
- * @FilePath: \03-尚硅谷张天禹\02-代码手敲\react_basic\06_组件实例三大属性之一_state\state.html
+ * @LastEditTime: 2021-08-18 17:34:50
+ * @FilePath: \03-尚硅谷张天禹(好)\02-代码手敲\react_basic\06_组件实例三大属性之一_state\01_state的标准写法.html
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -36,6 +36,7 @@
           //构造器调用几次？ ———— 1次——只创建了一个Weather实例
           console.log("constructor执行了一次");
           super(props);
+          console.log('constructor中的this',this);
           // 如果A继承了B，且A写了构造器，那么A类构造器中必须调用super！！！
           // this.state = true
           // 一个组件可能有多个数据，所以不能直接写true或false
@@ -60,7 +61,7 @@
         //可以通过对象解构赋值的方式优化一下render代码
         //render调用几次？ ———— 1+n次 1是初始化的那次 n是状态更新的次数
         render() {
-        //   console.log(this);
+          console.log('render中的this',this);
           console.log('render函数调用了一次');
           // render里面的this是组件实例对象
 
@@ -76,6 +77,8 @@
              console.log(myAge); // 20
              */
           const { isHot, isWind, mood } = this.state;
+        //   render里面的this是组件实例对象！！！
+        // 【constructor里面的this也是组件实例对象，这样事情就成了！！!】
           // this.state是一个对象,它有2个属性，分别是isHot和isWind
           // return <h1 id="title" onclick="demo()">今天天气很{isHot?'炎热' : '凉爽'},并且今天{isWind?'有风':'无风'}</h1>
           // onclick不对！onClick对！！
@@ -84,7 +87,7 @@
           // 报错 Expected `onClick` listener to be a function, instead got a value of `string` type.要写花括号
 
           // return <h1 id="title" onClick={demo()}>今天天气很{isHot?'炎热' : '凉爽'},并且今天{isWind?'有风':'无风'}</h1>
-          // 这样写也不行,老师解释过，写了小括号会直接进行调用，并将返回值undefined传给onClick
+          // 这样写也不行,老师解释过，【写了小括号会直接进行调用，并将返回值undefined传给onClick】
 
           // return <h1 id="title" onClick={demo}>今天天气很{isHot?'炎热' : '凉爽'},并且今天{isWind?'有风':'无风'}</h1>
           // 改一下函数名
@@ -93,6 +96,7 @@
 
           return (
             <h1 id="title" onClick={this.changeWeather}>
+                {/*this调用的是组件的实例对象*/}
               今天天气很{isHot ? "炎热" : "凉爽"},并且今天
               {isWind ? "有风" : "无风"},{mood}
             </h1>
@@ -101,13 +105,14 @@
         }
 
         changeWeather() {
+            // 这个changeWeather和constructor和render是平级的，也是在类里面
           //changeWeather放在哪里了？——放到了Weather原型对象上面了！！！非常好
           //通过Person实例调用study时，study中的this就是Person实例
           //通过Weather实例调用changeWeather时，changeWeather中的this就是Weather实例
-          //   console.log(this);
+            console.log('changeWeather中的this',this);
           //居然是undefined？？？？？？？？？
           //这好像挺不讲理的，构造器中的this是Weather实例对象，而这里的this却是undefined
-          // console.log(this.state.isHot);
+          console.log('changeWeather中的this.state',this.state.isHot);
           // 但是这里又报错了changeWeather is not defined
 
           //由于changeWeather是作为onClick的回调，所以不是通过实例调用的，是直接调用

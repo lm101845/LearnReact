@@ -1,0 +1,89 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-08-18 14:41:40
+ * @LastEditTime: 2021-08-18 15:51:55
+ * @FilePath: \04-王红元\02-代码手敲\01_learn_react\03_JSX核心语法二\01_JSX绑定属性.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width" ,initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div id="app"></div>
+
+    <!-- 1.添加React的依赖 -->
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+
+    <!-- 2.编写React代码 -->
+    <script type="text/babel">
+      class App extends React.Component {
+        constructor() {
+          super();
+          this.state = {
+            title: "标题",
+            imgUrl:
+              "http://p2.music.126.net/L8IDEWMk_6vyT0asSkPgXw==/109951163990535633.jpg",
+            link: "http://www.baidu.com",
+            active:true
+          };
+        }
+
+        render() {
+          // 使用对象的解构
+          const { title, imgUrl, link,active } = this.state;
+          return (
+            <div>
+              {/*1.绑定普通属性*/}
+              <h2 title="abc">我是标题</h2>
+              {/*div,span,a这些html元素都是有title属性的*/}
+              {/* <h2 title={this.state.title}>我是标题2</h2>*/}
+              <h2 title={title}>我是标题2</h2>
+              {/*大括号语法不仅可以绑定内容，还可以绑定属性*/}
+              {/* <img src={imgUrl} alt="" /> */}
+              <img src={getSizeImage(imgUrl, 140)} alt="" /><br/>
+              {/*JSX语法很严格，单标签必须要加闭合*/}
+              {/*服务器给我们图片地址的时候，可能给我们是非常大的图片，但是我们展示需要展示比较小的就可以了*/}
+              {/*我们在请求的时候，在图片地址后面加上参数，就可以获得比较小的图片了，此时我们需要对imgUrl进行处理*/}
+              {/*使用Vue语法想要对请求的图片做出改变，更多的时候我们使用过滤器，有点麻烦，但JSX就不需要，更加灵活 */}
+              <a href={link} target='_blank'>百度一下</a>
+              {/*target='_blank'就可以在新标签中打开了*/}
+             {/* <div class='box title'>我是div元素</div>*/}
+                <hr/>
+
+
+             {/*2.绑定class*/}
+              <div className='box title'>我是div元素</div>
+              <div className={'box title ' + (active?'active':'')}>我也是div元素——动态添加active样式</div>
+              {/*在Vue里面可以{active:true}这样做，但是React中没法这么做，只能通过JS代码来做*/}
+              {/*这里确实可以增加2个class类名，但是产生了警告了：
+               Warning: Invalid DOM property `class`. Did you mean `className`?*/}
+               {/*它不准你随随便便使用关键字——JSX中class表示类,使用className代替。for表示循环，使用htmlFor代替*/}
+               {/*<label for=""></label>*/}
+               <label htmlFor=""></label>
+               {/*Warning: Invalid DOM property `for`. Did you mean `htmlFor`?*/}
+                <hr/>
+               {/*3.绑定内联样式style*/}
+                <div style={{color:'red',fontSize:'50px'}}>我是div，绑定style属性</div>
+                {/*JSX中一个大括号表示一个对象，{{}}表示我要往里面放一个对象，对象里面放的就是键值对*/}
+                {/*属性名可以直接写，属性值如果是一个具体的值，一定要加上字符串才行*/}
+                {/*当属性名由多个单词组成的时候，在原来的HTML里面用连接符，在JSX里面用小驼峰标识*/}
+            </div>
+          );
+        }
+      }
+
+      /* 这个函数写在了类外面 */
+      function getSizeImage(imgUrl, size) {
+        return imgUrl + `?param=${size}x${size}`;
+      }
+      ReactDOM.render(<App />, document.getElementById("app"));
+    </script>
+  </body>
+</html>

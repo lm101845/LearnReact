@@ -1,8 +1,8 @@
 <!--
  * @Author: liming
  * @Date: 2021-07-13 13:48:02
- * @LastEditTime: 2021-07-13 14:25:29
- * @FilePath: \03-尚硅谷张天禹\02-代码手敲\react_basic\04_jsx的小练习\jsx小练习.html
+ * @LastEditTime: 2021-08-18 16:25:40
+ * @FilePath: \03-尚硅谷张天禹(好)\02-代码手敲\react_basic\04_jsx的小练习\jsx小练习.html
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -62,6 +62,8 @@
             
             {
                 data.map((item,index)=>{
+                    // 数组的map用法不熟悉
+                    //map:对数组的每一项都运行传入的函数，【返回】由每次函数调用的结果构成的数组
                     return <li key={index}>{item}</li>
                 })
             }

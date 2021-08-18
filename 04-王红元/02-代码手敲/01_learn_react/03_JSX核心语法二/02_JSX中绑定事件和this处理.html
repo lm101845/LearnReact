@@ -1,0 +1,100 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-08-18 15:53:47
+ * @LastEditTime: 2021-08-18 21:20:37
+ * @FilePath: \04-王红元\02-代码手敲\01_learn_react\03_JSX核心语法二\02_JSX中绑定事件.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width",initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <!-- 1.添加React的依赖 -->
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+
+    <!-- 2.编写React代码 -->
+    <script type="text/babel">
+      class App extends React.Component {
+        //   name='why'
+        constructor() {
+            super();
+            console.log('constructor中的this',this);   //App实例
+          this.state = {
+              //this.state是在constructor里面的，所以
+              //this指向的是组件的实例对象
+            message: "你好啊",
+            counter:100
+          };
+
+        //方案一：这样写下面就不用写bind(this了)，只需要绑定一次this了        
+        this.btnClick = this.btnClick.bind(this);
+        // this.increment = this.increment.bind(this);
+        }
+
+        render() {
+        //   const { message } = this.state;
+          return (
+            <div>
+                {/*1.方案一：bind显式绑定this——很少用，有重复代码*/}
+             {/* <button onClick={this.btnClick}>按钮</button>*/}
+              {/*<button onClick={this.btnClick.bind(this)}>按钮</button>*/}
+             {/* <button onClick={this.btnClick.bind(this)}>按钮</button>*/}
+              {/*为了和原生做区分，依然使用的是小驼峰,c要大写*/}
+              <button onClick={this.btnClick}>按钮</button>
+              <hr/>
+              {/*2.方案二：定义函数时，使用箭头函数*/}
+              <button onClick={this.increment}>+1</button>
+              <hr/>
+              {/*3.方案三：{}里面可以写表达式，那我索性就在大括号里面写函数了*/}
+              <button onClick={()=>{console.log( this.state.counter)}}>-1</button>
+              <hr/>
+              <button onClick={()=>{this.decrement()}}>-1</button>
+              <hr/>
+              <button onClick={()=>{this.decrement2('why')}}>-1</button>
+              </div>
+          );
+        }
+
+        //这个btnClick在类里面写,和constructor、render是平级关系
+        btnClick() {
+          console.log('btnClick中的',this); //undefined
+          console.log("按钮发生了点击");
+          console.log(this.state.message);
+        /*简简单单调用没问题，但是如果你用到了App里面的某些属性，那就有问题了*/
+        // Cannot read property 'state' of undefined
+        // 原因：btnClick这个函数并不是我们主动调用它的，而是React内部，它发现按钮发生点击之后，它在React内部对函数进行了回调
+        }
+
+        // increment(){
+        //     console.log(this.state.counter);
+        // }
+
+        // 方案二：函数名 = 箭头函数...
+        // 箭头函数中永远不绑定this——压根就没有this这个东西——它会一层一层往上找
+        // ES6中给对象增加属性的方式：class field
+        increment = ()=>{
+           console.log( this.state.counter);
+        }
+
+        // 方案三
+        decrement(){
+             console.log( this.state.counter);
+        }
+
+           decrement2(name){
+             console.log( this.state.counter,name);
+        }
+      }
+
+      ReactDOM.render(<App />, document.getElementById("app"));
+    </script>
+  </body>
+</html>

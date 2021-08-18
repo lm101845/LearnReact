@@ -1,0 +1,64 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-08-18 15:53:47
+ * @LastEditTime: 2021-08-18 21:52:22
+ * @FilePath: \04-王红元\02-代码手敲\01_learn_react\03_JSX核心语法二\03_JSX中绑定事件和传递参数.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width",initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <!-- 1.添加React的依赖 -->
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+
+    <!-- 2.编写React代码 -->
+    <script type="text/babel">
+      class App extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            movies: ["大话西游", "海王", "海贼王", "盗梦空间"],
+          };
+          this.btnClick = this.btnClick.bind(this);
+        }
+
+        render() {
+          return (
+            <div>
+              <button onClick={this.btnClick}>按钮</button>
+              {/*为什么我这里什么参数也没有写，它却把event给传过来了？？——React内部弄的*/}
+              <ul>
+                {this.state.movies.map((item, index, arr) => {
+                 {/* return <li key={index} onClick={this.liClick}>{item}</li>;*/}
+                  return <li key={index} onClick={event=>{this.liClick(item,index,event)}}>{item}</li>;
+                  {/*这样写，这个函数就是我们自己调用的，我想给它传什么参数就给它传什么参数*/}
+                })}
+              </ul>
+            </div>
+          );
+        }
+
+        btnClick(event, a, b, c) {
+          // 按钮发生点击后这个函数不是我们在调用，是React内部帮我们调用的，并且它也帮我们传递了一个参数
+          console.log("按钮发生了点击", event, a, b, c);
+          // 经过测试只传了一个参数
+          console.log(this);
+        }
+
+        liClick(item,index,event){
+            console.log('li发生了点击',item,index,event);
+        }
+      }
+      ReactDOM.render(<App />, document.getElementById("app"));
+    </script>
+  </body>
+</html>

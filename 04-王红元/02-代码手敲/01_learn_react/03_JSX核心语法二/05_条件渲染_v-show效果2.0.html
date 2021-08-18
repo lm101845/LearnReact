@@ -1,0 +1,59 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-08-19 04:05:07
+ * @LastEditTime: 2021-08-19 05:11:59
+ * @FilePath: \04-王红元\02-代码手敲\01_learn_react\03_JSX核心语法二\05_条件渲染_v-show效果2.0.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width",initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <!-- 1.添加React的依赖 -->
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+
+    <!-- 2.编写React代码 -->
+    <script type="text/babel">
+      class App extends React.Component {
+        constructor() {
+          super();
+          this.state = {
+            isLogin: true,
+          };
+        }
+
+        render() {
+          const { isLogin } = this.state;
+          const titleDisplayValue = isLogin?'block':'none';
+        //   写了const 值不是不能改变了吗？——这个没关系，因为我每次setState的时候，它都会重新执行render函数
+          return (
+            <div>
+              <button onClick={(e) => this.loginClick()}>
+                {isLogin ? "退出" : "登录"}
+              </button> 
+              {/*<h2 style={{ display: "none" }}>你好啊，coderwhy</h2>*/}
+              <h2 style={{ display: titleDisplayValue }}>你好啊，coderwhy</h2>
+              {/*一个大括号表示里面是表达式，而style是一个对象，所以里面又有了一对大括号*/}
+              {/*如果你担心这个不是一个整体的话，就加一个小括号*/}
+            </div>
+          );
+        }
+
+        loginClick() {
+          this.setState({
+            isLogin: !this.state.isLogin,
+          });
+        }
+      }
+      ReactDOM.render(<App />, document.getElementById("app"));
+    </script>
+  </body>
+</html>

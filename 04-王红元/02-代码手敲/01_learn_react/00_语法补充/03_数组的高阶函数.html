@@ -1,50 +1,63 @@
 <!--
  * @Author: liming
  * @Date: 2021-08-10 23:14:49
- * @LastEditTime: 2021-08-10 23:30:42
- * @FilePath: \04-王红元(一般)\02-代码手敲\01_learn_react\00_语法补充\03_数组的高阶函数.html
+ * @LastEditTime: 2021-08-19 06:44:04
+ * @FilePath: \04-王红元\02-代码手敲\01_learn_react\00_语法补充\03_数组的高阶函数.html
 -->
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
+  </head>
+  <body>
     <script>
-         /**
-     * 回调函数有三个参数:
-     *  参数一: 执行时的对应元素
-     *  参数二: 对应的下标值
-     *  参数三: 完整的数组对象
-     */
+      /**
+       * 回调函数有三个参数:
+       *  参数一: 执行时的对应元素
+       *  参数二: 对应的下标值
+       *  参数三: 完整的数组对象
+       */
 
-        const names = ['abc','cba','nba','mba']
-        //要求：给数组里的每个元素后面都添加一个'000'
-        //map和forEach很像，不过forEach是数组遍历，而map是数组映射
-        // names.map(回调函数(你有几个元素这个回调函数就会被执行几次),给前面的回调函数绑定this(这个参数很少传))
-        names.map(()=>{
-            console.log('这个函数被执行了一次');
-        })
+      const names = ["abc", "cba", "nba", "mba"];
+      //要求：给数组里的每个元素后面都添加一个'000'
+      //map和forEach很像，不过forEach是数组遍历，而map是数组映射
+      // names.map(回调函数(你有几个元素这个回调函数就会被执行几次),给前面的回调函数绑定this(这个参数很少传))
+      names.map(() => {
+        console.log("这个函数被执行了一次");
+      });
 
-         names.map((item,index,arr)=>{
-            console.log('这个函数被执行了一次');
-            console.log(item);
-            console.log(index);
-            console.log(arr);
-        })
+      names.map((item, index, arr) => {
+        console.log("这个函数被执行了一次=====");
+        console.log(item);
+        console.log(index);
+        console.log(arr);
+      });
 
-        const newArr = names.map((item,index,arr)=>{
-            //使用newArr将新的返回值做一个接收
-            return item + '000'
-            //这个函数给它一个返回值，会将这个函数放到一个新的数组里面
-            //这个新的数组会作为整个map函数的返回值，会将它返回出去
-        })
-        console.log(newArr);
-        console.log(names);
-        //原数组不变
+      const newArr = names.map((item, index, arr) => {
+        //使用newArr将【新的返回值】做一个接收
+        return item + "000";
+        //这个函数给它一个返回值，会将这个函数放到一个新的数组里面
+        //这个新的数组会作为整个map函数的返回值，会将它返回出去
+      });
+      console.log('新的返回值',newArr);
+      console.log('旧的返回值',names);
+      //原数组不变
+
+      const nums = [110, 123, 50, 32, 55, 10, 8, 333];
+      const newNums = nums.filter((item, index, arr) => {
+        return item >= 50;
+      });
+      console.log(newNums);
+
+      const newNums2 = nums.filter((item) => {
+        return item % 2 === 0;
+      });
+      console.log(newNums2);
+
+      console.log(nums.slice(-2));
     </script>
-</body>
+  </body>
 </html>

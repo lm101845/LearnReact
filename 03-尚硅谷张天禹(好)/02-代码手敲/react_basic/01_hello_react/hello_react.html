@@ -1,8 +1,8 @@
 <!--
  * @Author: liming
  * @Date: 2021-07-12 19:11:45
- * @LastEditTime: 2021-07-12 19:38:44
- * @FilePath: \LearnReact\03-尚硅谷张天禹\02-代码手敲\react_basic\01_hello_react\hello_react.html
+ * @LastEditTime: 2021-08-18 16:09:48
+ * @FilePath: \03-尚硅谷张天禹(好)\02-代码手敲\react_basic\01_hello_react\hello_react.html
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -36,7 +36,9 @@
             //2.渲染虚拟DOM到页面
             //学习任何一个东西的时候，API没人能帮得了你，就得自己慢慢记
             ReactDOM.render(VDOM,document.getElementById('test'))
-            ReactDOM.render(VDOM2,document.getElementById('test'))  /*注意：这句话不是一句追加的动作，这是一句替换的动作*/
+            // 这里的VDOM被替换了
+            ReactDOM.render(VDOM2,document.getElementById('test'))  
+            /*注意：这句话不是一句追加的动作，这是一句替换的动作*/
             // ReactDOM.render(虚拟DOM,容器)
             // ReactDOM.render(虚拟DOM,容器)
             //第一个参数：渲染哪个虚拟DOM

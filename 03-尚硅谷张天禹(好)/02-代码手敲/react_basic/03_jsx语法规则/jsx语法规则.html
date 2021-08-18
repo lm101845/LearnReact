@@ -1,8 +1,8 @@
 <!--
  * @Author: liming
  * @Date: 2021-07-12 22:14:37
- * @LastEditTime: 2021-07-12 22:34:27
- * @FilePath: \LearnReact\03-尚硅谷张天禹\02-代码手敲\react_basic\03_jsx语法规则\jsx语法规则.html
+ * @LastEditTime: 2021-08-18 16:20:00
+ * @FilePath: \03-尚硅谷张天禹(好)\02-代码手敲\react_basic\03_jsx语法规则\jsx语法规则.html
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -39,12 +39,12 @@
         //     </h2>
         // )
 
-            // 错误写法
-        	// const VDOM = (
-        	// <h2 id="myId">
-        	//     <span>myData</span>
-        	// </h2>
-        	// )
+        // 错误写法
+        // const VDOM = (
+        // <h2 id="myId">
+        //     <span>myData</span>
+        // </h2>
+        // )
 
             // 混写js的正确写法：使用{}进行包裹
             // 而读CSS里面的内容，直接写就行，不用这样写：className = {'title'}
@@ -58,7 +58,8 @@
                         <span>{myData.toLowerCase()}</span>
                     </h2>
                     <input type="text"/>
-                    <good>123</good>
+                   {/* <good>123</good>*/}
+                    {/* The tag <good> is unrecognized in this browser*/}
                 </div>
                 // <input type="text">
                 // jsx只能有一个根标签！！！这里div是根标签
