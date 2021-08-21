@@ -1,0 +1,32 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-08-21 22:22:00
+ * @LastEditTime: 2021-08-21 22:25:30
+ * @FilePath: \03-尚硅谷张天禹(好)\02-代码手敲\react-staging\src\test.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let obj = {a:{b:{c:{d:1}}}}
+        console.log(obj.a.b.c.d);
+
+        //连续解构赋值写法
+        let {a:{b:{c}}} = obj
+        console.log(c);
+
+        //连续解构赋值还可以改名
+        let obj2 = {a:{b:1}}
+        const {a:{b:data}} = obj2;
+        //在解构赋值的同时给b重命名为data
+        // console.log(b);
+        console.log(data);
+    </script>
+</body>
+</html>

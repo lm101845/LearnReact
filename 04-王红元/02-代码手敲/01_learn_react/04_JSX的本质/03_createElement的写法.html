@@ -1,0 +1,76 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-08-21 20:54:35
+ * @LastEditTime: 2021-08-21 20:59:34
+ * @FilePath: \04-王红元\02-代码手敲\01_learn_react\04_JSX的本质\03_createElement的写法.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width",initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <!-- 1.添加React的依赖 -->
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+
+    <!-- 2.编写React代码 -->
+    <!-- babel官网进行转换的 -->
+    <script>
+      const App =    React.createElement(
+            "div",
+            null,
+            React.createElement(
+              "div",
+              {
+                className: "header",
+              },
+              React.createElement(
+                "h1",
+                {
+                  title: "\u6807\u9898",
+                },
+                "\u6211\u662F\u6807\u9898"
+              )
+            ),
+            React.createElement(
+              "div",
+              {
+                className: "content",
+              },
+              React.createElement(
+                "h1",
+                {
+                  title: "\u6807\u9898",
+                },
+                "\u6211\u662F\u9875\u9762\u7684\u5185\u5BB9"
+              ),
+              React.createElement("button", null, "\u6309\u94AE"),
+              React.createElement("button", null, "+1"),
+              React.createElement("a", {
+                href: "http://www.baidu.com",
+              })
+            ),
+            React.createElement(
+              "div",
+              {
+                className: "footer",
+              },
+              React.createElement(
+                "p",
+                null,
+                "\u6211\u662F\u5C3E\u90E8\u7684\u5185\u5BB9"
+              )
+            )
+          );
+
+      ReactDOM.render(App, document.getElementById("app"));
+    </script>
+  </body>
+</html>

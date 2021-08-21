@@ -1,0 +1,41 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-08-21 16:19:59
+ * @LastEditTime: 2021-08-21 16:30:42
+ * @FilePath: \04-王红元\02-代码手敲\01_learn_react\04_JSX的本质\01_JSX的基本写法.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width",initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+        
+    </div>
+
+    <!-- 1.添加React的依赖 -->
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+
+    <!-- 2.编写React代码 -->
+    <!-- JSX的前提：必须要写到babel里面 -->
+    <!-- JSX仅仅是React.createElement(component,props,...children)函数的语法糖 -->
+    <!-- jsx——>babel——>React.createElement(component,props,...children) -->
+    <!-- 如果你使用原始写法的话，那你就不需要再使用babel了 -->
+    <!-- <script type="text/babel"> -->
+    <script>
+     
+     //const message1 = <h2>Hello world</h2>   //语法糖写法
+     const message2 = React.createElement("h2",null,'真实写法')  //真实写法(传递3个参数,标签名，标签属性,子组件)
+    //  如果有多个子组件的话，我们可以继续往后传
+    //ReactDOM.render(<h2>Hello world</h2>,document.getElementById("app"));
+    //   ReactDOM.render(message1,document.getElementById("app"));
+      ReactDOM.render(message2,document.getElementById("app"));
+    </script>
+  </body>
+</html>

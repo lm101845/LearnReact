@@ -1,8 +1,8 @@
 <!--
  * @Author: liming
  * @Date: 2021-07-14 18:16:49
- * @LastEditTime: 2021-07-14 22:03:40
- * @FilePath: \03-尚硅谷张天禹\02-代码手敲\react_basic\07_组件实例三大属性之二_props\02_对props进行限制.html
+ * @LastEditTime: 2021-08-21 21:38:59
+ * @FilePath: \03-尚硅谷张天禹(好)\02-代码手敲\react_basic\07_组件实例三大属性之二_props\02_对props进行限制.html
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -33,7 +33,7 @@
         // state = {name:'TOM',age:8,sex:'男'}
         render() {
           // return里面内容 是多级结构的，包一个小括号更加规整一些
-          console.log(this);
+          console.log('render里面的this',this);
           const { name, age, sex } = this.props;
           // 表明name,age,sex是this.props这个对象的3个属性，下面直接写name,age,sex就行了，更加方便
 

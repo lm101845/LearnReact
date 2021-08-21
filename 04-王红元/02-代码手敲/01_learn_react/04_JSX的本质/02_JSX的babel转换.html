@@ -1,0 +1,57 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-08-21 20:38:24
+ * @LastEditTime: 2021-08-21 20:46:51
+ * @FilePath: \04-王红元\02-代码手敲\01_learn_react\04_JSX的本质\02_JSX的babel转换.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width",initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+        
+    </div>
+
+    <!-- 1.添加React的依赖 -->
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+
+    <!-- 2.编写React代码 -->
+    <script type="text/babel">
+      class App extends React.Component {
+        constructor(props) {
+          super(props);
+        }
+
+        render() {
+            // 登陆babel官网可以将其转换为原始写法
+            // https://babeljs.io/repl#?browsers=defaults%2C%20not%20ie%2011%2C%20not%20ie_mob%2011&build=&builtIns=false&corejs=3.6&spec=false&loose=false&code_lz=ATA8BMEsDcD4CgROciNgGMA2BDAzngHI4C2ApgLwDkAFmTuGQE5UIrsqg0CMwALpD5ZKVQOAWgDIzWgRCNA9GYTQAeh5sOqBVDjxEqzhsy4CxctQwB7AHZ8yl1tp2ce_QcOoTpMwK4ZgI3TAIW6BQxUBO7UVlO3skUAAjAFc-PgtYQEhjQDqUxWjY-NCwsDS481gAam5UmNyVLJBQHGAaJjIAMwoAIhpYgAcALgUFAHdegDoInEhwKL6zEkbYRRwynUUNWfs0aH18IlIROtNTKxZFpdbYWUA-HUALhP8ghUPMjnmYfc51e60gA&debug=false&forceAllTransforms=false&shippedProposals=false&circleciRepo=&evaluate=false&fileSize=false&timeTravel=false&sourceType=module&lineWrap=true&presets=react&prettier=false&targets=&version=7.15.3&externalPlugins=&assumptions=%7B%7D
+          return(
+           <div>
+             <div className='header'>
+                <h1 title='标题'>我是标题</h1>
+            </div>
+
+              <div className='content'>
+                <h1 title='标题'>我是页面的内容</h1>
+                <button>按钮</button>
+                <button>+1</button>
+                <a href="http://www.baidu.com"></a>
+            </div>
+              <div className='footer'>
+               <p>我是尾部的内容</p>
+            </div>
+           </div>
+            )
+        }
+      }
+      ReactDOM.render(<App />,document.getElementById("app"));
+    </script>
+  </body>
+</html>

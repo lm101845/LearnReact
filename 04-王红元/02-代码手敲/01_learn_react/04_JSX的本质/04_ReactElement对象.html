@@ -1,0 +1,60 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-08-21 20:54:35
+ * @LastEditTime: 2021-08-21 21:15:12
+ * @FilePath: \04-王红元\02-代码手敲\01_learn_react\04_JSX的本质\04_ReactElement对象.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width",initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+        
+    </div>
+
+    <!-- 1.添加React的依赖 -->
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+
+    <!-- 2.编写React代码 -->
+    <script type="text/babel">
+      class App extends React.Component {
+        constructor(props) {
+          super(props);
+        }
+
+       render() {
+            // 登陆babel官网可以将其转换为原始写法
+            // jsx——>createElement函数——>ReactElement(对象树)——>ReactDOM.render——>真实DOM
+            // jsx——>createElement函数——>ReactElement(对象树)——>ReactDOM.render——>原生控件(这是RN的原理，只有最后不一样)
+            const elementObj = (
+           <div>
+             <div className='header'>
+                <h1 title='标题'>我是标题</h1>
+            </div>
+
+              <div className='content'>
+                <h1 title='标题'>我是页面的内容</h1>
+                <button>按钮</button>
+                <button>+1</button>
+                <a href="http://www.baidu.com"></a>
+            </div>
+              <div className='footer'>
+               <p>我是尾部的内容</p>
+            </div>
+           </div>
+            )
+            console.log(elementObj);
+            return elementObj
+        }
+      }
+      ReactDOM.render(<App />,document.getElementById("app"));
+    </script>
+  </body>
+</html>

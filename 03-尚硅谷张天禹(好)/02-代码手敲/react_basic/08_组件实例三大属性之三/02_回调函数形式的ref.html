@@ -1,0 +1,71 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-07-21 16:18:58
+ * @LastEditTime: 2021-08-21 21:53:18
+ * @FilePath: \03-尚硅谷张天禹(好)\02-代码手敲\react_basic\08_组件实例三大属性之三\02_回调函数形式的ref.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>回调函数形式的ref</title>
+    <!-- 字符串形式的ref现在已经不被官方推荐使用了 -->
+</head>
+
+<body>
+    <!-- 准备好一个“容器” -->
+    <div id="test"></div>
+
+    <!-- 引入react核心库 -->
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <!-- 引入react-dom，用于支持react操作DOM -->
+    <script type="text/javascript" src="../js/react-dom.development.js"></script>
+    <!-- 引入babel，用于将jsx转为js -->
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+
+    <script type="text/babel">
+    //创建组件
+    class Demo extends React.Component{
+        // 之前天气炎不炎热这个写法——需要写赋值语句和箭头函数，这样this的指向不会丢
+        //展示左侧输入框的数据
+        showData = ()=>{
+            console.log(this);
+            const {input1} = this
+            // 这个时候直接从实例自身上取就能取到了
+            // const {input1} = this.refs不用这样写了
+            alert(input1.value)
+        }
+
+        //展示左侧输入框的数据
+        showData2 = ()=>{
+            const {input2} = this
+            // alert(input2.value)
+        }
+
+        render(){
+            return(
+                <div>
+                   {/* <input  ref={(a)=>{console.log(a);}} type="text" placeholder="点击按钮提示数据"/>&nbsp;*/}
+                   {/* <input  ref={(currentNode)=>{this.input1 = currentNode}} type="text" placeholder="点击按钮提示数据"/>&nbsp;*/}
+                    <input  ref={c=>this.input1 = c} /*{haha={()=>{console.log('#')}}}*/ type="text" placeholder="点击按钮提示数据"/>&nbsp;
+                    {/*报错Invalid value for prop `haha` on <input> tag. Either remove it from the element, or pass a string or number
+                     value to keep it in the DOM*/}
+                     {/*不是什么函数React都帮你调用的！！！比如haha就不行，只有特定名字的函数（比如ref）才给你调用*/}
+                    {/*this.input1 = a意思是把这个节点放到了组件实例自身上，然后给它起了一个名字叫input1*/}
+                    {/*函数能收到什么参数取决于函数的调用者，但这个函数不是我们调用的，我们不知道它有什么参数，我们就用a试一下*/}
+                    {/*这个currentNode就是当前所处的节点*/}
+                    <button onClick={this.showData}>点我提示左侧数据</button>&nbsp; 
+                    <input ref={c=>this.input2 = c} onBlur={this.showData2}type="text" placeholder="失去焦点提示数据"/>
+                </div>
+            )
+        }
+    }
+
+        //渲染组件到页面
+        ReactDOM.render(<Demo a='1' b='2'/>,document.getElementById('test'))
+    
+    </script>
+</body>
+
+</html>
