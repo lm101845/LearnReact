@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import Search from './components/Search'
-import List from './components/List'
 // 因为他叫index，所以后面的我们可以不写了
 
 export default class App extends Component {
@@ -8,9 +6,8 @@ export default class App extends Component {
     render() {
         // const {users,isFirst,isLoading,err} = this.state
         return (
-              <div className="container">
-                <Search />
-                <List/>
+              <div>
+                  App...
             </div>
         )
     }
