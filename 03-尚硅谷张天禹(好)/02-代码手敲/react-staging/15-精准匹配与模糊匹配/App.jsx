@@ -6,11 +6,10 @@ import React, { Component } from 'react'
 // 我们直接在index.js里面包BrowserRouter，一劳永逸，因为App是所有组件的爸爸，你在index.js里面把爸爸包起来了，下面的儿子也就自动包起来了
 // import { Link,Route} from 'react-router-dom'
 // import { NavLink, Route } from 'react-router-dom'
-import { Route,Switch,Redirect } from 'react-router-dom'
+import { Route,Switch } from 'react-router-dom'
 // 如果你想要加高亮效果，就不要用Link了，使用Link的升级版——NavLink
 // 这个库不可能只暴露一个东西，所以它用的不是默认暴露，用的是分别暴露(你用哪个，你取哪个)
 // Router是路由器(你在Web中使用，就引入具体的BrowserRouter)
-// Redirect:重定向内置组件
 
 import Home from './pages/Home'
 import About from './pages/About'
@@ -96,16 +95,13 @@ export default class App extends Component {
                                         {/* 注册路由 */}
                                         {/* 如果你的路由是一个以上的话，你再包裹Switch   */}
                                         {/* 使用Switch组件把你注册的路由都给包起来，这样匹配的时候匹配到后就不往下继续找了，效率就高了 */}
-                                        <Route path="/about" component={ About}/>
-                                        {/* <Route path="/home/a/b" component={ Home}/>      */}
-                                        <Route  path="/home" component={ Home}/>     
+                                        <Route exact={ true} path="/about" component={ About}/>
+                                            {/* <Route path="/home/a/b" component={ Home}/>      */}
+                                            <Route exact  path="/home" component={ Home}/>     
                                         {/* 此时匹配到Home以后就不会往下找了，所以Test组件就不会展示到页面上了 */}
                                         {/* 所以一般情况下我们不会让一个路径去对应多个组件的 */}
                                         {/* exact={ true}表示精准匹配，简写为exact*/}
                                         {/* 但是严格匹配如果随便开，就会导致严重的问题。只有出现了一些状态我们才会开启 */}
-                                        <Redirect to='about'/>
-                                        {/* Redirect是兜底的人，如果刚开始和哪个路径都匹配补上，那就给你指条路 */}
-                                        {/* localhost:3000其实是 localhost:3000/，和/about和/home都匹配不上，这个时候就要Redirect了 */}
                                     </Switch>
                                 </div>
                             </div>

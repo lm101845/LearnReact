@@ -97,8 +97,8 @@ export default class App extends Component {
                                         {/* 如果你的路由是一个以上的话，你再包裹Switch   */}
                                         {/* 使用Switch组件把你注册的路由都给包起来，这样匹配的时候匹配到后就不往下继续找了，效率就高了 */}
                                         <Route path="/about" component={ About}/>
-                                        {/* <Route path="/home/a/b" component={ Home}/>      */}
-                                        <Route  path="/home" component={ Home}/>     
+                                            {/* <Route path="/home/a/b" component={ Home}/>      */}
+                                            <Route  path="/home" component={ Home}/>     
                                         {/* 此时匹配到Home以后就不会往下找了，所以Test组件就不会展示到页面上了 */}
                                         {/* 所以一般情况下我们不会让一个路径去对应多个组件的 */}
                                         {/* exact={ true}表示精准匹配，简写为exact*/}

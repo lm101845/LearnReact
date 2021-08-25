@@ -6,11 +6,10 @@ import React, { Component } from 'react'
 // 我们直接在index.js里面包BrowserRouter，一劳永逸，因为App是所有组件的爸爸，你在index.js里面把爸爸包起来了，下面的儿子也就自动包起来了
 // import { Link,Route} from 'react-router-dom'
 // import { NavLink, Route } from 'react-router-dom'
-import { Route,Switch,Redirect } from 'react-router-dom'
+import { Route,Switch } from 'react-router-dom'
 // 如果你想要加高亮效果，就不要用Link了，使用Link的升级版——NavLink
 // 这个库不可能只暴露一个东西，所以它用的不是默认暴露，用的是分别暴露(你用哪个，你取哪个)
 // Router是路由器(你在Web中使用，就引入具体的BrowserRouter)
-// Redirect:重定向内置组件
 
 import Home from './pages/Home'
 import About from './pages/About'
@@ -58,19 +57,15 @@ export default class App extends Component {
                                 {/* 注意：不一定要写标签体，你把标签体内容写到children中也是可以的！！！ */}
 
                                 {/* 升级版，把title写到外面,这才是一个优秀的封装*/}
-                                <MyNavLink to="/about">About</MyNavLink>
+                                <MyNavLink to="/atguigu/about">About</MyNavLink>
                                 {/* 标签属性to,a,b,c等我们知道怎么接，在props身上，但是我们没有学过标签体内容About如何去接 */}
                                 {/* 注意：标签体内容也是一个特殊的标签属性 */}
                                 {/* 标签里面的内容人家自己给你收集到children身上了 */}
-                                {/* <MyNavLink to="/home/a/b">Home</MyNavLink> */}
-                                <MyNavLink to="/home">Home</MyNavLink>
+                                <MyNavLink to="/atguigu/home">Home</MyNavLink>
                                 {/* 前端路由在你点击的时候根本不发送网络请求，但是如果你【刷新】的话，那样式就丢了*/}
                                 {/* 最终服务器请求的css文件路径是http://192.168.1.5:3000/atguigu/css/bootstrap.css，这是错的 */}
                                 {/* webpack兜底条款：你写错了，我就给你public文件夹下的index.html */}
                                 {/* 总结：你的路由路径是【多级结构】并且你【刷新】的话，样式会丢失，不刷新不会丢失 */}
-
-                                {/* 人家要的东西(下面的Router里面的)，你一个都不能少 */}
-                                {/* 你给的东西(MyNavLink里面的)，可以多给 */}
                             </div>
                         </div>
                         <div className="col-xs-6">
@@ -93,19 +88,12 @@ export default class App extends Component {
                                     {/* </BrowserRouter> */}
 
                                     <Switch>
-                                        {/* 注册路由 */}
                                         {/* 如果你的路由是一个以上的话，你再包裹Switch   */}
                                         {/* 使用Switch组件把你注册的路由都给包起来，这样匹配的时候匹配到后就不往下继续找了，效率就高了 */}
-                                        <Route path="/about" component={ About}/>
-                                        {/* <Route path="/home/a/b" component={ Home}/>      */}
-                                        <Route  path="/home" component={ Home}/>     
+                                            <Route path="/atguigu/about" component={ About}/>
+                                            <Route path="/atguigu/home" component={ Home}/>     
                                         {/* 此时匹配到Home以后就不会往下找了，所以Test组件就不会展示到页面上了 */}
                                         {/* 所以一般情况下我们不会让一个路径去对应多个组件的 */}
-                                        {/* exact={ true}表示精准匹配，简写为exact*/}
-                                        {/* 但是严格匹配如果随便开，就会导致严重的问题。只有出现了一些状态我们才会开启 */}
-                                        <Redirect to='about'/>
-                                        {/* Redirect是兜底的人，如果刚开始和哪个路径都匹配补上，那就给你指条路 */}
-                                        {/* localhost:3000其实是 localhost:3000/，和/about和/home都匹配不上，这个时候就要Redirect了 */}
                                     </Switch>
                                 </div>
                             </div>
