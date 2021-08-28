@@ -34,7 +34,7 @@ export default class App extends Component {
                                 {/* <BrowserRouter> */}
                                 <Link className="list-group-item" to="/about">About</Link>
                                 {/* 注意：浏览器是不认识Link的，它是React里面的东西，最终代码要交给浏览器执行，它还是把Link转为a的 */}
-                                      <Link className="list-group-item" to="/home">Home</Link>
+                                <Link className="list-group-item" to="/home">Home</Link>
                               {/* </BrowserRouter> */}
                             </div>
                         </div>
