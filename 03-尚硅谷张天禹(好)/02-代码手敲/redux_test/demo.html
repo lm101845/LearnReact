@@ -1,0 +1,38 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-08-30 21:07:40
+ * @LastEditTime: 2021-08-30 21:11:57
+ * @FilePath: \03-尚硅谷张天禹(好)\02-代码手敲\redux_test\demo.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const a = ()=>1
+        console.log(a());  //1
+
+        const m = b => 1+b
+        console.log(m(2));
+
+        const x = c => {data:c}
+        // 我想要返回对象，这样写是不对的
+        console.log(x());   //undefined
+        //你这么写它把{}当成花括号了
+
+         const y = c => {return {data:c}}
+        // 这样写可以，但是我不想写return 
+        console.log(y(5));   //{data: 5}
+
+         const z = c => ({data:c})
+        // 这样写可以，但是我不想写return 
+        // 外面包一个小括号即可！！！它就能自动返回一个对象了
+        console.log(z(10));   //{data: 10}
+    </script>
+</body>
+</html>
