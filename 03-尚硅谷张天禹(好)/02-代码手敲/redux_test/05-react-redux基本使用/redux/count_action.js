@@ -1,7 +1,7 @@
 /*
  * @Author: liming
  * @Date: 2021-08-30 21:00:32
- * @LastEditTime: 2021-09-04 09:58:13
+ * @LastEditTime: 2021-08-30 22:35:59
  * @FilePath: \03-尚硅谷张天禹(好)\02-代码手敲\redux_test\src\redux\count_action.js
  */
 /**
@@ -41,7 +41,6 @@ import {
 
 // 写法2——并且采用分别暴露的方式
 // 所谓的同步action,就是指action的值为Object类型的一般对象
-// 注意：箭头函数小括号花括号【({})】表示是有返回值的
 export const createIncrementAction = data => ({
     type: INCREMENT,
     data

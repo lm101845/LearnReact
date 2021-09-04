@@ -1,7 +1,7 @@
 /*
  * @Author: liming
  * @Date: 2021-08-30 18:10:29
- * @LastEditTime: 2021-09-04 10:08:37
+ * @LastEditTime: 2021-08-30 21:27:47
  * @FilePath: \03-尚硅谷张天禹(好)\02-代码手敲\redux_test\src\redux\count_reducer.js
  */
 
@@ -70,6 +70,7 @@ export default function countReducer(preState = initState, action) {
             // return 0
             // 初始化状态写法1
             //return 0也是可以的，但是我们不这么写——我们在函数最前面进行判断
+
             return preState
             // 初始化状态写法2
     }
