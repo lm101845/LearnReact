@@ -1,3 +1,9 @@
+/*
+ * @Author: liming
+ * @Date: 2021-08-30 17:46:50
+ * @LastEditTime: 2021-09-04 21:33:22
+ * @FilePath: \03-尚硅谷张天禹(好)\02-代码手敲\redux_test\01-纯react版\components\Count\index.jsx
+ */
 import React, { Component } from 'react'
 
 export default class Count extends Component {

@@ -1,7 +1,7 @@
 /*
  * @Author: liming
  * @Date: 2021-08-30 21:23:36
- * @LastEditTime: 2021-09-04 21:31:39
+ * @LastEditTime: 2021-08-30 21:30:30
  * @FilePath: \03-尚硅谷张天禹(好)\02-代码手敲\redux_test\src\redux\constant.js
  */
 
@@ -13,4 +13,3 @@
 
 export const INCREMENT = 'increment'
 export const DECREMENT = 'decrement'
-export const ADD_PERSON = 'add_person'
