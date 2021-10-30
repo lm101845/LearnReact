@@ -1,0 +1,170 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-10-30 10:52:10
+ * @LastEditTime: 2021-10-30 12:10:25
+ * @FilePath: \LearnReact\04-王红元\02-代码手敲\01_learn_react\05_阶段案例练习\04_移除某个书籍.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      table {
+        border: 1px solid #eee;
+        border-collapse: collapse;
+        /* 将table边框进行折叠，就没有间距了，如果有2个边框，就会进行合并，这个是table独有的CSS属性 */
+      }
+      th,
+      td {
+        border: 1px solid #eee;
+        padding: 10px 16px;
+      }
+
+      th {
+        background-color: #aaa;
+        text-align: center;
+      }
+      .count {
+        margin: 0 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <!-- 1.添加React的依赖 -->
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+    <script src="./format-util.js"></script>
+
+    <!-- 2.编写React代码 -->
+    <script type="text/babel">
+      class App extends React.Component {
+        // Component要大写！！！2个月以后再学React后发现已经没有什么印象了啊。。。
+        constructor(props) {
+          super(props);
+
+          this.state = {
+            books: [
+              {
+                id: 1,
+                name: "《算法导论》",
+                date: "2006-9",
+                price: 85.0,
+                count: 1,
+              },
+              {
+                id: 2,
+                name: "《UNIX编程艺术》",
+                date: "2006-2",
+                price: 59.0,
+                count: 1,
+              },
+              {
+                id: 3,
+                name: "《编程珠玑》",
+                date: "2008-10",
+                price: 39.0,
+                count: 1,
+              },
+              {
+                id: 4,
+                name: "《代码大全》",
+                date: "2006-3",
+                price: 128.0,
+                count: 1,
+              },
+            ],
+          };
+        }
+
+        render() {
+          return (
+            <div>
+              <table>
+                <thead>
+                  <tr>
+                    <td></td>
+                    <th>书籍名称</th>
+                    <th>出版日期</th>
+                    <th>价格</th>
+                    <th>购买数量</th>
+                    <th>操作</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {this.state.books.map((item, index) => {
+                    return (
+                      <tr key={index}>
+                        <td>{index + 1} </td>
+                        <td>{item.name}</td>
+                        <td>{item.date}</td>
+                        <td>{formatPrice(item.price)}</td>
+                        <td>
+                          <button>-</button>
+                          <span className="count">{item.count}</span>
+                          <button>+</button>
+                        </td>
+                        <td>
+                          <button onClick={e=>this.removeBook(index)}>移除</button>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+              <h2>总价格：{this.getTotalPrice()}</h2>
+              {/*这里的this是不会有问题的*/}
+            </div>
+          );
+        }
+
+       
+        
+        getTotalPrice() {
+          // 方法1.通过for循环遍历的方式来获取总价格
+          // let totalPrice = 0;
+          // for(let item of this.state.books){
+          //   // totalPrice = item.price * item.count
+          //   totalPrice += item.price * item.count
+          // }
+          // // return totalPrice
+          // return formatPrice(totalPrice)
+
+          // 方法2.通过reduce/filter/map来获取总价格
+          // const totalPrice = this.state.books.reduce(回调函数,初始化默认值)
+          // 回调函数的参数:
+          // 参数1：上一次回调函数的结果(第一次没有上一次回调函数的结果，就使用初始化值)——取名preValue
+          // 参数2：item
+          // 参数3：index
+          // 参数4：这个数组
+          const totalPrice = this.state.books.reduce((preValue, item) => {
+            return preValue + item.price * item.count;
+          }, 0);
+          return formatPrice(totalPrice)
+        }
+
+         removeBook(index){
+          //  React中的设计原则：state中的数据的不可变性，你永远不要试图来直接修改state里面的数据
+          //  如果有多个index的话，为了区分像下面这样起名字
+          //  index
+          //  indey
+          //  indez
+          // 我要根据你给的索引值来决定要移除哪个
+          console.log(index);
+          // 只要是想修改state里面的数据的话，一定是要通过【setState】来完成的！！！！
+          this.setState({
+            books:this.state.books.filter((item,indey)=>index !== indey)
+            // 注意：这个返回值返回的是新的数据，对原来的数据是没有修改的
+          })
+        }
+      }
+
+      ReactDOM.render(<App />, document.getElementById("app"));
+    </script>
+  </body>
+</html>

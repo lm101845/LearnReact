@@ -1,0 +1,83 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-10-30 10:52:10
+ * @LastEditTime: 2021-10-30 11:13:37
+ * @FilePath: \LearnReact\04-王红元\02-代码手敲\01_learn_react\05_阶段案例练习\01_案例的结构搭建.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      table{
+        border: 1px solid #eee;
+        border-collapse: collapse;
+        /* 将table边框进行折叠，就没有间距了，如果有2个边框，就会进行合并，这个是table独有的CSS属性 */
+      }
+      th,td{
+        border: 1px solid #eee;
+        padding: 10px 16px;
+      }
+
+      th{
+        background-color: #aaa;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <!-- 1.添加React的依赖 -->
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+
+    <!-- 2.编写React代码 -->
+    <script type="text/babel">
+      class App extends React.Component {
+        // Component要大写！！！2个月以后再学React后发现已经没有什么印象了啊。。。
+        constructor(props) {
+          super(props);
+        }
+
+        render() {
+          return (
+            <div>
+              <table>
+                <thead>
+                  <tr>
+                    <td></td>
+                    <th>书籍名称</th>
+                    <th>出版日期</th>
+                    <th>价格</th>
+                    <th>购买数量</th>
+                    <th>操作</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>5</td>
+                    <td>6</td>
+                    </tr>
+                </tbody>
+              </table>
+            </div>
+          )
+        }
+
+      }
+
+       
+
+      ReactDOM.render(<App />, document.getElementById("app"));
+    </script>
+  </body>
+</html>
