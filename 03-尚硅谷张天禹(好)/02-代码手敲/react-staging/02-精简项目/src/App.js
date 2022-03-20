@@ -10,6 +10,7 @@
 //这里我们使用类式组件(不使用函数式组件)
 
 //这个js文件要使用React.Component就需要引入它
+//App.js大写，说明它是一个组件
 import React from "react";
 
 class App extends React.Component {

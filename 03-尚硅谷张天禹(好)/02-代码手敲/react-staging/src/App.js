@@ -21,10 +21,9 @@ import React, { Component } from "react";
 
 // import Hello from "./components/Hello/Hello"
 // import Welcome from "./components/Welcome/Welcome"
-//组件里面 .js .jsx都是可以省略后缀名不写的
 import Hello from "./components/Hello"
 import Welcome from "./components/Welcome"
-// 优势：全部改名为index,index就可以【省略不写了】！！！
+// 优势：全部改名为index,index就可以省略不写了！！！
 //弊端：它们名字都叫index，就容易混乱，分不清
 
 

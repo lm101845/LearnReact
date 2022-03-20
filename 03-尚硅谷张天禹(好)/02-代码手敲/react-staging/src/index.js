@@ -1,8 +1,8 @@
 /*
  * @Author: liming
  * @Date: 2021-08-02 23:26:58
- * @LastEditTime: 2021-08-28 21:12:48
- * @FilePath: \03-尚硅谷张天禹(好)\02-代码手敲\react-staging\src\index.js
+ * @LastEditTime: 2021-08-04 18:26:30
+ * @FilePath: \03-尚硅谷张天禹(好)\02-代码手敲\react-staging\03-样式的模块化\src\index.js
  */
 
 //脚手架已经帮你安好React了
@@ -13,11 +13,15 @@ import React from 'react';
 //引入ReactDOM
 import ReactDOM from 'react-dom';
 
-
+//引入App组件
 import App from './App';
+//.js后缀名可以省略(.css后缀名无法省略)
 
-ReactDOM.render(<App />,document.getElementById('root'))
+//渲染APP组件到页面
+ReactDOM.render(<App/>,document.getElementById('root'))
 
+// import React from './module'
+// console.log(React);
 
 
 
