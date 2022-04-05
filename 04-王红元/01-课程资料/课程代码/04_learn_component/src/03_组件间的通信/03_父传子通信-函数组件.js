@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 
 function ChildCpn(props) {
+    console.log('====================================');
+    console.log(props, 'props');
+    console.log('====================================');
   const { name, age, height } = props;
 
   return (
