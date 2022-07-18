@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div>
+
+    <button id="sub">减少</button>
+    <span id="countSpan">1</span>
+    <span id="nameSpan"></span>
+    <button id="add">增加</button>
+    <button id="addFive">加5</button>
+
+</div>
+<script src="https://unpkg.com/redux@4.2.0/dist/redux.js"></script>
+<script>
+    const subBtn = document.getElementById('sub');
+    const addBtn = document.getElementById('add');
+    const addFiveBtn = document.getElementById('addFive');
+    const countSpan = document.getElementById('countSpan');
+    const nameSpan = document.getElementById('nameSpan');
+
+    const ADD = 'ADD';
+
+    /*
+    *   网页中使用redux的步骤：
+    *       1.引入redux核心包
+    *       2.创建reducer整合函数
+    *       3.通过reducer对象创建store
+    *       4.对store中的state进行订阅
+    *       5.通过dispatch派发state的操作指令
+    * */
+    function reducer(state = {count:1,name:'孙悟空'}, action) {
+        /*
+        *   state 表示当前state，可以根据这个state生成新的state
+        *   action 是一个js对象，它里边会保存操作的信息
+        *           type表示操作的类型
+        *           其他需要传递的参数，也可以在action中设置
+        *
+        *  问题：
+        *   1.如果state过于复杂，将会非常难以维护
+        *       - 可以通过对state分组来解决这个问题，创建多个reducer，然后将其合并为一个
+        *   2.state每次操作时，都需要对state进行复制，然后再去修改
+        *   3.case后边的常量维护起来会比较麻烦
+        * */
+        switch (action.type) {
+            case ADD:
+                return {...state, count:state.count +1};
+            case 'SUB':
+                return {...state, count:state.count -1};
+            case 'ADD_N':
+                return {...state, count:state.count +action.payload};
+            default:
+                return state;
+        }
+    }
+
+    const store = Redux.createStore(reducer);
+
+    nameSpan.innerText = store.getState().name;
+
+    store.subscribe(() => {
+        // 打印state的值
+        // console.log(store.getState());
+        countSpan.innerText = store.getState().count;
+        nameSpan.innerText = store.getState().name;
+
+    });
+
+
+    subBtn.addEventListener('click', () => {
+        store.dispatch({type: 'SUB'});
+    });
+
+    addBtn.addEventListener('click', () => {
+        store.dispatch({type: ADD});
+    });
+
+    addFiveBtn.addEventListener('click', () => {
+        store.dispatch({type: 'ADD_N', payload:50});
+    });
+
+
+</script>
+
+</body>
+</html>

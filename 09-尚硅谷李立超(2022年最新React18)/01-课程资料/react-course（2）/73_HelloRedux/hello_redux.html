@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div>
+
+    <button id="sub">减少</button>
+    <span id="countSpan">1</span>
+    <button id="add">增加</button>
+
+</div>
+<script src="https://unpkg.com/redux@4.2.0/dist/redux.js"></script>
+<script>
+    const subBtn = document.getElementById('sub');
+    const addBtn = document.getElementById('add');
+    const countSpan = document.getElementById('countSpan');
+
+    /*
+    *   网页中使用redux的步骤：
+    *       1.引入redux核心包
+    *       2.创建reducer整合函数
+    *       3.通过reducer对象创建store
+    *       4.对store中的state进行订阅
+    *       5.通过dispatch派发state的操作指令
+    * */
+    function reducer(state, action) {
+        /*
+        *   state 表示当前state，可以根据这个state生成新的state
+        *   action 是一个js对象，它里边会保存操作的信息
+        * */
+        switch (action.type) {
+            case 'ADD':
+                return state + 1;
+            case 'SUB':
+                return state - 1;
+            default:
+                return state;
+        }
+    }
+
+    const store = Redux.createStore(reducer, 1);
+
+    store.subscribe(() => {
+        // 打印state的值
+        // console.log(store.getState());
+        countSpan.innerText = store.getState();
+    });
+
+
+    subBtn.addEventListener('click', () => {
+        store.dispatch({type: 'SUB'});
+    });
+
+    addBtn.addEventListener('click', () => {
+        store.dispatch({type: 'ADD'});
+    });
+
+
+</script>
+
+</body>
+</html>

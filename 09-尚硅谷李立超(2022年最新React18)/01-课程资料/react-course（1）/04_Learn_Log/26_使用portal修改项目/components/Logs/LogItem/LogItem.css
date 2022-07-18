@@ -1,0 +1,59 @@
+/*设置item的样式*/
+.item{
+    /*开启弹性盒*/
+    display: flex;
+    margin: 16px 0;
+    padding: 6px;
+    background-color: #FCBF49;
+
+    position: relative;
+    z-index: 1;
+
+}
+/*设置日志内容的样式*/
+.content{
+    flex: auto;
+    text-align: center;
+    font-weight: bold;
+}
+
+/*设置描述内容*/
+.desc{
+    font-size: 16px;
+    color: #194B49;
+}
+
+/*设置学习时间*/
+.time{
+    color: #D62828;
+}
+
+.form-btn button{
+    width: 100px;
+    height: 50px;
+    border: none;
+    background-color: #194B49;
+    color: #fff;
+    font-weight: bold;
+    font-size: 30px;
+    transition: .3s;
+}
+
+.form-btn button:hover{
+    background-color: #D62828;
+}
+
+.delete{
+    margin-right: 10px;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.delete:hover{
+    color: #D62828;
+    transform: rotate(1turn);
+}
+

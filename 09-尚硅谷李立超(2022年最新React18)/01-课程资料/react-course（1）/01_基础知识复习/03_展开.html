@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>展开</title>
+    <script>
+
+        /*
+        *   可以通过 ... 展开一个数组
+        * */
+
+        function fn(a, b, c) {
+            return a + b + c;
+        }
+
+        const arr = [1, 2, 3];
+
+        // 计算数组中三个数字的和
+        let result = fn(...arr);
+        // console.log(result);
+
+        // const arr2 = [...arr]; // 相当于将arr浅复制给arr2
+        const arr2 = [7, 8, 9, ...arr, 4, 5, 6];
+
+        // console.log(arr2);
+
+        const obj = {
+            name: '孙悟空',
+            age: 18,
+            gender: '男'
+        };
+
+        // const obj2 = {...obj}; // 将obj在新的对象中展开，相当于浅复制
+        const obj2 = {address: '花果山', ...obj, name: '猪八戒',};
+
+        console.log(obj2);
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

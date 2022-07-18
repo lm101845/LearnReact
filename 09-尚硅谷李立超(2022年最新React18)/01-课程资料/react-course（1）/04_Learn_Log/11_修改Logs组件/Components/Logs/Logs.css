@@ -1,0 +1,9 @@
+/*设置外层容器logs的样式*/
+.logs{
+    width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #EAE2B7;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,.2);
+}
