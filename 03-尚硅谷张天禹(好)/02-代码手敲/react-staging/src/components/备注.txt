@@ -1,1 +1,0 @@
-把这些组件里面的jsx和css文件名全部改成index，这样import引入的时候可以省略index这一节不写
