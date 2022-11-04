@@ -17,12 +17,12 @@ const proxy = require('http-proxy-middleware');
 module.exports = function (app) {
     //注意：每次一改这个核心的配置文件，都要停掉脚手架之后重新开启配置才能生效
     app.use(
-        proxy('/api', {   //不能什么都走代理吧，只有遇见/api前缀的请求，才会触发该代理配置
+        proxy('/api1', {   //不能什么都走代理吧，只有遇见/api前缀的请求，才会触发该代理配置
             // 以后看到你请求路径里面有api1，则转发此请求
             target: 'http://localhost:5000',   //请求转发给谁
             changeOrigin: true,  //控制服务器收到的响应头中Host字段的值
             // 默认值是false，我们要把它修改为true,更安全——撒谎
-            pathRewrite:{'^/api':''}   //重写请求路径——不写的话会产生严重问题(/api1用于标记哪个请求用代理，利用完后就把/api1替换为空字符串)
+            pathRewrite:{'^/api1':''}   //重写请求路径——不写的话会产生严重问题(/api1用于标记哪个请求用代理，利用完后就把/api1替换为空字符串)
         })
     )
 }

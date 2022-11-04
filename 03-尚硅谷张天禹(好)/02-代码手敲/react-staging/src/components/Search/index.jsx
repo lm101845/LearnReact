@@ -53,7 +53,7 @@ export default class Search extends Component {
     }
     render() {
         return (
-            <section className="jumbotron">
+            <section style={{marginLeft:'100px'}}>
                 <h3 className="jumbotron-heading">搜索github用户</h3>
                 <div>
                     <input ref={this.myRef} type="text" placeholder="输入关键词点击搜索"/>&nbsp;

@@ -22,7 +22,7 @@ export default class Search extends Component {
 
 
         //发送网络请求
-        axios.get(`/api/search/users?q=${keyWord}`).then(
+        axios.get(`/api1/search/users?q=${keyWord}`).then(
             // 你站在3000，同样给代理服务器3000发请求，则前面的东西都可以不写
         // axios.get(`https://localhost:3000/api/search/users?q=${keyWord}`).then(
             // 记得要加api1的前缀，前缀放在端口后面
