@@ -23,5 +23,11 @@ import ReactDOM from 'react-dom';
 // import App from './08_React性能优化/02_组件嵌套的render调用'
 // import App from './08_React性能优化/03_showComponentUpdate函数优化'
 // import App from './08_React性能优化/04_PureComponent'
-import App from './08_React性能优化/05_memo的使用'
+// import App from './08_React性能优化/05_memo的使用'
+// import App from './09_前面知识点的补充/01_setState不可变的力量'
+// import App from './09_前面知识点的补充/02_全局事件传递'
+// import App from './10_受控与非受控组件/01_refs的使用'
+// import App from './10_受控与非受控组件/02_受控组件的基本使用'
+// import App from './10_受控与非受控组件/03_受控组件之select的使用'
+import App from './10_受控与非受控组件/04_受控组件-多输入'
 ReactDOM.render( <App/> , document.getElementById('root'))
