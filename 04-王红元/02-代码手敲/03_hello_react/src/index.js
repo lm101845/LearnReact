@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './css/index.css'
+// import './css/index.css'
 // import './04_组件通信的案例/style.css'
 // import App from './01_组件的定义方式/01_组件的定义';
 // import App from './01_组件的定义方式/02_render函数的返回值';
@@ -39,5 +39,17 @@ import './css/index.css'
 // import App from './11_高阶组件的使用/06_高阶组件应用-生命周期劫持默认'
 // import App from './11_高阶组件的使用/07_高阶组件应用-生命周期劫持增强'
 // import App from './12_组件内容补充/01_ref的转发'
-import App from './12_组件内容补充/02_protals的使用'
+// import App from './12_组件内容补充/02_protals的使用'
+// import App from './12_组件内容补充/03_fragments的使用'
+// import App from './12_组件内容补充/04_strictMode的使用'
+// import App from './13_react样式/01_内联样式/App'
+// import App from './13_react样式/02_普通的CSS/app'
+// import App from './13_react样式/03_css_modules/app'
+import App from './13_react样式/04_styled-components/app'
 ReactDOM.render( <App/> , document.getElementById('root'))
+// ReactDOM.render(
+//     <React.StrictMode>
+//         <App/>
+//     </React.StrictMode>,
+//     document.getElementById('root')
+// )
