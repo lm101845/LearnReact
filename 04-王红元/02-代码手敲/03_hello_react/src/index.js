@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+// import "antd/dist/antd.css"
+import 'antd/dist/antd.less';
 // import './css/index.css'
 // import './04_组件通信的案例/style.css'
 // import App from './01_组件的定义方式/01_组件的定义';
@@ -45,7 +47,9 @@ import ReactDOM from 'react-dom';
 // import App from './13_react样式/01_内联样式/App'
 // import App from './13_react样式/02_普通的CSS/app'
 // import App from './13_react样式/03_css_modules/app'
-import App from './13_react样式/04_styled-components/app'
+// import App from './13_react样式/04_styled-components/app'
+// import App from './14_AntDesign/App'
+import App from './14_AntDesign/comment/App'
 ReactDOM.render( <App/> , document.getElementById('root'))
 // ReactDOM.render(
 //     <React.StrictMode>

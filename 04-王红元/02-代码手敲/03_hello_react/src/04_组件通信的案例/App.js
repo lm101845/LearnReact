@@ -2,7 +2,7 @@
  * @Author: liming
  * @Date: 2022-05-01 22:02:19
  * @LastEditTime: 2022-05-01 22:05:04
- * @FilePath: \04-王红元\02-代码手敲\03_hello_react\src\04_组件通信的案例\App.js
+ * @FilePath: \04-王红元\02-代码手敲\03_hello_react\src\04_组件通信的案例\App1.js
  */
 import React, { Component } from 'react'
 import TabControl from './TabControl'

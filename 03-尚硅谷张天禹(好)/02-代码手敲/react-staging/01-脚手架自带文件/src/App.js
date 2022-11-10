@@ -2,7 +2,7 @@
  * @Author: liming
  * @Date: 2021-08-02 23:26:58
  * @LastEditTime: 2021-08-03 00:32:09
- * @FilePath: \react-staging\src\App.js
+ * @FilePath: \react-staging\src\App1.js
  */
 import logo from './logo.svg';
 // 一切皆模块，图片也可以作为一个模块来进行引入

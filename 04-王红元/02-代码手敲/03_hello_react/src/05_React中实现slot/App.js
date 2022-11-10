@@ -2,7 +2,7 @@
  * @Author: liming
  * @Date: 2022-06-06 22:30:33
  * @LastEditTime: 2022-06-06 22:30:33
- * @FilePath: \04-王红元\02-代码手敲\03_hello_react\src\05_React中实现slot\App.js
+ * @FilePath: \04-王红元\02-代码手敲\03_hello_react\src\05_React中实现slot\App1.js
  */
 import React, { Component } from 'react'
 import NavBar from './NavBar'
