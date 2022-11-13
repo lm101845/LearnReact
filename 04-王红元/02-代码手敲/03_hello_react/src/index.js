@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import 'antd/dist/antd.less';
 import 'moment/locale/zh-cn'
 import axios from 'axios'
-
+import './16_transition/transition/CSSTransition.css'
 // import './css/index.css'
 // import './04_组件通信的案例/style.css'
 // import App from './01_组件的定义方式/01_组件的定义';
@@ -53,7 +53,8 @@ import axios from 'axios'
 // import App from './13_react样式/04_styled-components/app'
 // import App from './14_AntDesign/App'
 // import App from './14_AntDesign/comment/App'
-import App from './15_axios/App'
+// import App from './15_axios/App'
+import App from './16_transition/App'
 
 axios.defaults.baseURL = "https://httpbin.org/"
 axios.defaults.timeout = 5000
