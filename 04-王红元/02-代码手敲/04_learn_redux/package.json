@@ -1,0 +1,13 @@
+{
+  "name": "04_learn_redux",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "redux": "^4.2.0"
+  },
+  "type": "module",
+  "scripts": {
+    "start": "node --experimental-modules index.js"
+  }
+}
