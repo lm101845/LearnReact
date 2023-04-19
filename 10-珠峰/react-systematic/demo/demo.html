@@ -1,0 +1,28 @@
+<!--
+ * @Author liming
+ * @Date 2023/4/19 18:21
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>操作DOM的demo</title>
+</head>
+<body>
+<span id="textBox">0</span>
+<br>
+<button id="submit">累加</button>
+<script>
+  //想操作谁，就先获取谁
+  let textBox = document.querySelector('#textBox')
+  let submit = document.querySelector('#submit')
+
+  //事件绑定
+  let num = 0;
+  submit.addEventListener('click',function (){
+    num++;
+    textBox.innerHTML = num;
+  })
+</script>
+</body>
+</html>
