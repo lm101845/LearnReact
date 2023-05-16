@@ -6,6 +6,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import '@/index.less'
 
+// import {createElement} from './jsxHandle'
 //创建的js文件，把后缀名设置为jsx，这样js文件中就可以支持jsx语法了
 //在createRoot的时候，不能直接把HTML/Body作为根容器，需要指定一个额外的盒子，例如#root
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -63,6 +64,9 @@ root.render(
                 </li>
             })}
         </ul>
+        {[1,2,3]}
+        {/*胡子语法中，不能嵌入除数组以外的其他对象，但是有一个对象是可以直接嵌入的：JSX元素对象[虚拟DOM对象]*/}
+        {/*我们可以基于createElement语法构建视图，但是这样做比较麻烦*/}
     </>
 )
 // fetch('/jian/subscriptions/recommended_collections').then(res=>res.json()).then(value => {
