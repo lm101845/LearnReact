@@ -6,7 +6,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import '@/index.less'
 
-// import {createElement} from './jsxHandle'
+import {createElement,render} from './jsxHandle'
 //创建的js文件，把后缀名设置为jsx，这样js文件中就可以支持jsx语法了
 //在createRoot的时候，不能直接把HTML/Body作为根容器，需要指定一个额外的盒子，例如#root
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -52,23 +52,25 @@ let data = [{
     id:3,
     title:'大家好'
 }]
-root.render(
-    <>
-        <h2 className="title">今日新闻</h2>
-        <ul className="news-box">
-            {data.map((item,index)=>{
-                return <li key={item.id}>
-                    <em>{index + 1}</em>
-                     &nbsp;&nbsp;
-                    <span>{item.title}</span>
-                </li>
-            })}
-        </ul>
-        {[1,2,3]}
-        {/*胡子语法中，不能嵌入除数组以外的其他对象，但是有一个对象是可以直接嵌入的：JSX元素对象[虚拟DOM对象]*/}
-        {/*我们可以基于createElement语法构建视图，但是这样做比较麻烦*/}
-    </>
-)
+
+// root.render(
+//     <div>
+//         <h2 className="title">今日新闻</h2>
+//         <ul className="news-box">
+//             {data.map((item,index)=>{
+//                 return <li key={item.id}>
+//                     <em>{index + 1}</em>
+//                      &nbsp;&nbsp;
+//                     <span>{item.title}</span>
+//                 </li>
+//             })}
+//         </ul>
+//         {[1,2,3]}
+//         {/*胡子语法中，不能嵌入除数组以外的其他对象，但是有一个对象是可以直接嵌入的：JSX元素对象[虚拟DOM对象]*/}
+//         {/*我们可以基于createElement语法构建视图，但是这样做比较麻烦*/}
+//     </div>
+// )
+
 // fetch('/jian/subscriptions/recommended_collections').then(res=>res.json()).then(value => {
 //     console.log(value,'简书value')
 // })
@@ -76,3 +78,22 @@ root.render(
 // fetch('/zhi/news/latest').then(res=>res.json()).then(value => {
 //     console.log(value,'知乎value')
 // })
+
+let styObj = {
+    color:'red',
+    fontSize:200
+}
+
+let x = '10'
+let y = 24
+//写的方法里面，暂时没有处理数字，所以先写成字符串
+let jsxObj = createElement("div",{className:'container'},
+                createElement("h2",{className:'title',style:styObj}, '\u73e0\u5cf0'),
+                createElement("div",{className:'box'},
+                    createElement("span",null,x),
+                    createElement("span",null,y),
+                )
+)
+
+console.log(jsxObj)
+render(jsxObj,document.getElementById('root'))
