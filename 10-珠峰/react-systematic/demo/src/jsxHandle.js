@@ -103,6 +103,7 @@ export function createElement(ele,props,...children){
  */
 export function render(virtualDOM,container){
     let {type,props} = virtualDOM;
+    console.log(type,'打印virtualDOM的type')
     //说明存储的是标签名，动态创建这样一个标签
     if(typeof  type === 'string'){
         let ele = document.createElement(type)
@@ -141,5 +142,9 @@ export function render(virtualDOM,container){
         })
         //把新增的标签，添加到指定的容器中
         container.appendChild(ele)
+    }
+    if(typeof  type === 'function'){
+        //会把函数执行
+        //把virtualDOM中的props，作为实参传递给函数->DemoOne(props)
     }
 }
