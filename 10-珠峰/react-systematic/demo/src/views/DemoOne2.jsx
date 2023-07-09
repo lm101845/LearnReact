@@ -12,31 +12,13 @@ const DemoOne = function DemoOne(props){
     //     children = [children]
     // }
     children = React.Children.toArray(children)
-    let headerSlot = [],
-        footerSlot = [],
-        defaultSlot = []
-    children.forEach(child=>{
-        //传递进来的插槽信息，都是编译为virtualDOM后传递进来的[而不是传递的标签]
-        console.log('child======》',child)
-        console.log('child======》',child.props.slot)
-        let {slot} = child.props
-        if(slot ==='header'){
-            headerSlot.push(child)
-        }else if(slot === 'footer'){
-            footerSlot.push(child)
-        }else{
-            defaultSlot.push(child)
-        }
-    })
     return <div className="demo-box">
-        {/*{children[0]}*/}
-        {headerSlot}
+        {children[0]}
         <br/>
         <h2 className="title">{title}</h2>
         <span>{x}</span>
         <br/>
-        {/*{children[1]}*/}
-        {footerSlot}
+        {children[1]}
     </div>
 }
 DemoOne.defaultProps = {
