@@ -1,14 +1,37 @@
-@B:lightblue;
+*{
+  margin:0;
+  padding: 0;
+}
 
 html,body{
   height: 100%;
-  background: @B;
+  overflow: hidden;
 }
 
-.box{
-  /* 清除默认边框 */
-  border:0;
-  outline:none;
-  /*清除默认背景 */
-  background-color: transparent;
+.center{
+  position: absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+}
+
+#root{
+  .center;
+  width: 300px;
+  height: 300px;
+  background:lightblue;
+}
+
+.outer{
+  .center;
+  width: 200px;
+  height: 200px;
+  background:lightgreen;
+}
+
+.inner{
+  .center;
+  width: 100px;
+  height: 100px;
+  background:lightcoral;
 }
