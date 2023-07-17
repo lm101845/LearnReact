@@ -2,4 +2,35 @@
  * @Author liming
  * @Date 2023/7/17 13:57
  **/
+.task-box{
+  box-sizing: border-box;
+  margin: 0 auto;
+  width: 800px;
+  .header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    .title{
+      font-size: 20px;
+      line-height: 50px;
+      font-weight: 700;
+    }
+  }
 
+  .tag-box{
+    margin: 15px 0;
+    .ant-tag {
+      margin-right: 20px;
+      padding: 5px 10px;
+      font-size: 14px;
+      border-radius: 0;
+      cursor: pointer;
+    }
+  }
+
+  .ant-btn-link {
+    padding: 4px 5px;
+  }
+}

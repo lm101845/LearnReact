@@ -8,6 +8,8 @@ https://gitee.com/zxt_team
 
 npx pm2 start .\server.js --name TASK
 
+"@": path.resolve(__dirname, "../src")
+
 第1-4集看完——23-04-19
 第5-6集看完——23-05-05
 第7集看完——23-05-16
@@ -20,4 +22,4 @@ npx pm2 start .\server.js --name TASK
 第18集看完——23-07-12
 第19-21集看完——23-07-15
 第22-24集看完——23-07-16
-第25-27集看完——23-07-17
+第25-29集看完——23-07-17
