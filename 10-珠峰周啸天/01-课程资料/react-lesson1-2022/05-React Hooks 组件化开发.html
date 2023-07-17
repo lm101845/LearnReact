@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>React Hooks 组件化开发</title>
+  <meta charset='utf-8'>
+  <link href='https://cdn.maxiang.io/res-min/themes/marxico.css' rel='stylesheet'>
+  <style>
+    #preview-contents {
+      margin-top: -20px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id='preview-contents' class='note-content'>
+    <h3 id="react-hooks-组件化开发">React Hooks 组件化开发</h3>
+
+    <p>React组件分类</p>
+
+    <ul>
+      <li>
+        <p>函数组件</p>
+
+        <ul>
+          <li>
+            <p>不具备“状态、ref、周期函数”等内容，第一次渲染完毕后，无法基于组件内部的操作来控制其更新，因此称之为静态组件！</p>
+          </li>
+          <li>
+            <p>但是具备属性及插槽，父组件可以控制其重新渲染！</p>
+          </li>
+          <li>
+            <p>渲染流程简单，渲染速度较快！</p>
+          </li>
+          <li>
+            <p>基于FP（函数式编程）思想设计，提供更细粒度的逻辑组织和复用！</p>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p>类组件</p>
+
+        <ul>
+          <li>
+            <p>具备“状态、ref、周期函数、属性、插槽”等内容，可以灵活的控制组件更新，基于钩子函数也可灵活掌控不同阶段处理不同的事情！</p>
+          </li>
+          <li>
+            <p>渲染流程繁琐，渲染速度相对较慢！</p>
+          </li>
+          <li>
+            <p>基于OOP（面向对象编程）思想设计，更方便实现继承等！</p>
+          </li>
+        </ul>
+      </li>
+    </ul>
+
+    <p>React Hooks 组件，就是基于 React 中新提供的 Hook 函数，可以<code>让函数组件动态化</code>!</p>
+
+
+
+    <h4 id="hook函数概览">Hook函数概览</h4>
+
+    <p>Hook 是 React 16.8 的新增特性！并且只能运用到函数组件中！ <br>
+      <a href="https://zh-hans.reactjs.org/docs/hooks-reference.html"
+        target="_blank">https://zh-hans.reactjs.org/docs/hooks-reference.html</a>
+    </p>
+
+    <ul>
+      <li>
+        <p>基础 Hook</p>
+
+        <ul>
+          <li>
+            <p><code>useState</code> 使用状态管理</p>
+          </li>
+          <li>
+            <p><code>useEffect</code> 使用周期函数</p>
+          </li>
+          <li>
+            <p><code>useContext</code> 使用上下文信息</p>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p>额外的 Hook</p>
+
+        <ul>
+          <li>
+            <p><code>useReducer</code> useState的替代方案，借鉴redux处理思想，管理更复杂的状态和逻辑</p>
+          </li>
+          <li>
+            <p><code>useCallback</code> 构建缓存优化方案</p>
+          </li>
+          <li>
+            <p><code>useMemo</code> 构建缓存优化方案</p>
+          </li>
+          <li>
+            <p><code>useRef</code> 使用ref获取DOM</p>
+          </li>
+          <li>
+            <p><code>useImperativeHandle</code> 配合forwardRef（ref转发）一起使用</p>
+          </li>
+          <li>
+            <p><code>useLayoutEffect</code> 与useEffect相同，但会在所有的DOM变更之后同步调用effect</p>
+          </li>
+          <li>
+            <p>…</p>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p>自定义Hook</p>
+      </li>
+      <li>
+        <p>……</p>
+      </li>
+    </ul>
+
+    <hr>
+
+
+
+    <h4 id="usestate">useState</h4>
+
+    <blockquote>
+      <p>作用：在函数组件中使用状态，修改状态值可让函数组件更新，类似于类组件中的setState <br>
+        语法： <br>
+        const [state, setState] = useState(initialState); <br>
+        返回一个 state，以及更新 state 的函数</p>
+    </blockquote>
+
+
+
+    <pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-keyword">import</span> React, { useState } <span class="hljs-keyword">from</span> <span class="hljs-string">"react"</span>;
+</div><div class="hljs-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Demo</span>(<span class="hljs-params">props</span>) </span>{
+</div><div class="hljs-line">    <span class="hljs-keyword">let</span> [num, setNum] = useState(<span class="hljs-number">10</span>);
+</div><div class="hljs-line">    <span class="hljs-keyword">const</span> handler = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+</div><div class="hljs-line">        setNum(num + <span class="hljs-number">1</span>);
+</div><div class="hljs-line">    };
+</div><div class="hljs-line">    <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">        <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>{num}<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{handler}</span>&gt;</span>新增<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>;
+</div><div class="hljs-line">};
+</div></code></pre>
+
+    <p><strong>设计原理</strong> <br>
+      函数组件的更新是让函数重新执行，也就是useState会被重新执行；那么它是如何确保每一次获取的是最新状态值，而不是传递的初始值呢？</p>
+
+
+
+    <pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-comment">// 函数组件每一次渲染/更新，都具备独立的闭包</span>
+</div><div class="hljs-line"><span class="hljs-keyword">import</span> React, { useState } <span class="hljs-keyword">from</span> <span class="hljs-string">"react"</span>;
+</div><div class="hljs-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Demo</span>(<span class="hljs-params">props</span>) </span>{
+</div><div class="hljs-line">    <span class="hljs-keyword">let</span> [num, setNum] = useState(<span class="hljs-number">10</span>);
+</div><div class="hljs-line">    <span class="hljs-keyword">const</span> handler = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+</div><div class="hljs-line">        setNum(<span class="hljs-number">100</span>);
+</div><div class="hljs-line">        setTimeout(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+</div><div class="hljs-line">            <span class="hljs-built_in">console</span>.log(num); <span class="hljs-comment">//10</span>
+</div><div class="hljs-line">        }, <span class="hljs-number">1000</span>);
+</div><div class="hljs-line">    };
+</div><div class="hljs-line">    <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">        <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>{num}<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{handler}</span>&gt;</span>新增<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>;
+</div><div class="hljs-line">};
+</div></code></pre>
+
+    <p>实现原理</p>
+
+
+
+    <pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-keyword">var</span> _state;
+</div><div class="hljs-line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">useState</span>(<span class="hljs-params">initialState</span>) </span>{
+</div><div class="hljs-line">  _state = _state | initialState;
+</div><div class="hljs-line">  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setState</span>(<span class="hljs-params">state</span>) </span>{
+</div><div class="hljs-line">    _state = state;
+</div><div class="hljs-line">    <span class="hljs-comment">//...重新渲染组件</span>
+</div><div class="hljs-line">  }
+</div><div class="hljs-line">  <span class="hljs-keyword">return</span> [_state, setState];
+</div><div class="hljs-line">}
+</div></code></pre>
+
+    <p><strong>更新多状态</strong> <br>
+      方案一：类似于类组件中一样，让状态值是一个对象（包含需要的全部状态），每一次只修改其中的一个状态值！ <br>
+      问题：不能像类组件的setState函数一样，支持部分状态更新！</p>
+
+
+
+    <pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-keyword">import</span> React, { useState } <span class="hljs-keyword">from</span> <span class="hljs-string">"react"</span>;
+</div><div class="hljs-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Demo</span>(<span class="hljs-params">props</span>) </span>{
+</div><div class="hljs-line">    <span class="hljs-keyword">let</span> [state, setState] = useState({
+</div><div class="hljs-line">        <span class="hljs-attr">x</span>: <span class="hljs-number">10</span>,
+</div><div class="hljs-line">        <span class="hljs-attr">y</span>: <span class="hljs-number">20</span>
+</div><div class="hljs-line">    });
+</div><div class="hljs-line">    <span class="hljs-keyword">const</span> handler = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+</div><div class="hljs-line">        <span class="hljs-comment">// setState({ x: 100 }); //state={x:100}</span>
+</div><div class="hljs-line">        setState({
+</div><div class="hljs-line">            ...state,
+</div><div class="hljs-line">            <span class="hljs-attr">x</span>: <span class="hljs-number">100</span>
+</div><div class="hljs-line">        });
+</div><div class="hljs-line">    };
+</div><div class="hljs-line">    <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">        <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>{state.x}<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">        <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>{state.y}<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{handler}</span>&gt;</span>处理<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>;
+</div><div class="hljs-line">};
+</div></code></pre>
+
+    <p>方案二：执行多次useState，把不同状态分开进行管理「推荐方案」</p>
+
+
+
+    <pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-keyword">import</span> React, { useState } <span class="hljs-keyword">from</span> <span class="hljs-string">"react"</span>;
+</div><div class="hljs-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Demo</span>(<span class="hljs-params">props</span>) </span>{
+</div><div class="hljs-line">    <span class="hljs-keyword">let</span> [x, setX] = useState(<span class="hljs-number">10</span>),
+</div><div class="hljs-line">        [y, setY] = useState(<span class="hljs-number">20</span>);
+</div><div class="hljs-line">    <span class="hljs-keyword">const</span> handler = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+</div><div class="hljs-line">        setX(<span class="hljs-number">100</span>);
+</div><div class="hljs-line">    };
+</div><div class="hljs-line">    <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">        <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>{x}<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">        <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>{y}<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{handler}</span>&gt;</span>处理<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>;
+</div><div class="hljs-line">};
+</div></code></pre>
+
+    <p><strong>更新队列机制</strong> <br>
+      和类组件中的setState一样，每次更新状态值，也不是立即更新，而是加入到更新队列中！</p>
+
+    <ul>
+      <li>
+        <p>React 18 全部采用批更新</p>
+      </li>
+      <li>
+        <p>React 16 部分批更新，放在其它的异步操作中，依然是同步操作！</p>
+      </li>
+      <li>
+        <p>可以基于flushSync刷新渲染队列</p>
+      </li>
+    </ul>
+
+
+
+    <pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-keyword">import</span> React, { useState } <span class="hljs-keyword">from</span> <span class="hljs-string">"react"</span>;
+</div><div class="hljs-line"><span class="hljs-keyword">import</span> { flushSync } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-dom'</span>;
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Demo</span>(<span class="hljs-params">props</span>) </span>{
+</div><div class="hljs-line">    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'OK'</span>);
+</div><div class="hljs-line">    <span class="hljs-keyword">let</span> [x, setX] = useState(<span class="hljs-number">10</span>);
+</div><div class="hljs-line">    <span class="hljs-keyword">let</span> [y, setY] = useState(<span class="hljs-number">20</span>);
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    <span class="hljs-keyword">const</span> handler = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+</div><div class="hljs-line">        <span class="hljs-comment">/* setX(100);</span>
+</div><div class="hljs-line"><span class="hljs-comment">        setY(200); */</span>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">        <span class="hljs-comment">/* setTimeout(() =&gt; {</span>
+</div><div class="hljs-line"><span class="hljs-comment">            setX(100);</span>
+</div><div class="hljs-line"><span class="hljs-comment">            setY(200);</span>
+</div><div class="hljs-line"><span class="hljs-comment">        }, 1000); */</span>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">        <span class="hljs-comment">/* flushSync(() =&gt; {</span>
+</div><div class="hljs-line"><span class="hljs-comment">            setX(100);</span>
+</div><div class="hljs-line"><span class="hljs-comment">        });</span>
+</div><div class="hljs-line"><span class="hljs-comment">        setY(200); */</span>
+</div><div class="hljs-line">    };
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">        <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>{x}<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">        <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>{y}<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{handler}</span>&gt;</span>处理<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>;
+</div><div class="hljs-line">};
+</div></code></pre>
+
+    <p><strong>函数式更新</strong> <br>
+      如果新的 state 需要通过使用先前的 state 计算得出，那么可以将函数传递给 setState；该函数将接收先前的 state，并返回一个更新后的值！</p>
+
+
+
+    <pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-keyword">import</span> React, { useState } <span class="hljs-keyword">from</span> <span class="hljs-string">"react"</span>;
+</div><div class="hljs-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Demo</span>(<span class="hljs-params"></span>) </span>{
+</div><div class="hljs-line">    <span class="hljs-keyword">let</span> [num, setNum] = useState(<span class="hljs-number">10</span>);
+</div><div class="hljs-line">    <span class="hljs-keyword">const</span> handler = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+</div><div class="hljs-line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++) {
+</div><div class="hljs-line">            <span class="hljs-comment">// 函数式更新</span>
+</div><div class="hljs-line">            setNum(<span class="hljs-function"><span class="hljs-params">num</span> =&gt;</span> {
+</div><div class="hljs-line">                <span class="hljs-keyword">return</span> num + <span class="hljs-number">1</span>;
+</div><div class="hljs-line">            });
+</div><div class="hljs-line">        }
+</div><div class="hljs-line">    };
+</div><div class="hljs-line">    <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">        <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>{num}<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{handler}</span>&gt;</span>处理<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>;
+</div><div class="hljs-line">};
+</div></code></pre>
+
+    <p><strong>惰性初始state</strong> <br>
+      如果初始 state 需要通过复杂计算获得，则可以传入一个函数，在函数中计算并返回初始的 state，此函数只在初始渲染时被调用！</p>
+
+
+
+    <pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-keyword">import</span> React, { useState } <span class="hljs-keyword">from</span> <span class="hljs-string">"react"</span>;
+</div><div class="hljs-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Demo</span>(<span class="hljs-params">props</span>) </span>{
+</div><div class="hljs-line">    <span class="hljs-keyword">let</span> [num, setNum] = useState(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+</div><div class="hljs-line">        <span class="hljs-keyword">let</span> { x, y } = props;
+</div><div class="hljs-line">        <span class="hljs-keyword">return</span> x + y;
+</div><div class="hljs-line">    });
+</div><div class="hljs-line">    <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">        <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>{num}<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>;
+</div><div class="hljs-line">};
+</div></code></pre>
+
+    <p><strong>性能优化</strong> <br>
+      调用 State Hook 的更新函数，并传入当前的 state 时，React 将跳过组件的渲染（原因：React 使用 Object.is 比较算法，来比较新老 state；注意不是因为DOM-DIFF；）！</p>
+
+
+
+    <pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-keyword">import</span> React, { useState } <span class="hljs-keyword">from</span> <span class="hljs-string">"react"</span>;
+</div><div class="hljs-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Demo</span>(<span class="hljs-params"></span>) </span>{
+</div><div class="hljs-line">    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'render'</span>);
+</div><div class="hljs-line">    <span class="hljs-keyword">let</span> [num, setNum] = useState(<span class="hljs-number">10</span>);
+</div><div class="hljs-line">    <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">        <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>{num}<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{()</span> =&gt;</span> {</span>
+</div><div class="hljs-line"><span class="xml">            setNum(num);</span>
+</div><div class="hljs-line"><span class="xml">        }}&gt;处理<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>;
+</div><div class="hljs-line">};
+</div></code></pre>
+
+    <hr>
+
+
+
+    <h4 id="useeffect-uselayouteffect">useEffect &amp;&amp; useLayoutEffect</h4>
+
+    <blockquote>
+      <p>作用：在函数组件中使用生命周期函数 <br>
+        语法：具备很多情况 <br>
+        useEffect([callback],[dependencies])</p>
+    </blockquote>
+
+
+
+    <pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-keyword">import</span> React, { useState, useEffect } <span class="hljs-keyword">from</span> <span class="hljs-string">"react"</span>;
+</div><div class="hljs-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Demo</span>(<span class="hljs-params"></span>) </span>{
+</div><div class="hljs-line">    <span class="hljs-keyword">let</span> [num, setNum] = useState(<span class="hljs-number">10</span>),
+</div><div class="hljs-line">        [x, setX] = useState(<span class="hljs-number">100</span>);
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    <span class="hljs-comment">/* </span>
+</div><div class="hljs-line"><span class="hljs-comment">     在组件 第一次渲染完 &amp;&amp; 每一次更新完 调用 </span>
+</div><div class="hljs-line"><span class="hljs-comment">     等同于 componentDidMount &amp;&amp; componentDidUpdate</span>
+</div><div class="hljs-line"><span class="hljs-comment">    */</span>
+</div><div class="hljs-line">    useEffect(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+</div><div class="hljs-line">        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'@1'</span>, num, x);
+</div><div class="hljs-line">    });
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    <span class="hljs-comment">/* </span>
+</div><div class="hljs-line"><span class="hljs-comment">     只在组件 第一次渲染完 调用 </span>
+</div><div class="hljs-line"><span class="hljs-comment">     等同于 componentDidMount</span>
+</div><div class="hljs-line"><span class="hljs-comment">    */</span>
+</div><div class="hljs-line">    useEffect(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+</div><div class="hljs-line">        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'@2'</span>, num, x);
+</div><div class="hljs-line">    }, []);
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    <span class="hljs-comment">/* </span>
+</div><div class="hljs-line"><span class="hljs-comment">     第一次渲染完 以及 依赖的状态发生改变 时调用</span>
+</div><div class="hljs-line"><span class="hljs-comment">    */</span>
+</div><div class="hljs-line">    useEffect(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+</div><div class="hljs-line">        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'@3'</span>, num);
+</div><div class="hljs-line">    }, [num]);
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    <span class="hljs-comment">/* </span>
+</div><div class="hljs-line"><span class="hljs-comment">     返回的函数将在 组件卸载后 被调用</span>
+</div><div class="hljs-line"><span class="hljs-comment">     等同于 componentWillUnmount</span>
+</div><div class="hljs-line"><span class="hljs-comment">     */</span>
+</div><div class="hljs-line">    useEffect(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+</div><div class="hljs-line">        <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+</div><div class="hljs-line">            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'@4'</span>);
+</div><div class="hljs-line">        };
+</div><div class="hljs-line">    }, []);
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">        <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>{num}<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{()</span> =&gt;</span> { setNum(num + 1); }}&gt;处理<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">        <span class="hljs-tag">&lt;<span class="hljs-name">br</span> /&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">        <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>{x}<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{()</span> =&gt;</span> { setX(x + 1); }}&gt;处理<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>;
+</div><div class="hljs-line">};
+</div></code></pre>
+
+    <p>只能在函数最外层调用 Hook，不要在循环、条件判断或者子函数中调用。</p>
+
+
+
+    <pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-keyword">import</span> React, { useState, useEffect } <span class="hljs-keyword">from</span> <span class="hljs-string">"react"</span>;
+</div><div class="hljs-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Demo</span>(<span class="hljs-params"></span>) </span>{
+</div><div class="hljs-line">    <span class="hljs-keyword">let</span> [num, setNum] = useState(<span class="hljs-number">10</span>);
+</div><div class="hljs-line">    <span class="hljs-keyword">if</span> (num &gt;= <span class="hljs-number">10</span>) {
+</div><div class="hljs-line">        <span class="hljs-comment">// Error：React Hook "useEffect" is called conditionally. React Hooks must be called in the exact same order in every component render  react-hooks/rules-of-hooks</span>
+</div><div class="hljs-line">        useEffect(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+</div><div class="hljs-line">            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'@1'</span>, num);
+</div><div class="hljs-line">        });
+</div><div class="hljs-line">    }
+</div><div class="hljs-line">    <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">        <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>{num}<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{()</span> =&gt;</span> { setNum(num + 1); }}&gt;处理<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>;
+</div><div class="hljs-line">};
+</div></code></pre>
+
+    <p><strong>异步获取数据</strong> <br>
+      不能直接对[callback]设置async，因为它只能返回一个函数（或者不设置返回值）</p>
+
+
+
+    <pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-keyword">import</span> React, { useState, useEffect } <span class="hljs-keyword">from</span> <span class="hljs-string">"react"</span>;
+</div><div class="hljs-line"><span class="hljs-keyword">const</span> queryData = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+</div><div class="hljs-line">    <span class="hljs-keyword">return</span> fetch(<span class="hljs-string">'/api/subscriptions/recommended_collections'</span>)
+</div><div class="hljs-line">        .then(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> {
+</div><div class="hljs-line">            <span class="hljs-keyword">return</span> response.json();
+</div><div class="hljs-line">        });
+</div><div class="hljs-line">};
+</div><div class="hljs-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Demo</span>(<span class="hljs-params"></span>) </span>{
+</div><div class="hljs-line">    <span class="hljs-keyword">let</span> [data, setData] = useState([]);
+</div><div class="hljs-line">    <span class="hljs-comment">/* // Warning: useEffect must not return anything besides a function, which is used for clean-up.</span>
+</div><div class="hljs-line"><span class="hljs-comment">    useEffect(async () =&gt; {</span>
+</div><div class="hljs-line"><span class="hljs-comment">        let result = await queryData();</span>
+</div><div class="hljs-line"><span class="hljs-comment">        setData(result);</span>
+</div><div class="hljs-line"><span class="hljs-comment">        console.log(result);</span>
+</div><div class="hljs-line"><span class="hljs-comment">    }, []); */</span>
+</div><div class="hljs-line">    useEffect(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+</div><div class="hljs-line">        <span class="hljs-keyword">const</span> next = <span class="hljs-keyword">async</span> () =&gt; {
+</div><div class="hljs-line">            <span class="hljs-keyword">let</span> result = <span class="hljs-keyword">await</span> queryData();
+</div><div class="hljs-line">            setData(result);
+</div><div class="hljs-line">            <span class="hljs-built_in">console</span>.log(result);
+</div><div class="hljs-line">        };
+</div><div class="hljs-line">        next();
+</div><div class="hljs-line">    }, []);
+</div><div class="hljs-line">    <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">        ...</span>
+</div><div class="hljs-line"><span class="xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>;
+</div><div class="hljs-line">};
+</div></code></pre>
+
+    <p><strong>useEffect的原理</strong> <br>
+      函数组件在渲染（或更新）期间，遇到useEffect操作，会基于MountEffect方法把callback（和依赖项）加入到<code>effect链表</code>中！</p>
+
+    <p>在视图渲染完毕后，基于UpdateEffect方法，通知链表中的方法执行！ <br>
+      1、按照顺序执行期间，首先会检测依赖项的值是否有更新「有容器专门记录上一次依赖项的值」；有更新则把对应的callback执行，没有则继续处理下一项！！ <br>
+      2、遇到依赖项是空数组的，则只在第一次渲染完毕时，执行相应的callback <br>
+      3、遇到没有设置依赖项的，则每一次渲染完毕时都执行相应的callback</p>
+
+    <p>……</p>
+
+    <p><strong>注意事项</strong></p>
+
+
+
+    <pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-keyword">import</span> React, { useState, useEffect } <span class="hljs-keyword">from</span> <span class="hljs-string">"react"</span>;
+</div><div class="hljs-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Demo</span>(<span class="hljs-params"></span>) </span>{
+</div><div class="hljs-line">    <span class="hljs-keyword">let</span> [num, setNum] = useState(<span class="hljs-number">0</span>);
+</div><div class="hljs-line">    useEffect(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+</div><div class="hljs-line">        <span class="hljs-keyword">const</span> timer = setTimeout(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+</div><div class="hljs-line">            <span class="hljs-comment">// ...</span>
+</div><div class="hljs-line">            <span class="hljs-built_in">console</span>.log(num); <span class="hljs-comment">//不管如何更新都是0</span>
+</div><div class="hljs-line">        }, <span class="hljs-number">2000</span>);
+</div><div class="hljs-line">        <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+</div><div class="hljs-line">            clearTimeout(timer);
+</div><div class="hljs-line">        };
+</div><div class="hljs-line">    }, []);
+</div><div class="hljs-line">    <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">        <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>{num}<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{()</span> =&gt;</span> { setNum(num + 1); }}&gt;处理<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>;
+</div><div class="hljs-line">};
+</div></code></pre>
+
+    <p><strong>useLayoutEffect</strong> <br>
+      其函数签名与 useEffect 相同，但它会在所有的 DOM 变更之后同步调用 effect。 <br>
+      可以使用它来读取 DOM 布局并同步触发重渲染。 <br>
+      在浏览器执行绘制之前，useLayoutEffect 内部的更新计划将被同步刷新。 <br>
+      尽可能使用标准的 useEffect 以避免阻塞视觉更新。</p>
+
+
+
+    <pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-keyword">import</span> React, { useState, useEffect, useLayoutEffect } <span class="hljs-keyword">from</span> <span class="hljs-string">"react"</span>;
+</div><div class="hljs-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Demo</span>(<span class="hljs-params"></span>) </span>{
+</div><div class="hljs-line">    <span class="hljs-keyword">let</span> [num, setNum] = useState(<span class="hljs-number">0</span>);
+</div><div class="hljs-line">    <span class="hljs-comment">// 再试试useLayoutEffect</span>
+</div><div class="hljs-line">    useEffect(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+</div><div class="hljs-line">        <span class="hljs-keyword">if</span> (num === <span class="hljs-number">0</span>) {
+</div><div class="hljs-line">            <span class="hljs-keyword">let</span> random = +<span class="hljs-built_in">String</span>(<span class="hljs-built_in">Math</span>.random()).substring(<span class="hljs-number">2</span>);
+</div><div class="hljs-line">            setNum(random);
+</div><div class="hljs-line">        }
+</div><div class="hljs-line">    }, [num]);
+</div><div class="hljs-line">    <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span></span></span>
+</div><div class="hljs-line"><span class="xml">        <span class="hljs-attr">style</span>=<span class="hljs-string">{{</span></span>
+</div><div class="hljs-line"><span class="xml">            <span class="hljs-attr">background:</span> '<span class="hljs-attr">lightblue</span>',</span>
+</div><div class="hljs-line"><span class="xml">            <span class="hljs-attr">WebkitUserSelect:</span> "<span class="hljs-attr">none</span>"</span>
+</div><div class="hljs-line"><span class="xml">        }}</span>
+</div><div class="hljs-line"><span class="xml">        <span class="hljs-attr">onClick</span>=<span class="hljs-string">{()</span> =&gt; {</span>
+</div><div class="hljs-line"><span class="xml">            setNum(0);</span>
+</div><div class="hljs-line"><span class="xml">        }}&gt;</span>
+</div><div class="hljs-line"><span class="xml">        {num}</span>
+</div><div class="hljs-line"><span class="xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>;
+</div><div class="hljs-line">};
+</div></code></pre>
+
+    <hr>
+
+
+
+    <h4 id="useref-和-useimperativehandle-ɪmˈperətɪv">useRef 和 useImperativeHandle /ɪmˈperətɪv/</h4>
+
+    <p>在函数组件中，可以基于<code>useRef</code>获取DOM元素！类似于类组件中的 ：</p>
+
+    <ul>
+      <li>
+        <p>ref={x=&gt;thix.box=x}</p>
+      </li>
+      <li>
+        <p>React.createRef</p>
+      </li>
+    </ul>
+
+    <p>注意：React.createRef在函数组件中依然可以使用！</p>
+
+    <ul>
+      <li>
+        <p>createRef 每次渲染都会返回一个新的引用</p>
+      </li>
+      <li>
+        <p>而 useRef 每次都会返回相同的引用</p>
+      </li>
+    </ul>
+
+
+
+    <pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-keyword">import</span> React, { useState, useEffect, useRef, createRef } <span class="hljs-keyword">from</span> <span class="hljs-string">"react"</span>;
+</div><div class="hljs-line"><span class="hljs-keyword">let</span> prev;
+</div><div class="hljs-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Demo</span>(<span class="hljs-params"></span>) </span>{
+</div><div class="hljs-line">    <span class="hljs-keyword">const</span> [num, setNum] = useState(<span class="hljs-number">0</span>);
+</div><div class="hljs-line">    <span class="hljs-keyword">const</span> btnBox = useRef(<span class="hljs-literal">null</span>); <span class="hljs-comment">//换成createRef也是可以的</span>
+</div><div class="hljs-line">    <span class="hljs-keyword">if</span> (!prev) {
+</div><div class="hljs-line">        prev = btnBox;
+</div><div class="hljs-line">    } <span class="hljs-keyword">else</span> {
+</div><div class="hljs-line">        <span class="hljs-built_in">console</span>.log(prev === btnBox);
+</div><div class="hljs-line">    }
+</div><div class="hljs-line">    useEffect(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+</div><div class="hljs-line">        <span class="hljs-built_in">console</span>.log(btnBox.current);
+</div><div class="hljs-line">    }, []);
+</div><div class="hljs-line">    <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">        <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>{num}<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">{btnBox}</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{()</span> =&gt;</span> setNum(num + 1)}&gt;按钮<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>;
+</div><div class="hljs-line">};
+</div></code></pre>
+
+    <p><strong>useImperativeHandle</strong></p>
+
+    <blockquote>
+      <p>useImperativeHandle 可以让你在使用 ref 时自定义暴露给父组件的实例值，应当与 forwardRef 一起使用，实现ref转发！</p>
+    </blockquote>
+
+    <p>在类组件中，我们获取其实例后，可以直接调用实例上的方法！</p>
+
+
+
+    <pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-keyword">import</span> React, { useEffect, useRef} <span class="hljs-keyword">from</span> <span class="hljs-string">"react"</span>;
+</div><div class="hljs-line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Child</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">Component</span> </span>{
+</div><div class="hljs-line">    submit = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+</div><div class="hljs-line">        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'调用了子组件的submit方法！'</span>);
+</div><div class="hljs-line">    };
+</div><div class="hljs-line">    render() {
+</div><div class="hljs-line">        <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">            ...</span>
+</div><div class="hljs-line"><span class="xml">        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>;
+</div><div class="hljs-line">    }
+</div><div class="hljs-line">}
+</div><div class="hljs-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Demo</span>(<span class="hljs-params"></span>) </span>{
+</div><div class="hljs-line">    <span class="hljs-keyword">const</span> box = useRef(<span class="hljs-literal">null</span>);
+</div><div class="hljs-line">    useEffect(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+</div><div class="hljs-line">        <span class="hljs-built_in">console</span>.log(box.current); <span class="hljs-comment">//子组件的实例</span>
+</div><div class="hljs-line">        box.current.submit();
+</div><div class="hljs-line">    }, []);
+</div><div class="hljs-line">    <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">        <span class="hljs-tag">&lt;<span class="hljs-name">Child</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">{box}</span> /&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>;</span>
+</div><div class="hljs-line"><span class="xml">};</span>
+</div></code></pre>
+
+    <p>但是直接把 ref 赋值给函数组件，是不被允许的！</p>
+
+
+
+    <pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-keyword">const</span> Child = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+</div><div class="hljs-line">    <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">        ...</span>
+</div><div class="hljs-line"><span class="xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>;
+</div><div class="hljs-line">};
+</div><div class="hljs-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Demo</span>(<span class="hljs-params"></span>) </span>{
+</div><div class="hljs-line">    <span class="hljs-keyword">const</span> box = useRef(<span class="hljs-literal">null</span>);
+</div><div class="hljs-line">    useEffect(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+</div><div class="hljs-line">        <span class="hljs-built_in">console</span>.log(box.current); <span class="hljs-comment">//null</span>
+</div><div class="hljs-line">        <span class="hljs-comment">// Warning: Function components cannot be given refs. Attempts to access this ref will fail. Did you mean to use React.forwardRef()?</span>
+</div><div class="hljs-line">    }, []);
+</div><div class="hljs-line">    <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">        <span class="hljs-tag">&lt;<span class="hljs-name">Child</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">{box}</span> /&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>;</span>
+</div><div class="hljs-line"><span class="xml">};</span>
+</div></code></pre>
+
+    <p>此时我们可以基于 forwardRef 和 useImperativeHandle , 就可以实现父组件调用子组件中的方法！</p>
+
+
+
+    <pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-keyword">import</span> React, { useEffect, useRef, useImperativeHandle, forwardRef } <span class="hljs-keyword">from</span> <span class="hljs-string">"react"</span>;
+</div><div class="hljs-line"><span class="hljs-keyword">const</span> Child = forwardRef(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">props, ref</span>) </span>{
+</div><div class="hljs-line">    useImperativeHandle(ref, () =&gt; {
+</div><div class="hljs-line">        <span class="hljs-keyword">return</span> {
+</div><div class="hljs-line">            <span class="hljs-attr">submit</span>: <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+</div><div class="hljs-line">                <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'调用了子组件的submit方法！'</span>);
+</div><div class="hljs-line">            }
+</div><div class="hljs-line">        };
+</div><div class="hljs-line">    });
+</div><div class="hljs-line">    <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">        ...</span>
+</div><div class="hljs-line"><span class="xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>;
+</div><div class="hljs-line">});
+</div><div class="hljs-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Demo</span>(<span class="hljs-params"></span>) </span>{
+</div><div class="hljs-line">    <span class="hljs-keyword">const</span> box = useRef(<span class="hljs-literal">null</span>);
+</div><div class="hljs-line">    useEffect(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+</div><div class="hljs-line">        <span class="hljs-built_in">console</span>.log(box.current);
+</div><div class="hljs-line">        box.current.submit();
+</div><div class="hljs-line">    }, []);
+</div><div class="hljs-line">    <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">        <span class="hljs-tag">&lt;<span class="hljs-name">Child</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">{box}</span> /&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>;</span>
+</div><div class="hljs-line"><span class="xml">};</span>
+</div></code></pre>
+
+    <hr>
+
+
+
+    <h4 id="usememo-usecallback">useMemo &amp;&amp; useCallback</h4>
+
+    <p>在前端开发的过程中，我们需要缓存一些内容，以避免在需渲染过程中因大量不必要的耗时计算而导致的性能问题。为此 React 提供了一些方法可以帮助我们去实现数据的缓存，useMemo 就是其中之一！</p>
+
+
+
+    <pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-keyword">import</span> React, { useState, useMemo } <span class="hljs-keyword">from</span> <span class="hljs-string">"react"</span>;
+</div><div class="hljs-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Demo</span>(<span class="hljs-params"></span>) </span>{
+</div><div class="hljs-line">    <span class="hljs-keyword">let</span> [x, setX] = useState(<span class="hljs-number">10</span>),
+</div><div class="hljs-line">        [y, setY] = useState(<span class="hljs-number">20</span>);
+</div><div class="hljs-line">    <span class="hljs-comment">/* const computed = () =&gt; {</span>
+</div><div class="hljs-line"><span class="hljs-comment">        // 大量的计算...</span>
+</div><div class="hljs-line"><span class="hljs-comment">        return x;</span>
+</div><div class="hljs-line"><span class="hljs-comment">    }; */</span>
+</div><div class="hljs-line">    <span class="hljs-keyword">const</span> cacheVal = useMemo(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+</div><div class="hljs-line">        <span class="hljs-comment">// 大量的计算...</span>
+</div><div class="hljs-line">        <span class="hljs-keyword">return</span> x;
+</div><div class="hljs-line">    }, [x]);
+</div><div class="hljs-line">    <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">        {/* <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>{computed()}<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span> */}</span>
+</div><div class="hljs-line"><span class="xml">        <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>{cacheVal}<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{()</span> =&gt;</span> setX(x + 1)}&gt;处理<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">        <span class="hljs-tag">&lt;<span class="hljs-name">br</span> /&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">        <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>y<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{()</span> =&gt;</span> setY(y + 1)}&gt;处理<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>;
+</div><div class="hljs-line">};
+</div></code></pre>
+
+    <p>useCallback 用于得到一个固定引用值的函数，通常用它进行性能优化！</p>
+
+
+
+    <pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-keyword">import</span> React, { useState, useCallback, memo } <span class="hljs-keyword">from</span> <span class="hljs-string">"react"</span>;
+</div><div class="hljs-line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Child1</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">PureComponent</span> </span>{
+</div><div class="hljs-line">    render() {
+</div><div class="hljs-line">        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'child1 render'</span>);
+</div><div class="hljs-line">        <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">            <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{this.props.handler}</span>&gt;</span>处理1<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>;
+</div><div class="hljs-line">    }
+</div><div class="hljs-line">}
+</div><div class="hljs-line"><span class="hljs-comment">/* class Child2 extends React.PureComponent {</span>
+</div><div class="hljs-line"><span class="hljs-comment">    render() {</span>
+</div><div class="hljs-line"><span class="hljs-comment">        console.log('child2 render');</span>
+</div><div class="hljs-line"><span class="hljs-comment">        return &lt;div&gt;</span>
+</div><div class="hljs-line"><span class="hljs-comment">            &lt;button onClick={this.props.handler}&gt;处理2&lt;/button&gt;</span>
+</div><div class="hljs-line"><span class="hljs-comment">        &lt;/div&gt;;</span>
+</div><div class="hljs-line"><span class="hljs-comment">    }</span>
+</div><div class="hljs-line"><span class="hljs-comment">} */</span>
+</div><div class="hljs-line"><span class="hljs-comment">// 如果子组件是函数组件，则需要useCallback和memo配合使用「函数组件的属性浅比较是在memo中处理的，类组件是在shouldComponentUpdate中」</span>
+</div><div class="hljs-line"><span class="hljs-keyword">const</span> Child2 = memo(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Child2</span>(<span class="hljs-params">{ handler }</span>) </span>{
+</div><div class="hljs-line">    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'child2 render'</span>);
+</div><div class="hljs-line">    <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{handler}</span>&gt;</span>处理2<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>;
+</div><div class="hljs-line">});
+</div><div class="hljs-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Demo</span>(<span class="hljs-params"></span>) </span>{
+</div><div class="hljs-line">    <span class="hljs-keyword">let</span> [val, setVal] = useState(<span class="hljs-string">''</span>);
+</div><div class="hljs-line">    <span class="hljs-keyword">const</span> handler1 = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+</div><div class="hljs-line">        setVal(<span class="hljs-string">'哈哈哈'</span>);
+</div><div class="hljs-line">    };
+</div><div class="hljs-line">    <span class="hljs-keyword">const</span> handler2 = useCallback(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+</div><div class="hljs-line">        setVal(<span class="hljs-string">'呵呵呵'</span>);
+</div><div class="hljs-line">    }, []);
+</div><div class="hljs-line">    <span class="hljs-keyword">return</span> &lt;div&gt;
+</div><div class="hljs-line">        &lt;input type="text" value={val}
+</div><div class="hljs-line">            onChange={ev =&gt; {
+</div><div class="hljs-line">                setVal(ev.target.value);
+</div><div class="hljs-line">            }} /&gt;
+</div><div class="hljs-line">        &lt;Child1 handler={handler1} /&gt;
+</div><div class="hljs-line">        &lt;Child2 handler={handler2} /&gt;
+</div><div class="hljs-line">    &lt;/div&gt;;
+</div><div class="hljs-line">};
+</div></code></pre>
+
+    <hr>
+
+    <h4 id="自定义hook">自定义Hook</h4>
+
+    <p>使用自定义hook可以将某些组件逻辑提取到可重用的函数中</p>
+
+
+
+    <pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-keyword">import</span> React, { useState } <span class="hljs-keyword">from</span> <span class="hljs-string">"react"</span>;
+</div><div class="hljs-line"><span class="hljs-keyword">const</span> usePartState = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">usePartState</span>(<span class="hljs-params">initial</span>) </span>{
+</div><div class="hljs-line">    <span class="hljs-keyword">let</span> [state, setState] = useState(initial);
+</div><div class="hljs-line">    <span class="hljs-keyword">const</span> setPartState = <span class="hljs-function">(<span class="hljs-params">partState</span>) =&gt;</span> {
+</div><div class="hljs-line">        setState({
+</div><div class="hljs-line">            ...state,
+</div><div class="hljs-line">            ...partState
+</div><div class="hljs-line">        });
+</div><div class="hljs-line">    };
+</div><div class="hljs-line">    <span class="hljs-keyword">return</span> [state, setPartState];
+</div><div class="hljs-line">};
+</div><div class="hljs-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Demo</span>(<span class="hljs-params"></span>) </span>{
+</div><div class="hljs-line">    <span class="hljs-keyword">let</span> [state, setState] = usePartState({
+</div><div class="hljs-line">        <span class="hljs-attr">x</span>: <span class="hljs-number">10</span>,
+</div><div class="hljs-line">        <span class="hljs-attr">y</span>: <span class="hljs-number">20</span>
+</div><div class="hljs-line">    });
+</div><div class="hljs-line">    <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">        <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>{state.x}<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">        &nbsp;&nbsp;</span>
+</div><div class="hljs-line"><span class="xml">        <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>{state.y}<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{()</span> =&gt;</span> {</span>
+</div><div class="hljs-line"><span class="xml">            setState({</span>
+</div><div class="hljs-line"><span class="xml">                x: state.x + 1</span>
+</div><div class="hljs-line"><span class="xml">            });</span>
+</div><div class="hljs-line"><span class="xml">        }}&gt;处理x<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>;
+</div><div class="hljs-line">};
+</div></code></pre>
+
+    <hr>
+
+    <p>其余的 Hook 函数（例如：useContext、useReducer）我们将在后续课程中进行讲解！</p>
+
+    <ul>
+      <li>
+        <p>useContext 在接下里的复合组件通信中会使用</p>
+      </li>
+      <li>
+        <p>useReducer 会在讲完redux思想后，再对比 useState 进行讲解</p>
+      </li>
+    </ul>
+
+    <p>此外 React18还提供一些供不常使用的 Hook 函数，有兴趣的同学可以私下去研究一下！</p>
+  </div>
+</body>
+
+</html>

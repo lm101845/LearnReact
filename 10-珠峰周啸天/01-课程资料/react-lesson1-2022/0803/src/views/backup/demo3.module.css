@@ -1,0 +1,25 @@
+.demo {
+    width: 300px;
+    height: 200px;
+    background: lightblue;
+}
+
+.demo span {
+    color: green;
+    font-size: 12px
+}
+
+.title {
+    color: red;
+    font-size: 18px;
+    font-weight: normal;
+}
+
+.subTitle {
+    composes: title;
+    font-size: 16px;
+}
+
+:global(.box) {
+    width: 100px;
+}

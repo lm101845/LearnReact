@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件委托</title>
+</head>
+
+<body>
+    <div class="container">
+        <button class="submit">我是按钮</button>
+        <a href="javascript:;" class="link">我是超链接按钮</a>
+        <div class="box">我是DIV盒子</div>
+    </div>
+
+    <!-- IMPORT JS -->
+    <script>
+        const container = document.querySelector('.container'),
+            box = document.querySelector('.box');
+
+        container.addEventListener('click', function (ev) {
+            let target = ev.target,
+                targetTag = target.tagName;
+            if (targetTag === 'BUTTON') {
+                console.log('我是按钮');
+                return;
+            }
+            if (targetTag === 'A') {
+                console.log('我是超链接按钮');
+                return;
+            }
+            console.log('我是新增的');
+        });
+
+        box.addEventListener('click', function (ev) {
+            console.log('我是DIV盒子');
+            ev.stopPropagation();
+        });
+
+        setTimeout(() => {
+            let pBox = document.createElement('p');
+            pBox.innerHTML = '我是新增的PBOX';
+            pBox.className = 'p-box';
+            container.appendChild(pBox);
+        }, 2000);
+    </script>
+</body>
+
+</html>

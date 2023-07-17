@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>合成事件底层机制</title>
+    <!-- IMPORT CSS -->
+    <style>
+        html,
+        body,
+        #root {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .outer {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 200px;
+            background: lightblue;
+            cursor: pointer;
+        }
+
+        .inner {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100px;
+            height: 100px;
+            background: lightcoral;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root">
+        <div class="outer">
+            <div class="inner"></div>
+        </div>
+    </div>
+
+    <!-- IMPORT JS -->
+    <script>
+        const root = document.querySelector('#root'),
+            outer = document.querySelector('.outer'),
+            inner = document.querySelector('.inner');
+        /* 原理 */
+        const dispatchEvent = function dispatchEvent(ev, isCapture) {
+            // ev->合成事件对象「针对不同浏览器的行为操作，统一合并一套」
+            let path = ev.path, //[div.inner,div.outer,....,window]
+                target = ev.target;
+            if (isCapture) {
+                [...path].reverse().forEach(ele => {
+                    let handler = ele.onClickCapture;
+                    if (typeof handler === "function") handler(ev);
+                });
+                return;
+            }
+            path.forEach(ele => {
+                let handler = ele.onClick;
+                if (typeof handler === "function") handler(ev);
+            });
+        };
+        root.addEventListener('click', function (ev) {
+            dispatchEvent(ev, false);
+        }, false);
+        root.addEventListener('click', function (ev) {
+            dispatchEvent(ev, true);
+        }, true);
+
+        /* 原生事件绑定 */
+        document.addEventListener('click', function () {
+            console.log('DOCUMENT BUBBLING');
+        }, false);
+        document.addEventListener('click', function () {
+            console.log('DOCUMENT CAPTURING');
+        }, true);
+
+        outer.addEventListener('click', function () {
+            console.log('OUTER BUBBLING');
+        }, false);
+        outer.addEventListener('click', function () {
+            console.log('OUTER CAPTURING');
+        }, true);
+
+        inner.addEventListener('click', function () {
+            console.log('INNER BUBBLING');
+        }, false);
+        inner.addEventListener('click', function () {
+            console.log('INNER CAPTURING');
+        }, true);
+
+        /* 合成事件绑定 */
+        outer.onClick = function () {
+            console.log('Synthetic OUTER BUBBLING');
+        };
+        outer.onClickCapture = function () {
+            console.log('Synthetic OUTER CAPTURING');
+        };
+
+        inner.onClick = function () {
+            console.log('Synthetic INNER BUBBLING');
+        };
+        inner.onClickCapture = function () {
+            console.log('Synthetic INNER CAPTURING');
+        };
+    </script>
+</body>
+
+</html>

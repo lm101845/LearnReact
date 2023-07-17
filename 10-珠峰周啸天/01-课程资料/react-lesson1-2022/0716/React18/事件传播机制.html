@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件传播机制</title>
+    <!-- IMPORT CSS -->
+    <style>
+        .outer {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 200px;
+            background: lightblue;
+            cursor: pointer;
+        }
+
+        .inner {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100px;
+            height: 100px;
+            background: lightcoral;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="outer">
+        <div class="inner"></div>
+    </div>
+
+    <!-- IMPORT JS -->
+    <script>
+        const outer = document.querySelector('.outer'),
+            inner = document.querySelector('.inner');
+
+        window.addEventListener('click', function () {
+            console.log('WINDOW BUBBLING');
+        }, false);
+        window.addEventListener('click', function () {
+            console.log('WINDOW CAPTURING');
+        }, true);
+
+        document.addEventListener('click', function () {
+            console.log('DOCUMENT BUBBLING');
+        }, false);
+        document.addEventListener('click', function () {
+            console.log('DOCUMENT CAPTURING');
+        }, true);
+
+        document.documentElement.addEventListener('click', function () {
+            console.log('HTML BUBBLING');
+        }, false);
+        document.documentElement.addEventListener('click', function () {
+            console.log('HTML CAPTURING');
+        }, true);
+
+        document.body.addEventListener('click', function (ev) {
+            console.log('BODY BUBBLING');
+            // ev.stopPropagation();
+        }, false);
+        document.body.addEventListener('click', function () {
+            console.log('BODY CAPTURING');
+        }, true);
+
+        outer.addEventListener('click', function () {
+            console.log('OUTER BUBBLING');
+        }, false);
+        outer.addEventListener('click', function () {
+            console.log('OUTER CAPTURING');
+        }, true);
+
+        inner.addEventListener('click', function (ev) {
+            console.log('INNER BUBBLING', ev);
+            // ev.stopPropagation(); //阻止冒泡传播
+            ev.stopImmediatePropagation();
+        }, false);
+        inner.addEventListener('click', function () {
+            console.log('INNER BUBBLING 2');
+        }, false);
+        inner.addEventListener('click', function () {
+            console.log('INNER CAPTURING');
+        }, true);
+    </script>
+</body>
+
+</html>
