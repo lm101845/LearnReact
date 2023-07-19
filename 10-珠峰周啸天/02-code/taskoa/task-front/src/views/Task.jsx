@@ -30,6 +30,7 @@ const formatTime = (time, template = '{0}-{1}-{2} {3}:{4}:{5}') => {
     });
 };
 
+// class Task extends React.PureComponent {
 class Task extends React.Component {
     //定义表格列的数据(不变，就不放在state里面了)
     columns = [
