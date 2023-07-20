@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.less';
-import Demo from "./views/Demo5";
+import Demo from "./views/Demo11";
 import Vote from "./views/Vote";
 /* ANTD */
 import { ConfigProvider } from 'antd';
