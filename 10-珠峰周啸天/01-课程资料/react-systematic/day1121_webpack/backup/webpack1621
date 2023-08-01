@@ -1,0 +1,52 @@
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+
+module.exports = {
+    /* 基础配置 */
+    mode: 'production',
+    entry: './src/index.js',
+    output: {
+        filename: '[name].[hash:8].js',
+        path: path.resolve(__dirname, './dist')
+    },
+    /* 使用插件 */
+    plugins: [
+        new HtmlWebpackPlugin({
+            template: './public/index.html',
+            filename: 'index.html',
+            minify: true
+        }),
+        new CleanWebpackPlugin()
+    ],
+    /* DEV-SERVER */
+    devServer: {
+        host: '127.0.0.1', //域名
+        port: 3000, //端口号
+        open: true, //自动打开浏览器
+        hot: true, //热更新
+        compress: true, //开启服务器端的GZIP压缩
+        /* 
+         跨域代理的处理  
+           "/xxx" 前缀：主要就是用来区分，以“什么前缀”发的请求，我们代理到哪一台服务器上 「一般设置为"/api"」
+           target：代理的真正服务器地址
+           pathRewrite：地址重写，主要用于把用来区分不同代理的前缀，从最后请求的真正地址中移除掉
+           changeOrigin：修改请求头中的origin源信息
+           ws：支持webscoket通信机制
+        */
+        proxy: {
+            "/jian": {
+                target: "https://www.jianshu.com/asimov",
+                changeOrigin: true,
+                ws: true,
+                pathRewrite: { "^/jian": "" }
+            },
+            "/zhi": {
+                target: "https://news-at.zhihu.com/api/4",
+                changeOrigin: true,
+                ws: true,
+                pathRewrite: { "^/zhi": "" }
+            }
+        }
+    }
+};

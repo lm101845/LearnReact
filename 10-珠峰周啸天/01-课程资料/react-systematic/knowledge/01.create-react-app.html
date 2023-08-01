@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>从零开始学习React</title>
+  <meta charset='utf-8'>
+  <link href='https://cdn.maxiang.io/res-min/themes/marxico.css' rel='stylesheet'>
+  <style>
+    #preview-contents {
+      margin-top: -20px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id='preview-contents' class='note-content'>
+    <h4 id="使用-create-react-app-构建react工程化项目">使用 create-react-app 构建React工程化项目</h4>
+    <p>安装create-react-app <br>
+      <code>$ npm i create-react-app -g 「mac需要加sudo」</code>
+    </p>
+    <p>基于脚手架创建项目「项目名称需要符合npm包规范」 <br>
+      <code>$ create-react-app xxx</code>
+    </p>
+    <pre class="prettyprint hljs-dark"><code class="hljs 1c"><div class="hljs-line"><span class="hljs-string">|- node_modules  包含安装的模块</span>
+</div><div class="hljs-line"><span class="hljs-string">|- public  页面模板和IconLogo</span>
+</div><div class="hljs-line">    <span class="hljs-string">|- favicon.ico</span>
+</div><div class="hljs-line">    <span class="hljs-string">|- index.html</span>
+</div><div class="hljs-line"><span class="hljs-string">|- src  我们编写的程序</span>
+</div><div class="hljs-line">    <span class="hljs-string">|- index.jsx  程序入口「jsx后缀名可以让文件支持jsx语法」</span>
+</div><div class="hljs-line"><span class="hljs-string">|- package.json</span>
+</div><div class="hljs-line"><span class="hljs-string">|- ...</span>
+</div></code></pre>
+
+    <p>package.json</p>
+    <pre class="prettyprint hljs-dark"><code class="language-json hljs"><div class="hljs-line">{
+</div><div class="hljs-line">  ...
+</div><div class="hljs-line">  <span class="hljs-attr">"dependencies"</span>: {
+</div><div class="hljs-line">    ...
+</div><div class="hljs-line">    <span class="hljs-attr">"react"</span>: <span class="hljs-string">"^18.2.0"</span>,  //核心
+</div><div class="hljs-line">    <span class="hljs-attr">"react-dom"</span>: <span class="hljs-string">"^18.2.0"</span>,  //视图编译
+</div><div class="hljs-line">    <span class="hljs-attr">"react-scripts"</span>: <span class="hljs-string">"5.0.1"</span>, //对打包命令的集成
+</div><div class="hljs-line">    <span class="hljs-attr">"web-vitals"</span>: <span class="hljs-string">"^2.1.4"</span>  //性能检测工具
+</div><div class="hljs-line">  },
+</div><div class="hljs-line">  <span class="hljs-attr">"scripts"</span>: {
+</div><div class="hljs-line">    <span class="hljs-attr">"start"</span>: <span class="hljs-string">"react-scripts start"</span>, //开发环境启动web服务进行预览
+</div><div class="hljs-line">    <span class="hljs-attr">"build"</span>: <span class="hljs-string">"react-scripts build"</span>, //生产环境打包部署
+</div><div class="hljs-line">    <span class="hljs-attr">"test"</span>: <span class="hljs-string">"react-scripts test"</span>,   //单元测试
+</div><div class="hljs-line">    <span class="hljs-attr">"eject"</span>: <span class="hljs-string">"react-scripts eject"</span>  //暴露配置项
+</div><div class="hljs-line">  },
+</div><div class="hljs-line">  <span class="hljs-attr">"eslintConfig"</span>: {  //ESLint词法检测
+</div><div class="hljs-line">    <span class="hljs-attr">"extends"</span>: [
+</div><div class="hljs-line">      <span class="hljs-string">"react-app"</span>,
+</div><div class="hljs-line">      <span class="hljs-string">"react-app/jest"</span>
+</div><div class="hljs-line">    ]
+</div><div class="hljs-line">  },
+</div><div class="hljs-line">  <span class="hljs-attr">"browserslist"</span>: {  //浏览器兼容列表
+</div><div class="hljs-line">    <span class="hljs-attr">"production"</span>: [
+</div><div class="hljs-line">      <span class="hljs-string">"&gt;0.2%"</span>,
+</div><div class="hljs-line">      <span class="hljs-string">"not dead"</span>,
+</div><div class="hljs-line">      <span class="hljs-string">"not op_mini all"</span>
+</div><div class="hljs-line">    ],
+</div><div class="hljs-line">    <span class="hljs-attr">"development"</span>: [
+</div><div class="hljs-line">      <span class="hljs-string">"last 1 chrome version"</span>,
+</div><div class="hljs-line">      <span class="hljs-string">"last 1 firefox version"</span>,
+</div><div class="hljs-line">      <span class="hljs-string">"last 1 safari version"</span>
+</div><div class="hljs-line">    ]
+</div><div class="hljs-line">  }
+</div><div class="hljs-line">}
+</div></code></pre>
+
+    <p>默认情况下，会把webpack配置项隐藏到node_modules中，如果想修改，则需要暴露配置项： <br>
+      <code>$ yarn eject</code>
+    </p>
+    <pre class="prettyprint hljs-dark"><code class="hljs 1c"><div class="hljs-line">/* package.json中的变化 */
+</div><div class="hljs-line">{
+</div><div class="hljs-line">  <span class="hljs-string">"dependencies"</span>:{  <span class="hljs-comment">//暴露后，webpack中需要的模块都会列在这</span>
+</div><div class="hljs-line">     ...
+</div><div class="hljs-line">  },
+</div><div class="hljs-line">  <span class="hljs-string">"scripts"</span>: {
+</div><div class="hljs-line">    <span class="hljs-string">"start"</span>: <span class="hljs-string">"node scripts/start.js"</span>,  
+</div><div class="hljs-line">    <span class="hljs-string">"build"</span>: <span class="hljs-string">"node scripts/build.js"</span>,
+</div><div class="hljs-line">    <span class="hljs-string">"test"</span>: <span class="hljs-string">"node scripts/test.js"</span>
+</div><div class="hljs-line">    <span class="hljs-comment">//不在基于react-scripts处理命令，而是直接基于node去执行对应的文件</span>
+</div><div class="hljs-line">    <span class="hljs-comment">//已经没有eject命令了</span>
+</div><div class="hljs-line">  },
+</div><div class="hljs-line">  <span class="hljs-string">"jest"</span>: {
+</div><div class="hljs-line">    <span class="hljs-comment">//单元测试配置</span>
+</div><div class="hljs-line">  },
+</div><div class="hljs-line">  <span class="hljs-string">"babel"</span>: {  <span class="hljs-comment">//关于babel-loader的额外配置</span>
+</div><div class="hljs-line">    <span class="hljs-string">"presets"</span>: [
+</div><div class="hljs-line">      <span class="hljs-string">"react-app"</span>
+</div><div class="hljs-line">    ]
+</div><div class="hljs-line">  }
+</div><div class="hljs-line">}
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">/* 新增的内容 */
+</div><div class="hljs-line"><span class="hljs-string">|- scripts</span>
+</div><div class="hljs-line">    <span class="hljs-string">|- start.js</span>
+</div><div class="hljs-line">    <span class="hljs-string">|- build.js</span>
+</div><div class="hljs-line">    <span class="hljs-string">|- ...</span>
+</div><div class="hljs-line"><span class="hljs-string">|- config</span>
+</div><div class="hljs-line">    <span class="hljs-string">|- webpack.config.js</span>
+</div><div class="hljs-line">    <span class="hljs-string">|- paths.js</span>
+</div><div class="hljs-line">    <span class="hljs-string">|- ...</span>
+</div></code></pre>
+
+    <p><strong>真实项目中常用的一些修改操作</strong> <br>
+      <code>配置less</code>
+    </p>
+    <pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-comment">/* </span>
+</div><div class="hljs-line"><span class="hljs-comment">默认安装和配置的是sass，如果需要使用less，则需要：</span>
+</div><div class="hljs-line"><span class="hljs-comment">1. 安装</span>
+</div><div class="hljs-line"><span class="hljs-comment">  $ yarn add less less-loader@8</span>
+</div><div class="hljs-line"><span class="hljs-comment">  $ yarn remove sass-loader</span>
+</div><div class="hljs-line"><span class="hljs-comment">2. 修改webpack.config.js</span>
+</div><div class="hljs-line"><span class="hljs-comment">*/</span>
+</div><div class="hljs-line"><span class="hljs-comment">// 72~73</span>
+</div><div class="hljs-line"><span class="hljs-keyword">const</span> lessRegex = <span class="hljs-regexp">/\.less$/</span>;
+</div><div class="hljs-line"><span class="hljs-keyword">const</span> lessModuleRegex = <span class="hljs-regexp">/\.module\.less$/</span>;
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><span class="hljs-comment">//507~545</span>
+</div><div class="hljs-line">{
+</div><div class="hljs-line">  <span class="hljs-attr">test</span>: lessRegex,
+</div><div class="hljs-line">  <span class="hljs-attr">exclude</span>: lessModuleRegex,
+</div><div class="hljs-line">  <span class="hljs-attr">use</span>: getStyleLoaders(
+</div><div class="hljs-line">    ...
+</div><div class="hljs-line">    <span class="hljs-string">'less-loader'</span>
+</div><div class="hljs-line">  )
+</div><div class="hljs-line">},
+</div><div class="hljs-line">{
+</div><div class="hljs-line">  <span class="hljs-attr">test</span>: lessModuleRegex,
+</div><div class="hljs-line">  <span class="hljs-attr">use</span>: getStyleLoaders(
+</div><div class="hljs-line">    ...
+</div><div class="hljs-line">    <span class="hljs-string">'less-loader'</span>
+</div><div class="hljs-line">  ),
+</div><div class="hljs-line">}
+</div></code></pre>
+
+    <p><code>配置别名</code></p>
+    <pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-comment">//313</span>
+</div><div class="hljs-line">resolve: {
+</div><div class="hljs-line">  ...
+</div><div class="hljs-line">  alias: {
+</div><div class="hljs-line">    <span class="hljs-string">'@'</span>: path.appSrc,
+</div><div class="hljs-line">    ...
+</div><div class="hljs-line">  }
+</div><div class="hljs-line">}
+</div></code></pre>
+
+    <p><code>配置预览域名</code></p>
+    <pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-comment">// scripts/start.js</span>
+</div><div class="hljs-line"><span class="hljs-comment">// 48</span>
+</div><div class="hljs-line"><span class="hljs-keyword">const</span> HOST = process.env.HOST || <span class="hljs-string">'127.0.0.1'</span>;
+</div><div class="hljs-line"><span class="hljs-comment">// 也可以基于 cross-env 设置环境变量</span>
+</div></code></pre>
+
+    <p><code>配置跨域代理</code></p>
+    <pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-comment">/*</span>
+</div><div class="hljs-line"><span class="hljs-comment">安装 http-proxy-middleware</span>
+</div><div class="hljs-line"><span class="hljs-comment">$ yarn add http-proxy-middleware</span>
+</div><div class="hljs-line"><span class="hljs-comment"></span>
+</div><div class="hljs-line"><span class="hljs-comment">src/setupProxy.js</span>
+</div><div class="hljs-line"><span class="hljs-comment">*/</span>
+</div><div class="hljs-line"><span class="hljs-keyword">const</span> { createProxyMiddleware } = <span class="hljs-built_in">require</span>(<span class="hljs-string">'http-proxy-middleware'</span>);
+</div><div class="hljs-line"><span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">app</span>) </span>{
+</div><div class="hljs-line">    app.use(
+</div><div class="hljs-line">        createProxyMiddleware(<span class="hljs-string">"/api"</span>, {
+</div><div class="hljs-line">            <span class="hljs-attr">target</span>: <span class="hljs-string">"http://127.0.0.1:7100"</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">changeOrigin</span>: <span class="hljs-literal">true</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">ws</span>: <span class="hljs-literal">true</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">pathRewrite</span>: { <span class="hljs-string">"^/api"</span>: <span class="hljs-string">""</span> }
+</div><div class="hljs-line">        })
+</div><div class="hljs-line">    );
+</div><div class="hljs-line">};
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><span class="hljs-comment">//测试地址：</span>
+</div><div class="hljs-line"><span class="hljs-comment">//https://www.jianshu.com/asimov/subscriptions/recommended_collections</span>
+</div><div class="hljs-line"><span class="hljs-comment">//https://news-at.zhihu.com/api/4/news/latest</span>
+</div></code></pre>
+
+    <p><code>配置浏览器兼容</code></p>
+    <pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-comment">//package.json</span>
+</div><div class="hljs-line"><span class="hljs-comment">//https://github.com/browserslist/browserslist</span>
+</div><div class="hljs-line"><span class="hljs-string">"browserslist"</span>: {
+</div><div class="hljs-line">  <span class="hljs-string">"production"</span>: [
+</div><div class="hljs-line">    <span class="hljs-string">"&gt;0.2%"</span>,
+</div><div class="hljs-line">    <span class="hljs-string">"not dead"</span>,
+</div><div class="hljs-line">    <span class="hljs-string">"not op_mini all"</span>
+</div><div class="hljs-line">  ],
+</div><div class="hljs-line">  <span class="hljs-string">"development"</span>: [
+</div><div class="hljs-line">    <span class="hljs-string">"last 1 chrome version"</span>,
+</div><div class="hljs-line">    <span class="hljs-string">"last 1 firefox version"</span>,
+</div><div class="hljs-line">    <span class="hljs-string">"last 1 safari version"</span>
+</div><div class="hljs-line">  ]
+</div><div class="hljs-line">}
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><span class="hljs-comment">/*</span>
+</div><div class="hljs-line"><span class="hljs-comment">CSS兼容处理：设置前缀</span>
+</div><div class="hljs-line"><span class="hljs-comment">autoprefixer + postcss-loader + browserslist</span>
+</div><div class="hljs-line"><span class="hljs-comment"></span>
+</div><div class="hljs-line"><span class="hljs-comment">JS兼容处理：ES6语法转换为ES5语法</span>
+</div><div class="hljs-line"><span class="hljs-comment">babel-loader + babel-preset-react-app(@babel/preset-env) + browserslist</span>
+</div><div class="hljs-line"><span class="hljs-comment"></span>
+</div><div class="hljs-line"><span class="hljs-comment">JS兼容处理：内置API</span>
+</div><div class="hljs-line"><span class="hljs-comment">入口配置react-app-polyfill</span>
+</div><div class="hljs-line"><span class="hljs-comment">*/</span>
+</div><div class="hljs-line"><span class="hljs-keyword">import</span> <span class="hljs-string">'react-app-polyfill/ie9'</span>;
+</div><div class="hljs-line"><span class="hljs-keyword">import</span> <span class="hljs-string">'react-app-polyfill/ie11'</span>;
+</div><div class="hljs-line"><span class="hljs-keyword">import</span> <span class="hljs-string">'react-app-polyfill/stable'</span>;
+</div></code></pre>
+
+    <p>其余的一些优化配置、响应式布局的配置等，实战中再去处理！！</p>
+  </div>
+</body>
+
+</html>

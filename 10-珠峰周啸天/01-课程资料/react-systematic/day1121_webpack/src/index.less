@@ -1,0 +1,28 @@
+@R: red;
+
+html,
+body {
+    height: 100%;
+    overflow: hidden;
+    background: lightblue;
+}
+
+#app {
+    font-size: 20px;
+
+    a {
+        color: @R;
+        transition: color .3s;
+
+        &:hover {
+            color: darken(@R, 20%);
+        }
+    }
+}
+
+.box {
+    width: 200px;
+    height: 200px;
+    background: url('./assets/images/girl.jpg') no-repeat;
+    background-size: 100% 100%;
+}

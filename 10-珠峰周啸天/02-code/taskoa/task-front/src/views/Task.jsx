@@ -3,7 +3,7 @@
  * @Date 2023/7/17 13:55
  **/
 import React from 'react'
-import '@/views/Task.less'
+import '@/views类组件上下文/Task.less'
 import {Button, DatePicker, Form, Input, Modal, Popconfirm, Table, Tag,message} from "antd";
 // import {queryList,addTask,removeTask,completeTask} from '@/api'
 import {queryList,addTask,removeTask,completeTask} from '../api/index'

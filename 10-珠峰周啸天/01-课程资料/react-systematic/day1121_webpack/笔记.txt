@@ -1,0 +1,45 @@
+webpack打包的原理：
+  webpack其实是一个平台，在平台中，我们会安装/融入/配置各种打包规则
+    + mode：打包模式「开发环境development、生产环境production」
+    + entry：入口「webpack就是从入口开始，根据CommonJS/ES6Module模块规范，分析出模块之间的依赖，从而按照相关的依赖关系，进行打包的」
+    + output：出口
+    + loader：加载器「一般都是用于实现代码编译的，但是想编译啥代码，我们需要安装对应的加载器，并且完成相关的规则配置 https://webpack.docschina.org/loaders/」
+    + plugin：插件「处理的需求比较多了，例如：压缩、编译HTML、清空打包... https://webpack.docschina.org/plugins/」
+    + resolve：解析器
+    + optimization：优化项
+    + devServer：配合webpack-dev-server，在本地启动Web服务，实现项目预览以及跨域处理...
+    + ......
+  webpack是基于Node.js进行打包的！！把打包后的内容，最后都是交给浏览器去访问的！！
+    + 想用webpack，电脑上需要安装Node
+    + webpack中，支持CommonJS模块规范「我们写的配置规则，就是基于CommonJS规范处理的」
+    + webpack中，支持ES6Module模块规范
+    + 而且两种规范在webpack中可以混淆使用「webpack内部做了处理」
+
+wepack支持零配置打包：不需要自己写任何的配置规则，直接使用内置的默认规则进行打包
+  @1 安装webpack
+    $ yarn add webpack webpack-cli -D
+    安装在本地的模块，不能直接使用命令，我们还需要配置可执行脚本命令 => package.json「前提是 node_modules/.bin目录下，需要有这样的命令文件，才说明安装在本地的模块可以使用命令」
+    "scripts": {
+       "start": "webpack"
+    },
+    执行脚本命令
+    $ yarn start     -> $ webpack
+  @2 默认去找 src/index.js，把其作为打包的入口，进行打包！！ 
+     打包后的内容输出到 dist/main.js 中！！
+  -----
+  以上两步操作，直接基于 $ npx webpack 处理也是一样的！！！
+
+自定义打包规则
+  + 基础配置
+  + HtmlWebpackPlugin 打包编译HTML的
+    + 把打包后的JS/CSS自动导入到页面中
+    + 对HTML进行压缩处理
+    + ...
+  + webpack-dev-server
+    项目开发的流程：本地开发「边开发、边看效果  开发环境」-> 提测「打包，部署到测试服务器」-> 重新打包，部署到服务器上「生产环境」
+    + 基于Node在客户端本地启动一个Web服务，帮助开发者预览开发的作品
+    + 第一步：项目打包「打包后的内容没有放在dist目录下，放在了虚拟内存中」
+    + 第二步：启动web服务器「从虚拟内存中获取打包的内容，进行实时预览」
+    + 第三步：热更新「当代码修改后，会实时进行打包编译，自动刷新浏览器，渲染最新的效果」 => vscode中的LiveServer插件也是做这个事情的
+    + 启动的Web服务器，可以作为数据跨域请求的代理服务器，也就是可以实现Proxy跨域代理！！
+    + ...

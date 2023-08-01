@@ -7,6 +7,7 @@ https://www.bilibili.com/video/BV1sx4y1L7Rg?p=1
 
 课程资料我偶尔找到了，就在周啸天老师的gitee仓库中：
 https://gitee.com/zxt_team
+不过我发现里面的代码不是最全的
 
 npx pm2 start .\server.js --name TASK
 
@@ -28,3 +29,6 @@ npx pm2 start .\server.js --name TASK
 第30-32集看完——23-07-18
 第33-35集看完——23-07-19
 第36-38集看完——23-07-20
+第39-42集看完——23-07-21
+第43-46集看完——23-07-22
+第47-51集看完——23-08-01

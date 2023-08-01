@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import DemoOne from "@/views/DemoOne";
+import DemoOne from "@/views类组件上下文/DemoOne";
 
 
 

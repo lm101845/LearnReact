@@ -1,0 +1,23 @@
+/* 自定义webpack打包规则 */
+const path = require('path');
+module.exports = {
+    /* 
+    设置环境模式  
+      获取环境变量 process.env.NODE_EVN
+      production生产环境：打包后的JS会自动压缩、NODE_EVN="production"
+      development开发环境：代码不会压缩、NODE_EVN="development"
+    */
+    mode: 'production',
+    /* 指定入口「相对地址」 */
+    entry: './src/index.js',
+    /* 指定出口 */
+    output: {
+        // 打包后文件的名字
+        //  [hash]/[hash:8]：为打包后的文件创建哈希名
+        //   + 代码一但被修改，生成的文件名中的哈希值也会变化
+        //   + 有助于强缓存的设置
+        filename: 'main.[hash:8].js',
+        // 设置打包的路径「绝对路径」
+        path: path.resolve(__dirname, './dist')
+    }
+};
