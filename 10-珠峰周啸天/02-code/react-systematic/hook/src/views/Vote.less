@@ -1,0 +1,53 @@
+.vote-box {
+    box-sizing: border-box;
+    margin: 20px auto;
+    padding: 10px;
+    width: 300px;
+    border: 1px solid #DDD;
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #DDD;
+
+        .title,
+        .num {
+            line-height: 40px;
+            font-size: 18px;
+        }
+
+        .num {
+            color: lightcoral;
+        }
+    }
+
+    .main {
+        margin: 10px 0;
+
+        p {
+            line-height: 35px;
+            font-size: 14px;
+        }
+    }
+
+    .footer {
+        button {
+            box-sizing: border-box;
+            margin-right: 10px;
+            width: 80px;
+            height: 30px;
+            line-height: 30px;
+            border: none;
+            cursor: pointer;
+
+            &:nth-child(1) {
+                background: lightblue;
+            }
+
+            &:nth-child(2) {
+                background: lightpink;
+            }
+        }
+    }
+}

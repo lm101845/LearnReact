@@ -7,11 +7,12 @@ import './index.less';
 import { ConfigProvider } from 'antd';
 import zhCN from 'antd/lib/locale/zh_CN';
 import App from './App'
+import Vote from "@/views/Vote";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <ConfigProvider locale={zhCN}>
-        {/*<Vote title="React是很棒的前端框架 "/>*/}
-        <App/>
+        <Vote title="React是很棒的前端框架 "/>
+        {/*<App/>*/}
     </ConfigProvider>
 );
