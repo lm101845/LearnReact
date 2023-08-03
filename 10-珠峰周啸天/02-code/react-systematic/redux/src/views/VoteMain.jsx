@@ -6,7 +6,7 @@ class VoteMain extends React.Component{
     render() {
         const {store} = this.context
         console.log(store,'类组件VoteMain上下文中的store')
-        let {supNum,oppNum} = store.getState()
+        let {supNum,oppNum} = store.getState().vote
         return <div className="main">
             <p>支持人数：{supNum}人</p>
             <p>反对人数：{oppNum}人</p>
@@ -14,6 +14,7 @@ class VoteMain extends React.Component{
     }
 
     componentDidMount() {
+        console.log('VoteMain类组件componentDidMount')
         const {store} = this.context
         store.subscribe(()=>{
             this.forceUpdate()

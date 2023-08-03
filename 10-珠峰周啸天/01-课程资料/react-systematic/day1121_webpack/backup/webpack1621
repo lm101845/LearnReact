@@ -5,7 +5,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 module.exports = {
     /* 基础配置 */
     mode: 'production',
-    entry: './src/index.js',
+    entry: './src/index之前.js',
     output: {
         filename: '[name].[hash:8].js',
         path: path.resolve(__dirname, './dist')
@@ -26,8 +26,8 @@ module.exports = {
         open: true, //自动打开浏览器
         hot: true, //热更新
         compress: true, //开启服务器端的GZIP压缩
-        /* 
-         跨域代理的处理  
+        /*
+         跨域代理的处理
            "/xxx" 前缀：主要就是用来区分，以“什么前缀”发的请求，我们代理到哪一台服务器上 「一般设置为"/api"」
            target：代理的真正服务器地址
            pathRewrite：地址重写，主要用于把用来区分不同代理的前缀，从最后请求的真正地址中移除掉

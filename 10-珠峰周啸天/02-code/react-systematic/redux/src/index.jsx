@@ -8,7 +8,7 @@ import { ConfigProvider } from 'antd';
 import zhCN from 'antd/lib/locale/zh_CN';
 
 import Vote from "@/views/Vote";
-import store from './store'
+import store from './store/index'
 import ThemeContext from './ThemeContext'
 // console.log(store)
 const root = ReactDOM.createRoot(document.getElementById('root'));

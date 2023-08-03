@@ -1,0 +1,31 @@
+<!--
+ * @Author liming
+ * @Date 2023/8/3 15:34
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function test(a){
+        console.log('test函数执行')
+        if(typeof a !== 'function'){
+            throw new Error('报错了')
+            console.log('throw后面代码不会执行')
+        }
+        console.log('打印aaa不会执行')
+    }
+
+    try{
+        test('11')
+    }catch (e){
+        console.log(e.message)
+    }
+
+    console.log('会正常执行')
+</script>
+</body>
+</html>

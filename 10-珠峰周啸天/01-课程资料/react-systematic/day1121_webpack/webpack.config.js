@@ -8,7 +8,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 module.exports = {
     /* 基础配置 */
     mode: 'production',
-    entry: './src/index.js',
+    entry: './src/index之前.js',
     output: {
         filename: '[name].[hash:8].js',
         path: path.resolve(__dirname, './dist')
@@ -105,7 +105,7 @@ module.exports = {
 };
 
 
-/* 
+/*
  浏览器兼容处理
    设置browserslist「浏览器兼容列表」
      https://github.com/browserslist/browserslist
