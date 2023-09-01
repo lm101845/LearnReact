@@ -38,12 +38,12 @@
                 class=""></p>
 
         <p><strong>类组件</strong> <br>
-            <code>Vote.jsx</code>
+            <code>Vote2.jsx</code>
         </p>
 
         <pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
 </div><div class="hljs-line">...
-</div><div class="hljs-line">class Vote extends React.Component {
+</div><div class="hljs-line">class Vote2 extends React.Component {
 </div><div class="hljs-line">    <span class="hljs-comment">// 设置初始状态</span>
 </div><div class="hljs-line">    state = {
 </div><div class="hljs-line">        <span class="hljs-attr">supNum</span>: <span class="hljs-number">10</span>,
@@ -70,7 +70,7 @@
 </div><div class="hljs-line">        &lt;/div&gt;;
 </div><div class="hljs-line">    }
 </div><div class="hljs-line">};
-</div><div class="hljs-line">export default Vote;
+</div><div class="hljs-line">export default Vote2;
 </div></code></pre>
 
         <p><code>VoteMain.jsx</code></p>
@@ -123,12 +123,12 @@
 </div></code></pre>
 
         <p><strong>函数组件</strong> <br>
-            <code>Vote.jsx</code>
+            <code>Vote之前2.jsx</code>
         </p>
 
         <pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-keyword">import</span> React, { useState, useCallback } <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
 </div><div class="hljs-line">...
-</div><div class="hljs-line">const Vote = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Vote</span>(<span class="hljs-params"></span>) </span>{
+</div><div class="hljs-line">const Vote2 = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Vote2</span>(<span class="hljs-params"></span>) </span>{
 </div><div class="hljs-line">    <span class="hljs-comment">// 定义状态</span>
 </div><div class="hljs-line">    <span class="hljs-keyword">let</span> [supNum, setSupNum] = useState(<span class="hljs-number">10</span>),
 </div><div class="hljs-line">        [oppNum, setOppNum] = useState(<span class="hljs-number">5</span>);
@@ -149,7 +149,7 @@
 </div><div class="hljs-line">        &lt;VoteFooter change={change} /&gt;
 </div><div class="hljs-line">    &lt;/div&gt;;
 </div><div class="hljs-line">};
-</div><div class="hljs-line">export default Vote;
+</div><div class="hljs-line">export default Vote2;
 </div></code></pre>
 
         <p><code>VoteMain.jsx</code></p>
@@ -270,13 +270,13 @@
 </div></code></pre>
 
         <p><strong>类组件</strong> <br>
-            <code>Vote.jsx</code>
+            <code>Vote之前2.jsx</code>
         </p>
 
         <pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
 </div><div class="hljs-line">...
 </div><div class="hljs-line">import ThemeContext <span class="hljs-keyword">from</span> <span class="hljs-string">'@/ThemeContext'</span>;
-</div><div class="hljs-line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Vote</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">Component</span> </span>{
+</div><div class="hljs-line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Vote2</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">Component</span> </span>{
 </div><div class="hljs-line">    <span class="hljs-comment">// 设置初始状态</span>
 </div><div class="hljs-line">    state = {
 </div><div class="hljs-line">        <span class="hljs-attr">supNum</span>: <span class="hljs-number">10</span>,
@@ -310,7 +310,7 @@
 </div><div class="hljs-line"><span class="xml">        <span class="hljs-tag">&lt;/<span class="hljs-name">ThemeContext.Provider</span>&gt;</span>;</span>
 </div><div class="hljs-line"><span class="xml">    }</span>
 </div><div class="hljs-line"><span class="xml">};</span>
-</div><div class="hljs-line"><span class="xml">export default Vote;</span>
+</div><div class="hljs-line"><span class="xml">export default Vote2;</span>
 </div></code></pre>
 
         <p><code>VoteMain.jsx</code></p>
@@ -360,13 +360,13 @@
 </div></code></pre>
 
         <p><strong>函数组件</strong> <br>
-            <code>Vote.jsx</code>
+            <code>Vote2.jsx</code>
         </p>
 
         <pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-keyword">import</span> React, { useState } <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
 </div><div class="hljs-line">...
 </div><div class="hljs-line">import ThemeContext <span class="hljs-keyword">from</span> <span class="hljs-string">'@/ThemeContext'</span>;
-</div><div class="hljs-line"><span class="hljs-keyword">const</span> Vote = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Vote</span>(<span class="hljs-params"></span>) </span>{
+</div><div class="hljs-line"><span class="hljs-keyword">const</span> Vote2 = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Vote2</span>(<span class="hljs-params"></span>) </span>{
 </div><div class="hljs-line">    <span class="hljs-keyword">let</span> [supNum, setSupNum] = useState(<span class="hljs-number">10</span>),
 </div><div class="hljs-line">        [oppNum, setOppNum] = useState(<span class="hljs-number">5</span>);
 </div><div class="hljs-line">    <span class="hljs-keyword">const</span> change = <span class="hljs-function"><span class="hljs-params">type</span> =&gt;</span> {
@@ -392,7 +392,7 @@
 </div><div class="hljs-line"><span class="xml">        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
 </div><div class="hljs-line"><span class="xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">ThemeContext.Provider</span>&gt;</span>;</span>
 </div><div class="hljs-line"><span class="xml">};</span>
-</div><div class="hljs-line"><span class="xml">export default Vote;</span>
+</div><div class="hljs-line"><span class="xml">export default Vote2;</span>
 </div></code></pre>
 
         <p><code>VoteMain.jsx</code></p>

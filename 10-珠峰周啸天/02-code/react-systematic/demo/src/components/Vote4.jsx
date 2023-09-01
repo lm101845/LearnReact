@@ -1,4 +1,4 @@
-// export default Vote
+// export default Vote2
 import React from 'react'
 
 /**

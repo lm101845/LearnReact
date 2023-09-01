@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import Vote from '@/components/Vote'
+import Vote from '@/components/Vote2'
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(

@@ -5,7 +5,8 @@
 
 //合并各个模块的reducer,创建出一个总的reducer
 
-import {combineReducers} from "redux";
+// import {combineReducers} from "redux";
+import combineReducers from "../reducers/myredux-combineReducers";
 import VoteReducer from "./VoteReducer";
 import PersonalReducer from "./PersonalReducer";
 

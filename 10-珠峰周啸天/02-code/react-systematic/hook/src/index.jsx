@@ -2,12 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.less';
 
-// import Vote from "./views函数组件上下文/Vote";
+// import Vote2 from "./views函数组件上下文/Vote2";
 /* ANTD */
 import { ConfigProvider } from 'antd';
 import zhCN from 'antd/lib/locale/zh_CN';
 import App from './App'
-import Vote from "@/views/Vote";
+import Vote from "@/views/Vote2";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

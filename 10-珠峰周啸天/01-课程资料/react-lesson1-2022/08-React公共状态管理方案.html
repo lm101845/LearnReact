@@ -223,22 +223,22 @@
 </div><div class="hljs-line"><span class="xml">    <span class="hljs-attr">value</span>=<span class="hljs-string">{{</span></span>
 </div><div class="hljs-line"><span class="xml">      <span class="hljs-attr">store</span></span>
 </div><div class="hljs-line"><span class="xml">    }}&gt;</span>
-</div><div class="hljs-line"><span class="xml">    <span class="hljs-tag">&lt;<span class="hljs-name">Vote</span> /&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">    <span class="hljs-tag">&lt;<span class="hljs-name">Vote2</span> /&gt;</span></span>
 </div><div class="hljs-line"><span class="xml">  <span class="hljs-tag">&lt;/<span class="hljs-name">ThemeContext.Provider</span>&gt;</span></span>
 </div><div class="hljs-line"><span class="xml">);</span>
 </div></code></pre>
 
-    <p>views/Vote.jsx</p>
+    <p>views/Vote之前2.jsx</p>
 
 
 
     <pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-keyword">import</span> React, { useContext, useState, useEffect } <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
 </div><div class="hljs-line"><span class="hljs-keyword">import</span> VoteMain <span class="hljs-keyword">from</span> <span class="hljs-string">'./VoteMain'</span>;
 </div><div class="hljs-line"><span class="hljs-keyword">import</span> VoteFooter <span class="hljs-keyword">from</span> <span class="hljs-string">'./VoteFooter'</span>;
-</div><div class="hljs-line"><span class="hljs-keyword">import</span> <span class="hljs-string">'./Vote.less'</span>;
+</div><div class="hljs-line"><span class="hljs-keyword">import</span> <span class="hljs-string">'./Vote2.less'</span>;
 </div><div class="hljs-line"><span class="hljs-keyword">import</span> ThemeContext <span class="hljs-keyword">from</span> <span class="hljs-string">'@/ThemeContext'</span>;
 </div><div class="hljs-line"><wbr>
-</div><div class="hljs-line"><span class="hljs-keyword">const</span> Vote = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Vote</span>(<span class="hljs-params"></span>) </span>{
+</div><div class="hljs-line"><span class="hljs-keyword">const</span> Vote2 = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Vote2</span>(<span class="hljs-params"></span>) </span>{
 </div><div class="hljs-line">    <span class="hljs-keyword">const</span> { store } = useContext(ThemeContext);
 </div><div class="hljs-line">    <span class="hljs-keyword">let</span> { supNum, oppNum } = store.getState();
 </div><div class="hljs-line"><wbr>
@@ -259,7 +259,7 @@
 </div><div class="hljs-line"><span class="xml">        <span class="hljs-tag">&lt;<span class="hljs-name">VoteFooter</span> /&gt;</span></span>
 </div><div class="hljs-line"><span class="xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>;
 </div><div class="hljs-line">};
-</div><div class="hljs-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> Vote;
+</div><div class="hljs-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> Vote2;
 </div></code></pre>
 
     <p>views/VoteMain.jsx</p>
@@ -504,7 +504,7 @@
 </div><div class="hljs-line"><wbr>
 </div><div class="hljs-line">root.render(
 </div><div class="hljs-line">  <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Provider</span> <span class="hljs-attr">store</span>=<span class="hljs-string">{store}</span>&gt;</span></span>
-</div><div class="hljs-line"><span class="xml">    <span class="hljs-tag">&lt;<span class="hljs-name">Vote</span> /&gt;</span></span>
+</div><div class="hljs-line"><span class="xml">    <span class="hljs-tag">&lt;<span class="hljs-name">Vote2</span> /&gt;</span></span>
 </div><div class="hljs-line"><span class="xml">  <span class="hljs-tag">&lt;/<span class="hljs-name">Provider</span>&gt;</span></span>
 </div><div class="hljs-line">);
 </div></code></pre>
@@ -525,7 +525,7 @@
   </li>
 </ul>
 <pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-keyword">import</span> { connect } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-redux'</span>;
-</div><div class="hljs-line"><span class="hljs-keyword">const</span> Vote = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Vote</span>(<span class="hljs-params">props</span>) </span>{
+</div><div class="hljs-line"><span class="hljs-keyword">const</span> Vote2 = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Vote2</span>(<span class="hljs-params">props</span>) </span>{
 </div><div class="hljs-line">    <span class="hljs-keyword">let</span> { supNum, oppNum } = props;
 </div><div class="hljs-line">    <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"vote-box"</span>&gt;</span></span>
 </div><div class="hljs-line"><span class="xml">        ...</span>
@@ -535,7 +535,7 @@
 </div><div class="hljs-line">    <span class="hljs-function"><span class="hljs-params">state</span> =&gt;</span> {
 </div><div class="hljs-line">        <span class="hljs-keyword">return</span> state.vote;
 </div><div class="hljs-line">    }
-</div><div class="hljs-line">)(Vote);
+</div><div class="hljs-line">)(Vote2);
 </div></code></pre>
 <pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-keyword">import</span> actions <span class="hljs-keyword">from</span> <span class="hljs-string">'@/store/actions'</span>;
 </div><div class="hljs-line"><span class="hljs-keyword">import</span> { connect } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-redux'</span>;

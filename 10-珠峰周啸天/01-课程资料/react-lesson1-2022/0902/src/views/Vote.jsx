@@ -26,4 +26,4 @@ export default connect(state => state.vote)(Vote);
             info: state.person.info
         };
     }
-)(Vote); */
+)(Vote2); */

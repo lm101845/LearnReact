@@ -1,5 +1,5 @@
 /**
- * 从调用类组件[new Vote{...}开始，类组件内部发生的事情]：
+ * 从调用类组件[new Vote2{...}开始，类组件内部发生的事情]：
  *      1.初始化属性 & 规则校验
  *          即使我们自己不在constructor中处理[或者constructor都没写],在constructor处理完毕后，react内部也会把传递的props挂载到实例上
  *          所以在其他的函数中，只要保证this是实例,就可以基于this.props获取传递的属性

@@ -20,7 +20,7 @@ class Vote extends React.Component {
     }
 
     render() {
-        console.log('Vote Render')
+        console.log('Vote2 Render')
         let {supNum, oppNum} = this.state
         return <ThemeContext.Provider value={{
             supNum,

@@ -18,7 +18,7 @@ class Vote extends React.Component{
         this.setState({oppNum: oppNum + 1})
     }
     render() {
-        console.log('Vote Render')
+        console.log('Vote2 Render')
         let {supNum,oppNum} = this.state
         return <div className="vote-box">
             <header className="header">

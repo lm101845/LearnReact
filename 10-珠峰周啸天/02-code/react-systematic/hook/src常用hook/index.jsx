@@ -12,6 +12,6 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <ConfigProvider locale={zhCN}>
         <Demo x={10} y={20}/>
-        {/*<Vote title="React学好需要JS功底 "/>*/}
+        {/*<Vote2 title="React学好需要JS功底 "/>*/}
     </ConfigProvider>
 );

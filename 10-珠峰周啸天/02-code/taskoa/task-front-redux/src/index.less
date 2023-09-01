@@ -1,0 +1,25 @@
+@import './assets/reset.min.css';
+@import 'antd/dist/antd.css';
+
+/* 全局公共的样式 */
+.ant-btn{
+  border-radius: 0;
+
+  &.ant-btn-sm{
+    border-radius: 0;
+  }
+}
+
+.ant-input,
+.ant-picker{
+  border-radius: 0;
+}
+
+textarea{
+  resize: none;
+}
+
+/* 隐藏鼠标点击这些元素时出现的光标 */
+span, p {
+  caret-color: transparent;
+}
