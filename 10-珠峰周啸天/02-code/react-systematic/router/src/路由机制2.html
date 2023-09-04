@@ -1,0 +1,80 @@
+<!--
+ * @Author liming
+ * @Date 2023/9/4 12:43
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>前端路由机制实现</title>
+</head>
+<body>
+<nav class="nav-box">
+    <a href="/">首页</a>
+    <a href="/product">产品中心</a>
+    <a href="/personal">个人中心</a>
+</nav>
+<div class="view-box"></div>
+
+<script>
+    /**
+     * History路由(浏览器路由)
+     *   +利用了H5的historyAPI来实现页面地址的切换[可以不刷新页面]
+     *   +根据不同的地址，到路由表中尽显匹配，让容器中渲染不同的内容[组件]
+     *
+     *   问题：我们切换地址，在页面不刷新情况下没有问题；
+     *   但是如果页面刷新，这个地址是不存在的，会报404错误，所以我们需要服务器配合：在地址不存在的情况下，也可以把主页内容返回
+     * */
+
+    //获取渲染内容的容器
+    const viewBox = document.querySelector('.view-box')
+    const navBox = document.querySelector('.nav-box')
+
+    //点击A页面实现页面地址切换，但是不能刷新页面
+    navBox.onclick = (ev)=>{
+        console.log(ev,'ev')
+        let target = ev.target
+        console.log(target,'target')
+        if(target.tagName === 'A'){
+            ev.preventDefault()   //阻止A标签页面跳转 & 刷新的默认行为
+            history.pushState({},"",target.href)
+            //去路由匹配
+            routerMatch()
+        }
+    }
+    const routes = [
+        {
+            path:'/',
+            component:'首页内容'
+        },
+        {
+            path:'/product',
+            component:'产品中心内容'
+        },
+        {
+            path:'/personal',
+            component:'个人中心内容'
+        },
+    ]
+    //路由匹配的方法
+    const routerMatch = ()=>{
+        // let hash = location.hash.substring(1)
+        let path = location.pathname
+        let text = ''
+        routes.forEach(item=>{
+            if(item.path === path){
+                text = item.component
+            }
+        })
+        viewBox.innerHTML = text
+    }
+
+    //默认展示首页
+    history.pushState({},"","/")
+    routerMatch()
+
+    //监听onpopstate地址变化事件(此事件执行go/forward/back等方法可以触发，但是执行pushState,replaceState等方法无法触发)
+    window.onpopstate = routerMatch
+</script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!--
+ * @Author liming
+ * @Date 2023/9/4 12:43
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>前端路由机制实现</title>
+</head>
+<body>
+<nav class="nav-box">
+    <a href="#/">首页</a>
+    <a href="#/product">产品中心</a>
+    <a href="#/personal">个人中心</a>
+</nav>
+<div class="view-box"></div>
+
+<script>
+    /**
+     * HASH路由
+     *   +改变页面的哈希值(#/xxx),主页面不会刷新
+     *   +根据不同的哈希值，让容器中渲染不同的内容[组件]
+     * */
+
+    //获取渲染内容的容器
+    const viewBox = document.querySelector('.view-box')
+    //构建一个路由匹配表：每当我们重新加载页面、或者路由切换(切换哈希值),都先到这个路由表中进行匹配；
+    //根据当前页面的哈希值，匹配出要渲染的内容[组件]
+    const routes = [
+        {
+            path:'/',
+            component:'首页内容'
+        },
+        {
+            path:'/product',
+            component:'产品中心内容'
+        },
+        {
+            path:'/personal',
+            component:'个人中心内容'
+        },
+    ]
+    //路由匹配的方法
+    const routerMatch = ()=>{
+        let hash = location.hash.substring(1)
+        console.log(location.hash,'打印hash')
+        let text = ''
+        routes.forEach(item=>{
+            if(item.path === hash){
+                text = item.component
+            }
+        })
+        viewBox.innerHTML = text
+    }
+    //一进来要展示首页的信息,所以默认改变一下hash值
+    location.hash = '/'
+    routerMatch()
+
+    //监测hash值变化，重新进行路由匹配
+    window.onhashchange = routerMatch
+</script>
+</body>
+</html>
