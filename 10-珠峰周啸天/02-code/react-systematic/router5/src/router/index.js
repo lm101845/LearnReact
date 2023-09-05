@@ -26,10 +26,11 @@ const RouterView = (props) => {
             //正常匹配规则
             config = {path}
             if (exact) config.exact = true
-            return <Route key={index} {...config} render={() => {
+            return <Route key={index} {...config} render={(props) => {
+                console.log(props,'打印props')
                 //统一基于RENDER函数处理，当某个路由匹配，后期在这里可以做一些其他事情
                 return <Suspense fallback={<>正在处理中...</>}>
-                    <Component/>
+                    <Component {...props}/>
                 </Suspense>
             }}></Route>
         })}

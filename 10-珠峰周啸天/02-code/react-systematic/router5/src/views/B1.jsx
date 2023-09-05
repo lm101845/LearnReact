@@ -4,7 +4,8 @@
  **/
 import React from 'react'
 
-const B = () => {
+const B = (props) => {
+    console.log(props,'B组件props')
     return <div className="box">
         B组件的内容
     </div>

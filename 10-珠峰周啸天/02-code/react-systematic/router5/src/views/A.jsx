@@ -6,9 +6,9 @@ import React from 'react'
 import {Link, Redirect, Route, Switch} from 'react-router-dom'
 import routes from '../router/aRoutes'   //二级路由
 import styled from 'styled-components'
-import A1 from "./a/A1";
-import A2 from "./a/A2";
-import A3 from "./a/A3";
+// import A1 from "./a/A1";
+// import A2 from "./a/A2";
+// import A3 from "./a/A3";
 import RouterView from '../router'
 
 const DemoBox = styled.div`

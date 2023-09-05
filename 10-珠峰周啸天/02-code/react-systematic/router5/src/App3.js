@@ -9,10 +9,10 @@ import routes from './router/routes'
 import styled from 'styled-components'
 
 //导入组件
-import A from './views/A'
-import B from './views/B'
-import C from './views/C'
-import Wrong from "./views/Wrong";
+// import A from './views/A'
+// import B from './views/B'
+// import C from './views/C'
+// import Wrong from "./views/Wrong";
 
 const NavBox = styled.nav`
   a{
@@ -21,7 +21,8 @@ const NavBox = styled.nav`
     font-size: 32px;
   }
 `
-const App = ()=>{
+const App = (props)=>{
+    console.log(props,'App组件的props')
     return <HashRouter>
         {/*导航部分*/}
         <NavBox>

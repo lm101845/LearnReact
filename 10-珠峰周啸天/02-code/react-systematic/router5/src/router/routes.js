@@ -45,6 +45,8 @@ const routes = [
     },
     {
         path:'/c',
+        // path:'/c/:id/:name',
+        // path:'/c/:id?/:name',
         name:'c',
         component: lazy(()=>{return import('../views/C')}),
         meta:{},
