@@ -1,0 +1,3 @@
+jest以后，在webpack.config.js中
+1.把sass改成less
+2.313行，添加一个@别名(缺点，使用@没有提示)

@@ -1,0 +1,68 @@
+<!--
+ * @Author liming
+ * @Date 2023/9/6 17:57
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1.0, minimum-scale=1.0,user-scalable=no" />
+    <title>REM练习</title>
+<!--    <link rel="stylesheet" href="src/assets/reset.min.css">-->
+    <style>
+        /**
+        实现rem响应式布局的步骤：
+          +找参照的比例(例如设计稿的比例->一般750px),在这个比例下，给予html.fontSize一个初始值
+          rem（font size of the root element）是指相对于根元素的字体大小的单位。
+           1rem 等于根元素 htm 的 font-size，即只需要设置根元素的 font-size，其它元素使用 rem 单位时，设置成相应的百分比即可。
+           ③我们一般还会给页面设置最大宽度，超过这个宽度，就不让rem比例继续放大了
+         */
+        #root{
+            margin: 0 auto;
+            max-width: 750px;
+        }
+        html{
+            font-size: 100px;
+        }
+
+        .box{
+            width: 3.28rem;
+            height: 1.64rem;
+            line-height: 1.64rem;
+            text-align: center;
+            font-size: .4rem;
+            background-color: pink;
+        }
+    </style>
+    <script>
+        <!--计算当前设备下，REM和PX的换算比例-->
+        (function () {
+            const computed = ()=>{
+                console.log('computed函数执行了')
+                //获取设备的宽度
+                let html = document.documentElement
+                let deviceW = html.clientWidth
+                console.log(deviceW,'deviceW')
+                let designW = 750
+                //750/100=deviceW/x
+                if(deviceW >= designW){
+                    html.style.fontSize = '100px'
+                    return
+                }
+                let ratio = deviceW * 100 / designW
+                html.style.fontSize = ratio + 'px'
+            }
+            computed()
+            window.addEventListener('resize',computed)
+        })()
+    </script>
+</head>
+<body>
+    <div id="root">
+        <div class="box">
+            珠峰培训
+        </div>
+    </div>
+</body>
+</html>
