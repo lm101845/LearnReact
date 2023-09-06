@@ -1,0 +1,197 @@
+总述：
+POST模式，基于请求主体传递给服务器的数据格式 application/x-www-form-urlencoded 「/user_update接口特殊」
+GET模式，基于“问号参数”传递数据
+
+初始账号：珠峰培训  13161883402
+
+服务器返回信息中{返回的数据格式:JSON}
+  code ：0成功 1失败 
+  codeText ：对状态码的描述
+
+package.json
+  "config": {
+    "server": 7100,  //服务器启动WEB服务的端口号
+    "secret": "ZFPX", //TOKEN加密秘钥
+    "maxAge": "7d"  //TOKEN有效周期(7天)
+  }
+database存储相关的数据
+static存储用户上传的头像
+
+本后台不支持CORS跨域请求，请客户端基于Proxy跨域代理实现
+
+=======================
+获取最新新闻  /news_latest  GET
+  @params
+  @return
+	{
+		date:'20191204',
+		stories:[{
+			"image_hue": "0x484825",
+			"title": "如何评价 12 月 4 号国行 Switch 发布会？",
+			"url": "https:\/\/daily.zhihu.com\/story\/9717893",
+			"hint": "WouldYouKindly · 7 分钟阅读",
+			"ga_prefix": "120416",
+			"images": ["https:\/\/pic2.zhimg.com\/v2-8d47848eb5ea9d747b12eead9dbf4741.jpg"],
+			"type": 0,
+			"id": 9717893
+		},...],
+		top_stories:[{
+			"image_hue": "0x879943",
+			"hint": "作者 \/ 苏澄宇",
+			"url": "https:\/\/daily.zhihu.com\/story\/9717531",
+			"image": "https:\/\/pic2.zhimg.com\/v2-5c87a645d36d140fa87df6e8ca7cb989.jpg",
+			"title": "斑马的条纹到底是干嘛用的？",
+			"ga_prefix": "120407",
+			"type": 0,
+			"id": 9717531
+		},...]
+	}
+
+
+获取以往新闻  /news_before  GET
+  @params 
+	time:20211022  传递今天日期则获取昨日新闻(不传则默认是今天日期)
+  @return
+	{
+		"date": "20191201",
+		"stories": [{
+			"image_hue": "0xb39f7d",
+			"title": "小事 · 芳姐",
+			"url": "https:\/\/daily.zhihu.com\/story\/9717813",
+			"hint": "VOL.1146",
+			"ga_prefix": "120122",
+			"images": ["https:\/\/pic1.zhimg.com\/v2-26cbb28e78f2fd51d786d9ef542f9358.jpg"],
+			"type": 0,
+			"id": 9717813
+		},...]
+	}
+
+
+获取新闻详细信息  /news_info  GET
+  @params
+	id:新闻ID
+  @return
+	{
+		"body": "",
+		"image_hue": "0x879943",
+		"image_source": "12019 \/ CC0",
+		"title": "斑马的条纹到底是干嘛用的？",
+		"url": "https:\/\/daily.zhihu.com\/story\/9717531",
+		"image": "https:\/\/pic2.zhimg.com\/v2-5c87a645d36d140fa87df6e8ca7cb989.jpg",
+		"share_url": "http:\/\/daily.zhihu.com\/story\/9717531",
+		"js": [],
+		"ga_prefix": "120407",
+		"images": ["https:\/\/pic4.zhimg.com\/v2-e5c464d7196a5fa254724cc91c15ca4b.jpg"],
+		"type": 0,
+		"id": 9717531,
+		"css": ["http:\/\/news-at.zhihu.com\/css\/news_qa.auto.css?v=4b3e3"]
+	}
+
+
+获取新闻点赞信息  /story_extra  GET 
+  @params
+	id:新闻ID
+  @return 
+    {
+		"long_comments": 1,  长评论总数
+		"popularity": 183,  点赞总数
+		"short_comments": 22,  短评论总数
+		"comments": 23 评论总数
+	}
+
+
+用户登录  /login  POST
+  @params
+	phone:手机号码
+	code:短信验证码   用户存在则为登录,不存在则为注册新用户
+  @return
+	{
+		code:0,
+       	codeText:'',
+       	token:''
+	}
+
+
+获取手机验证码  /phone_code  POST
+  @params
+	phone:手机号
+  @return
+    {
+		code:0,
+       	codeText:''
+	}
+  临时测试:生成的验证码可在「后端程序 -> code.txt」中查看
+
+
+=======================
+以下接口需要在请求头中携带TOKEN信息
+  authorization:token「客户端登录成功后存储在本地的令牌信息(从服务器获取)」
+
+获取登录者信息  /user_info  GET
+  @params 
+  @return
+	code 
+	codeText
+	data:{
+		id,
+		name,
+        phone,
+		pic
+	}
+
+
+上传图片  /upload  POST
+  @params  格式:multipart/form-data
+	file
+  @return
+    code 
+	codeText
+	pic
+	
+修改用户信息  /user_update  POST
+  @params  
+	username
+	pic
+  @return
+    code 
+	codeText
+	data:{
+		id,
+		name,
+        phone,
+		pic
+	}
+
+
+收藏新闻  /store  POST 
+  @params
+	newsId:新闻ID
+  @return
+    code 
+	codeText
+
+
+移除收藏  /store_remove  GET
+  @params
+	id:收藏ID
+  @return
+    code 
+	codeText
+
+
+获取登录者收藏列表  /store_list  GET
+  @params
+  @return
+	code 
+	codeText
+	data:[
+		{
+			id,
+			userId,
+			news: {
+				id,
+				title,
+				image
+			}
+		},...
+	]

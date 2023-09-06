@@ -15,7 +15,7 @@ https://gitee.com/zxt_team
 不过我发现里面的代码不是最全的
 
 npx pm2 start .\server.js --name TASK
-
+npx pm2 start .\server.js --name ZHIHU
 "@": path.resolve(__dirname, "../src")
 
 第1-4集看完——23-04-19
@@ -44,4 +44,5 @@ npx pm2 start .\server.js --name TASK
 第67-70集看完——23-09-02
 第71-75集看完——23-09-03
 第76-80集看完——23-09-04
-第81-84集看完——23-09-05
+第81-85集看完——23-09-05
+第86-90集看完——23-09-06

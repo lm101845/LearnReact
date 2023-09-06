@@ -5,6 +5,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import {NavLink} from "react-router-dom";
+import {withRouter} from "../router";
 
 const NavBox = styled.nav`
   a {
@@ -17,8 +18,9 @@ const NavBox = styled.nav`
   }
 `
 
-const HomeHead = () => {
+const HomeHead = (props) => {
     {/*导航部分*/}
+    console.log(props,'HomeHead的props')
     return <NavBox>
         <NavLink to="/a">A</NavLink>
         <NavLink to="/b">B</NavLink>
@@ -26,4 +28,4 @@ const HomeHead = () => {
     </NavBox>
 }
 
-export default HomeHead
+export default withRouter(HomeHead)
