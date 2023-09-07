@@ -1,10 +1,14 @@
+/**
+ * @Author liming
+ * @Date 2023/9/7 10:13
+ **/
 import _ from '../assets/utils';
 import qs from 'qs';
 import { Toast } from 'antd-mobile';
 
 /* 核心方法 */
-let regGET = /^(GET|HEAD|DELETE|OPTIONS)$/i,
-    regPOST = /^(POST|PUT|PATCH)$/i;
+let regGET = /^(GET|HEAD|DELETE|OPTIONS)$/i
+let regPOST = /^(POST|PUT|PATCH)$/i
 let initial = {
     method: 'GET',
     headers: null,
@@ -15,7 +19,8 @@ let initial = {
     cache: 'no-cache',
     referrer: 'client',
     responseType: 'json'
-};
+}
+
 const http = function http(url, options) {
     // 参数校验 & 合并配置项
     if (typeof url !== 'string') throw new TypeError('url请求地址必须是一个字符串');

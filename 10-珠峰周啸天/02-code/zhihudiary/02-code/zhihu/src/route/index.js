@@ -5,14 +5,14 @@
 
 import { Suspense, useEffect, useState } from 'react';
 import { Routes, Route, useParams, useSearchParams, useLocation, useMatch, useNavigate } from 'react-router-dom';
-import 'antd-mobile/es/global';
 import {Toast, Mask, DotLoading} from 'antd-mobile';
 import routes from "./routes";
 
 
 /*统一路由配置*/
 const Element = (props)=>{
-    let {component:Component,meta} = props
+    // console.log(props,'Element的props')
+    let {component: Component,meta} = props
     //修改页面的title
     let {title='知乎日报-WebApp'} = meta || {}
     //没有meta中title属性，则给一个默认值

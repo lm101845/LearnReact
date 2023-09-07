@@ -4,7 +4,6 @@
  **/
 import {lazy} from 'react'
 import Home from '../views/Home'
-import {withKeepAlive} from "keepalive-react-component";
 const routes = [
     {
         path: '/',

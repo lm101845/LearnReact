@@ -5,8 +5,8 @@
 import React from 'react'
 
 const Login = () => {
-    return <div className="login_box">
-
+    return <div className="login-box">
+        登录页
     </div>
 }
 

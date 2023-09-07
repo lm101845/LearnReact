@@ -4,7 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "start2": "npx pm2 start .\\server.js --name ZHIHU"
   },
   "keywords": [],
   "author": "",

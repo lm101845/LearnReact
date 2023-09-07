@@ -1,0 +1,3 @@
+base存个人信息
+store存收藏列表
+index用来合并reducer

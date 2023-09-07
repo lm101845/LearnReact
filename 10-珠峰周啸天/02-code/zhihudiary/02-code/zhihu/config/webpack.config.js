@@ -149,7 +149,7 @@ module.exports = function (webpackEnv) {
                   // which in turn let's users customize the target behavior as per their needs.
                   'postcss-normalize',
                   px2rem({
-                    rootValue: 37.5,
+                    rootValue: 75,
                     propList: ['*']
                   })
                 ]

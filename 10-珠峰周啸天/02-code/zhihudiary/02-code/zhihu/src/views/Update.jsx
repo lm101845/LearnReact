@@ -5,8 +5,8 @@
 import React from 'react'
 
 const Update = () => {
-    return <div className="update_box">
-
+    return <div className="update-box">
+        更新页
     </div>
 }
 

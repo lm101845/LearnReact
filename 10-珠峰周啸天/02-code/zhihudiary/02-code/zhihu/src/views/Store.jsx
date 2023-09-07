@@ -5,8 +5,8 @@
 import React from 'react'
 
 const Store = () => {
-    return <div className="store_box">
-
+    return <div className="store-box">
+        收藏页
     </div>
 }
 

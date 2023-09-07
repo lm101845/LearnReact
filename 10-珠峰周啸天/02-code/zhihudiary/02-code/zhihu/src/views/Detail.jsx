@@ -5,7 +5,7 @@
 import React from 'react'
 
 const Detail = () => {
-    return <div className="detail_box">
+    return <div className="detail-box">
      详情页
     </div>
 }

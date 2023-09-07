@@ -1,0 +1,47 @@
+/**
+ * @Author liming
+ * @Date 2023/9/7 14:02
+ **/
+.home-head-box{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 20px 30px;
+  .picture{
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    overflow: hidden;
+    img{
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .info{
+    display: flex;
+    align-items: center;
+    .title{
+      padding-left: 24px;
+      height: 64px;
+      line-height: 64px;
+      font-size: 40px;
+      border-left: 2px solid #eee;
+    }
+    .time{
+      width: 80px;
+      height: 70px;
+      span{
+        display: block;
+        text-align: center;
+        line-height: 35px;
+        font-size: 24px;
+        &:nth-child(1){
+          font-size: 32px;
+        }
+      }
+    }
+  }
+}
