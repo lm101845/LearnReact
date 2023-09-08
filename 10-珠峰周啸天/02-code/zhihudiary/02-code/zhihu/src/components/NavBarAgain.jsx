@@ -5,6 +5,7 @@
 import React from 'react'
 import {NavBar} from 'antd-mobile'
 import PropTypes from "prop-types";
+import './NavBarAgain.less'
 //对UI组件库中的NavBar做了二次封装
 const NavBarAgain = (props) => {
     let {title} = props
@@ -12,7 +13,7 @@ const NavBarAgain = (props) => {
         //...
     }
     return <div>
-        return <NavBar onBack={handleBack}>{title}</NavBar>
+        <NavBar className="navbar-again-box" onBack={handleBack}>{title}</NavBar>
     </div>
 }
 

@@ -16,11 +16,11 @@ body {
 
 /* Toast提示的样式 */
 .adm-toast-main {
-    max-width: 120px !important;
-    font-size: 14px !important;
+    max-width: 240px !important;
+    font-size: 28px !important;
 
     .adm-toast-icon {
-        font-size: 20px !important;
+        font-size: 40px !important;
     }
 }
 
@@ -31,4 +31,20 @@ body {
 
 .adm-input-element {
     font-size: 14px !important;
+}
+
+.adm-dot-loading{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    font-size: 60px;
+}
+
+.adm-button-loading{
+    .adm-dot-loading{
+        position: static;
+        transform: none;
+        font-size: 30px;
+    }
 }

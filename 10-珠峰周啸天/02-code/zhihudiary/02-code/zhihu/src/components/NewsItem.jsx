@@ -6,16 +6,29 @@ import React from 'react'
 import './NewsItem.less'
 import {Image} from 'antd-mobile'
 import {Link} from 'react-router-dom'
-const NewsItem = () => {
+import PropTypes from 'prop-types'
+const NewsItem = (props) => {
+    let {info} = props
+    if(!info) return null
+    let {id,title,hint,images} = info
+    //let { info: { id, title, hint, images } } = props; 简写，但是中间有判断，所以不能简写
+    if(!Array.isArray(images)) images = ['']
     return <div className="news-item-box">
-        <Link to={{pathname:`/detail/xx`}}>
+        <Link to={{pathname:`/detail/${id}`}}>
             <div className="content">
-                <div className="title">斑马的条纹是干什么的？</div>
-                <div className="author">作者 苏轼</div>
+                <div className="title">{title}</div>
+                <div className="author">{hint}</div>
             </div>
-            <Image src="https://picx.zhimg.com/v2-263e6451fe32ed8d9512eab97de4a2be.jpg?source=8673f162" lazy></Image>
+            <Image src={images[0]} lazy></Image>
         </Link>
     </div>
 }
 
+/*属性规则处理:这个组件别人也要调，别人不清楚要传什么值，所以要做规则校验*/
+NewsItem.defaultProps = {
+    info:null
+}
+NewsItem.propTypes = {
+    info:PropTypes.object
+}
 export default NewsItem

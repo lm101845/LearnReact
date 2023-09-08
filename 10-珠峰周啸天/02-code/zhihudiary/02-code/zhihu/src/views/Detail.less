@@ -1,0 +1,86 @@
+/**
+ * @Author liming
+ * @Date 2023/9/8 14:30
+ **/
+.detail-box {
+  padding-bottom: 90px;
+  .content{
+    overflow-x: hidden;
+    margin: 0;   //覆盖从服务器拿到的样式
+    .img-place-holder{
+      overflow: hidden;
+      img{
+        margin: 0;
+        width: 100%;
+      }
+    }
+    .meta{
+      .avatar{
+        display: inline-block;
+      }
+    }
+  }
+  //底部栏
+  .tab-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 999;
+    box-sizing: border-box;
+    width: 100%;
+    height: 90px;
+    background: #ddd;
+    display: flex;
+    align-items: center;
+    .back{
+      //当成文字处理
+      box-sizing: border-box;
+      width: 100px;
+      height: 50px;
+      line-height: 50px;
+      text-align: center;
+      font-size: 40px;
+      font-weight: 900;
+      border-right: 2px solid #ccc;
+    }
+    .icons{
+      flex-grow: 1;
+      //box-sizing: border-box;
+      //width: 650px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 50px;
+      line-height: 50px;
+      .adm-badge-wrapper,
+      span{
+        flex-grow: 1;
+        //width: 120px;
+        text-align: center;
+        font-size: 40px;
+      }
+      span{
+        &:nth-last-of-type(1){
+          color: #aaa;
+        }
+
+        &:nth-of-type(1){
+          &.stored{
+            color: #108ee9;
+          }
+        }
+      }
+      .adm-badge-wrapper{
+        .adm-badge-fixed{
+          right:25%
+        }
+        .adm-badge{
+          background: none;
+          .adm-badge-content{
+            color: #555;
+          }
+        }
+      }
+    }
+  }
+}

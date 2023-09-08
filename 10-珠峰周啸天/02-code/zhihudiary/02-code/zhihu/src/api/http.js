@@ -44,8 +44,8 @@ const http = function http(url, options) {
     headers = head;
 
     // 特殊处理2：需要根据项目中的需求自定义处理「处理Token」 请求拦截器
-    let token = _.storage.get('TK'),
-        tokenList = ['/user_info', '/upload', '/user_update', '/store', '/store_remove', '/store_list'];
+    let token = _.storage.get('tk')
+    let tokenList = ['/user_info', '/upload', '/user_update', '/store', '/store_remove', '/store_list'];
     if (token && tokenList.includes(url.replace(/^\/api/, ''))) {
         headers.append('authorization', token);
     }
