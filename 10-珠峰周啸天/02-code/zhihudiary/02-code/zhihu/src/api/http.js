@@ -47,6 +47,7 @@ const http = function http(url, options) {
     let token = _.storage.get('tk')
     let tokenList = ['/user_info', '/upload', '/user_update', '/store', '/store_remove', '/store_list'];
     if (token && tokenList.includes(url.replace(/^\/api/, ''))) {
+        // console.log(url,'打印url',tokenList.includes(url),'打印tokenList.includes(url)')
         headers.append('authorization', token);
     }
 

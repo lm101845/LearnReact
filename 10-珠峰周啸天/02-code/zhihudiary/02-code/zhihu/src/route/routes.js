@@ -26,8 +26,8 @@ const routes = [
         meta: { title: '登录/注册' },
         component: lazy(() => import('../views/Login'))
     }, {
-        path: '/mystore',
-        name: 'mystore',
+        path: '/store',
+        name: 'store',
         meta: { title: '我的收藏' },
         component: lazy(() => import('../views/Store'))
     }, {

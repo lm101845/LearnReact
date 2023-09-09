@@ -54,20 +54,21 @@ const queryUserInfo = () => {
     return http.get('/api/user_info');
 };
 
+
 // 获取登录者的收藏列表
-const queryStoreList = () => {
+const storeList = () => {
     return http.get('/api/store_list');
 };
 
 // 新增收藏记录
-const addStoreInfo = (newsId) => {
+const store = (newsId) => {
     return http.post('/api/store', {
         newsId
     });
 };
 
 // 移除收藏记录
-const removeStoreInfo = (id) => {
+const storeRemove = (id) => {
     return http.get('/api/store_remove', {
         params: {
             id
@@ -99,9 +100,9 @@ const API = {
     sendPhoneCode,
     userLogin,
     queryUserInfo,
-    queryStoreList,
-    addStoreInfo,
-    removeStoreInfo,
+    storeList,
+    store,
+    storeRemove,
     upload,
     updateLoginInfo
 };

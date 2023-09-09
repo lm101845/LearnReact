@@ -2,22 +2,27 @@
  * @Author liming
  * @Date 2023/9/6 22:15
  **/
-import React,{useState,useEffect} from "react";
+import React, {useState, useEffect} from "react";
 
 import {Form, Input, Button, Toast} from 'antd-mobile';
+import {connect} from 'react-redux'
+import action from '../store/action'
 import NavBarAgain from "../components/NavBarAgain";
 import ButtonAgain from "../components/ButtonAgain";
 import _ from '../assets/utils'
 import './Login.less'
 import API from '../api'
 
-const Login = () => {
+const Login = (props) => {
+    // console.log(props,'Login中的props')
+    let {queryUserInfoAsync, navigate, usp} = props
+
     /*状态*/
     const [formIns] = Form.useForm()
     //组件提供的hook函数，表示Form实例
     // console.log(formIns,'formIns')
-    const [disabled,setDisabled] = useState(false)
-    const [sendText,setSendText] = useState("发送验证码")
+    const [disabled, setDisabled] = useState(false)
+    const [sendText, setSendText] = useState("发送验证码")
 
     /*表单提交*/
     // const submit = (values) => {
@@ -36,16 +41,24 @@ const Login = () => {
             // await delay(3000)
             let {phone,code} = formIns.getFieldsValue()
             let {code:codeHttp,token} = await API.userLogin(phone,code)
-            if(+codeHttp !== 0){
+            if (+codeHttp !== 0) {
                 Toast.show({
-                    icon:'fail',
-                    content:'登录失败'
+                    icon: 'fail',
+                    content: '登录失败'
                 })
                 formIns.resetFields(['code'])
                 return
             }
             //登录成功：存储token、存储用户信息到redux、提示、跳转
-            _.storage.set('tk',token)
+            _.storage.set('tk', token)
+            await queryUserInfoAsync()   //派发任务，同步redux中的信息
+            Toast.show({
+                icon: 'success',
+                content: '登录/注册成功'
+            })
+            let to = usp.get('to')
+            to ? navigate(to, {replace: true}) : navigate(-1)
+            navigate(-1)
         }catch (_){}
     }
 
@@ -180,4 +193,20 @@ const Login = () => {
 };
 
 
-export default Login
+export default connect(null, action.base)(Login)
+
+/**
+ * connect函数在react-redux库中是一个非常重要的函数，其主要作用是将React组件与Redux store连接起来。
+ * 具体来说，connect函数会创建一个容器组件，该组件会订阅Redux store的状态变化，并将这些状态变化作为props传递给被包裹的React组件。
+ *
+ * connect函数接收两个参数：mapStateToProps和mapDispatchToProps。
+ *
+ * mapStateToProps是一个函数，它接收当前的Redux store的state作为参数，并返回一个对象，
+ * 这个对象的属性将作为props传递给被包裹的React组件。
+ * mapDispatchToProps也是一个函数，它接收dispatch作为参数，并返回一个对象，这个对象的属性将作为props传递给被包裹的React组件。
+ * mapDispatchToProps可以帮助你将Redux的action creators转化为props，
+ * 这样你就可以在React组件中通过props直接调用这些action creators。
+ *
+ * 使用connect函数的好处是，它使得React组件与Redux store的状态更新保持同步，
+ * 同时也使得React组件可以方便地调用Redux的action creators。
+ */

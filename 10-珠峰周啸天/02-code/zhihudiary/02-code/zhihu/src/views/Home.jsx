@@ -24,7 +24,7 @@ const Home = () => {
         (async () => {
             try {
                 let {date, stories, top_stories} = await API.queryNewsLatest()
-                console.log('RENDER')
+                // console.log('RENDER')
                 setToday(date)
                 setBannerData(top_stories)
                 //在原来新闻列表基础上往上加
@@ -35,7 +35,7 @@ const Home = () => {
                 //useState有优化机制，只要内存地址一样，视图就不会修改,所以如下写法不行
                 // setNewsList(newsList)
                 setNewsList([...newsList])
-                console.log(newsList,'newsList')
+                // console.log(newsList,'newsList')
             } catch (_) {
             }
         })()
@@ -43,7 +43,7 @@ const Home = () => {
 
     //第一次渲染完毕：设置监听器，实现触底加载
     useEffect(()=>{
-        console.log('useEffect-第一次设置监听器')
+        // console.log('useEffect-第一次设置监听器')
         // console.log(loadMore.current,'loadMore')
         //设置监听器
         /**

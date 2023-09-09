@@ -2,7 +2,7 @@
  * @Author liming
  * @Date 2023/9/7 9:40
  **/
-
+//当页面刷新后，Redux中的数据会回到初始值，之前存储到Redux中的数据将不复存在。
 import {createStore,applyMiddleware} from 'redux'
 import reduxLogger from 'redux-logger'
 import reduxThunk from 'redux-thunk'
