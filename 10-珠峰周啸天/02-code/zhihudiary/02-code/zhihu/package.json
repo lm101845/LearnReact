@@ -179,11 +179,7 @@
       [
         "styled-components-px2rem",
         {
-          "rootValue": 37.5,
-          "unitPrecision": 5,
-          "minPixelValue": 0,
-          "multiplier": 1,
-          "transformRuntime": false
+          "rootValue": 75
         }
       ]
     ]

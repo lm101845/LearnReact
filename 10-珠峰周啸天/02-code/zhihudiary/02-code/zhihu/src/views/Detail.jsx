@@ -124,6 +124,7 @@ const Detail = (props) => {
     }, [])
 
     //依赖于收藏列表和路径参数，计算出是否收藏
+
     const isStore = useMemo(()=>{
         if(!storeList) return false
         return storeList.some(item=>{
@@ -132,7 +133,9 @@ const Detail = (props) => {
     },[storeList,params])
 
     //点击收藏按钮
+    //TODO:有一个Bug，先点击收藏，再取消收藏，再点击收藏，提示收藏失败
     const handleStore = async () => {
+        console.log(isStore, '点击收藏按钮了，查看isStore是什么')
         //先判断是否登录
         if (!userInfo) {
             Toast.show({
@@ -144,11 +147,13 @@ const Detail = (props) => {
         }
 
         //已经登录：收藏或者移除收藏
+        //如果已经收藏，则此时需要移除收藏
         if(isStore){
             //移除收藏
             let item = storeList.find(item=>{
                 return +item.news.id === +params.id
             })
+            console.log(item, '移除收藏后的item')
             if(!item) return
             let {code} = await API.storeRemove(params.id)
             if(+code !== 0){
@@ -159,29 +164,37 @@ const Detail = (props) => {
                 return
             }
             Toast.show({
-                icon:'success',
-                content:'操作成功'
+                icon: 'success',
+                content: '操作成功'
             })
             removeStoreListById(item.id)  //告诉redux也把这项移除掉
             return;
         }
         //收藏
-        try{
+        try {
+            console.log('点击收藏了', params)
+            // let result = await API.store(params.id)
+            // console.log(result,'打印result--显示当前文章已经收藏了')
+            // queryStoreListAsync()
             let {code} = await API.store(params.id)
-            if(+code !== 0){
+            //这个函数第2次调用就失败了
+            if (+code !== 0) {
                 Toast.show({
-                    icon:'fail',
-                    content:'收藏失败'
+                    icon: 'fail',
+                    content: '收藏失败'
                 })
                 return
             }
             Toast.show({
-                icon:'success',
-                content:'收藏成功'
+                icon: 'success',
+                content: '收藏成功'
             })
             //同步最新的收藏列表到redux中
             queryStoreListAsync()
-        }catch (_){}
+        } catch (_) {
+            console.log(_, '打印失败信息')
+        }
+
     }
     return <div className="detail-box">
         {/*新闻内容*/}

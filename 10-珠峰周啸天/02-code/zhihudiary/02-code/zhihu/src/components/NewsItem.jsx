@@ -10,8 +10,9 @@ import PropTypes from 'prop-types'
 const NewsItem = (props) => {
     let {info} = props
     if(!info) return null
-    let {id,title,hint,images} = info
+    let {id,title,hint,images,image} = info
     //let { info: { id, title, hint, images } } = props; 简写，但是中间有判断，所以不能简写
+    if(!images) images = [image]
     if(!Array.isArray(images)) images = ['']
     return <div className="news-item-box">
         <Link to={{pathname:`/detail/${id}`}}>

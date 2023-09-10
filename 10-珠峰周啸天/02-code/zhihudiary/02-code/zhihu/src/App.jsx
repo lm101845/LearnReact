@@ -5,9 +5,12 @@
 import React from 'react'
 import {HashRouter} from "react-router-dom";
 import RouterView from "./route";
+import {KeepAliveProvider} from 'keepalive-react-component'
 const App = () => {
     return <HashRouter>
-        <RouterView/>
+        <KeepAliveProvider>
+            <RouterView/>
+        </KeepAliveProvider>
     </HashRouter>
 }
 
