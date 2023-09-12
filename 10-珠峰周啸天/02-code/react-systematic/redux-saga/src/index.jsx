@@ -7,6 +7,7 @@ import { ConfigProvider } from 'antd';
 import zhCN from 'antd/lib/locale/zh_CN';
 
 import Demo from "@/views/Demo";
+import Vote from "@/views/Vote";
 import store from './store/index'
 
 import {Provider} from 'react-redux'
@@ -16,6 +17,7 @@ root.render(
     <ConfigProvider locale={zhCN}>
         <Provider store={store}>
             <Demo />
+            <Vote/>
         </Provider>
     </ConfigProvider>
 );
