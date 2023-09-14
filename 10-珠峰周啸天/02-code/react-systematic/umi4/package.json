@@ -1,0 +1,23 @@
+{
+  "private": true,
+  "author": "lm101845 <1018457683@qq.com>",
+  "scripts": {
+    "dev": "umi dev",
+    "build": "npx umi build",
+    "postinstall": "umi setup",
+    "setup": "umi setup",
+    "start": "npx pnpm run dev"
+  },
+  "dependencies": {
+    "antd": "^5.1.2",
+    "qs": "^6.11.0",
+    "styled-components": "^5.3.6",
+    "umi": "^4.0.80"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.21",
+    "@types/react-dom": "^18.2.7",
+    "@umijs/plugins": "^4.0.41",
+    "typescript": "^5.2.2"
+  }
+}
