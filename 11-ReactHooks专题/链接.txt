@@ -1,0 +1,12 @@
+老师听声音应该是黑马的刘龙彬，我最早做的一个Vue的后台管理系统就是跟他做的，挺不错的一个老师。
+
+https://www.bilibili.com/video/BV1sV411c7u9
+
+视频时长8小时，共55集。
+
+
+讲义地址 https://escook.cn
+源码地址 https://gitee.com/vsdeveloper/react_hooks_code_bilibili
+
+第1-8集看完——23-10-02
+第9-17集看完——23-10-04
