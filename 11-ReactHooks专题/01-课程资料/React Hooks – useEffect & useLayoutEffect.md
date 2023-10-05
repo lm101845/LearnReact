@@ -4,7 +4,7 @@
 
 ### 什么是函数的副作用
 
-函数的副作用就是函数**除了返回值外**对**外界环境**造成的**其它影响**，即与组件渲染无关的操作。例如**获取数据**、**修改全局变量**、**更新 DOM** 等。
+函数的副作用就是函数**除了返回值外**对**外界环境**造成的**其它影响**，即**与组件渲染无关的操作**。例如**获取数据**、**修改全局变量**、**更新 DOM** 等。
 
 useEffect 是 React 中的 hooks API。通过 useEffect 可以执行一些副作用操作，例如：请求数据、事件监听等。它的语法格式如下：
 
@@ -16,22 +16,18 @@ useEffect(fn, deps?)
 
 - 第一个参数 **fn** 是一个副作用函数，该函数会在**每次渲染完成之后**被调用。
 
-- 第二个参数是
-
-  可选的依赖项数组
-
-  ，这个数组中的每一项内容都会被用来进行
-
-  渲染前后的对比
-
-  。
+- 第二个参数是**可选的依赖项数组**，这个数组中的每一项内容都会被用来进行**渲染前后的对比**
 
   - 当依赖项发生变化时，会重新执行 fn 副作用函数
   - 当依赖项没有任何变化时，则不会执行 fn 副作用函数
 
-### useEffect 的执行时机
+#### useEffect 的执行时机
 
-如果没有为 useEffect 指定依赖项数组，则 Effect 中的副作用函数，会在函数组件**每次**渲染**完成后**执行。例如，我们在下面的代码中，基于 useEffect 获取 h1 元素最新的 innerText：
+#### **情况一：没有第2个参数——ComponetDidMount + ComponentDidUpdate**
+
+> 不管依赖性变不变化都执行，其他变量变化也会执行——不好
+
+如果**没有为 useEffect 指定依赖项数组**，则 Effect 中的副作用函数，会在函数组件**每次**渲染**完成后**执行。例如，我们在下面的代码中，基于 useEffect 获取 h1 元素最新的 innerText：
 
 ```tsx
 import React, { useEffect, useState } from 'react'
@@ -60,9 +56,9 @@ export const Counter: React.FC = () => {
 }
 ```
 
-### deps 为空数组
+#### 有第2个参数，但deps 为空数组===ComponentDidMount(只执行一次)
 
-如果为 useEffect 指定了一个空数组 `[]` 作为 deps 依赖项，则副作用函数只会在组件首次渲染完成后执行唯一的一次。当组件 rerender 的时候不会触发副作用函数的重新执行。例如下面的代码中，useEffect 中的 console.log() 只会执行1次：
+如果为 useEffect 指定了一个空数组 `[]` 作为 deps 依赖项，则副作用函数只会在**组件首次渲染完成后**执行**唯一的一次**。**当组件 rerender 的时候不会触发副作用函数的重新执行**。例如下面的代码中，useEffect 中的 console.log() 只会执行1次：
 
 ```jsx
 import React, { useEffect, useState } from 'react'
@@ -88,7 +84,7 @@ export const Counter: React.FC = () => {
 }
 ```
 
-### deps 为依赖项数组
+#### 有第2个参数，且deps 为依赖项数组=ComponentDidMount + 依赖项变化执行
 
 如果想**有条件地**触发副作用函数的**重新执行**，则需要通过 deps 数组指定**依赖项列表**。
 
@@ -383,8 +379,8 @@ export const useCountDown: UseCountDown = (seconds = 10) => {
 
 ### useEffect 的使用注意事项
 
-1. 不要在 useEffect 中改变依赖项的值，会造成死循环。
-2. 多个不同功能的副作用尽量分开声明，不要写到一个 useEffect 中。
+1. 不要在 useEffect 中改变依赖项的值，会造成**死循环**。
+2. 多个**不同功能**的副作用尽量分开声明，不要写到一个 useEffect 中。
 
 ## 2. useLayoutEffect
 
