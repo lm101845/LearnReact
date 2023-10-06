@@ -26,6 +26,7 @@ export const useMousePosition = (delay: number = 0) => {
 }
 
 type UseCountDown = (num?: number) => [number, boolean]
+
 export const useCountDown: UseCountDown = (num = 10) => {
   const seconds = Math.round(Math.abs(num)) || 10
 

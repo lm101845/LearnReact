@@ -9,8 +9,8 @@ import DateCom from "@/components/use_state/03_date";
 import InputFocus from "@/components/use_ref/01_base";
 // import Count from "@/components/use_ref/03_share";
 import RefTimer from "@/components/use_ref/05_attention";
-import Father from "@/components/use_ref/09_forwardref";
-import {Counter, Counter2, RandomColor, TestMouseInfo, TestRandomColor} from "@/components/use_Effect/01_base";
+import {CountDown, Counter, Counter2, TestMouseInfo, TestRandomColor,RandomNumber} from "@/components/use_Effect/01_base";
+import {Father} from "@/components/user_reducer/01_base";
 
 
 
@@ -31,7 +31,10 @@ const App: FC = () => {
         {/*<Counter2/>*/}
         {/*<RandomColor/>*/}
         {/*<TestRandomColor/>*/}
-        <TestMouseInfo/>
+        {/*<TestMouseInfo/>*/}
+        {/*<CountDown/>*/}
+        {/*<RandomNumber/>*/}
+        <Father/>
     </>
 }
 

@@ -22,7 +22,7 @@ export const Counter: React.FC = () => {
     // 2. 如果为 useEffect 指定了依赖项的数组，则 useEffect 中的副作用函数，会在组件每次渲染完毕之后，判断依赖项是否变化，再决定是否执行副作用函数
     // 3. 如果为 useEffect 指定了空的依赖项数组，则 useEffect 中的副作用函数，仅在组件首次渲染完毕之后，执行唯一的一次
     useEffect(() => {
-        console.log('使用useEfect去拿', document.querySelector('h1')?.innerText)
+        console.log('使用useEffect去拿', document.querySelector('h1')?.innerText)
         // })
         // 如果**没有为 useEffect 指定依赖项数组**，则 Effect 中的副作用函数，会在函数组件**每次**渲染**完成后**执行。
         // },[])
@@ -135,33 +135,35 @@ export const TestMouseInfo: React.FC = () => {
     )
 }
 
-// export const CountDown: React.FC = () => {
-//     const [count, disabled] = useCountDown(-3.8)
-//
-//     return (
-//         <>
-//             <button disabled={disabled} onClick={() => console.log('协议已生效！')}>
-//                 {disabled ? `请仔细阅读本协议（${count}）秒` : '请确认此协议'}
-//             </button>
-//         </>
-//     )
-// }
+export const CountDown: React.FC = () => {
+    // const [count, disabled] = useCountDown(-3.8)
+    const [count, disabled] = useCountDown(3)
 
-// export const RandomNumber: React.FC = () => {
-//     const [num, setNum] = useState(Math.random() * 200)
-//
-//     useLayoutEffect(() => {
-//         console.log('触发了 useEffect 的副作用函数', num)
-//         if (num === 0) {
-//             setNum(Math.random() * 200)
-//         }
-//     }, [num])
-//
-//     return (
-//         <>
-//             <h3>num 的值是：{num}</h3>
-//             <button onClick={() => setNum(0)}>把 num 改成 0</button>
-//         </>
-//     )
-// }
+    return (
+        <>
+            <button disabled={disabled} onClick={() => console.log('协议已生效！')}>
+                {disabled ? `请仔细阅读本协议（${count}）秒` : '请确认此协议'}
+            </button>
+        </>
+    )
+}
+
+export const RandomNumber: React.FC = () => {
+    const [num, setNum] = useState(Math.random() * 200)
+
+    useLayoutEffect(() => {
+    // useEffect(() => {
+        console.log('触发了 useEffect 的副作用函数', num)
+        if (num === 0) {
+            setNum(Math.random() * 200)
+        }
+    }, [num])
+
+    return (
+        <>
+            <h3>num 的值是：{num}</h3>
+            <button onClick={() => setNum(0)}>把 num 改成 0</button>
+        </>
+    )
+}
 
