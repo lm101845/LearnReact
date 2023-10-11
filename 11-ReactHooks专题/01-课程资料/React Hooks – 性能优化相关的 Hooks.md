@@ -1,6 +1,6 @@
 # React Hooks – 性能优化相关的 Hooks
 
-## 1. React.memo
+## 1. React.memo-缓存组件
 
 当父组件被重新渲染的时候，也会触发子组件的重新渲染，这样就多出了无意义的性能开销。如果子组件的状态没有发生变化，则子组件是不需要被重新渲染的。
 
@@ -65,7 +65,7 @@ export const Son: React.FC<{ num: number }> = React.memo(({ num }) => {
 })
 ```
 
-## 2. useMemo
+## 2. useMemo-缓存变量
 
 ### 1. 问题引入
 
@@ -141,11 +141,11 @@ const memoValue = useMemo(() => {
 
 3. 此时，点击 Father 中的 +1 按钮，并不会触发 `tips` 的重新计算，而是会使用上一次缓存的值进行渲染。只有依赖项 `flag` 变化时，才会触发 `tips` 的重新计算。
 
-## 3. useCallback
+## 3. useCallback-缓存函数
 
 ### 语法格式
 
-之前我们所学的 `useMemo` 能够达到缓存某个变量值的效果，而当前要学习的 `useCallback` 用来对组件内的函数进行缓存，它返回的是缓存的函数。它的语法格式如下：
+之前我们所学的 `useMemo` 能够达到缓存某个**变量值**的效果，而当前要学习的 `useCallback` 用来对组件内的函数进行缓存，它返回的是**缓存的函数**。它的语法格式如下：
 
 ```js
 const memoCallback = useCallback(cb, array)
@@ -366,6 +366,10 @@ export const Search: React.FC = () => {
 > useMemo和useCallback的区别在于它们的应用场景和返回值类型。useCallback主要优化针对于子组件渲染，返回值是函数。而useMemo优化针对于当前组件高开销的计算，返回值是缓存的变量。如果子组件不需要父组件的值和函数，只需要使用memo函数包裹子组件即可。如果有函数传递给子组件，使用useCallback；如果有值传递给子组件，使用useMemo。
 
 ## 4. useTransition
+
+> 把用户的操作标记为高优先级的，把对组件的更新标记为低优先级的。
+>
+> 用户点击tab栏B(耗时)，React渲染UI时会默认阻塞其他操作，比如这个时候用户点击tabC，点不动，因为tab栏B还没渲染完成。这个时候，用户就会产生卡顿的感觉。
 
 ### 1. 问题引入
 

@@ -16,6 +16,8 @@ import {CountDown, Counter, Counter2, TestMouseInfo, TestRandomColor,RandomNumbe
 // import {Father, UserInfoContextWrapper} from "@/components/user_context/03_reducer";
 import {AppContextWrapper} from "@/components/user_context/02_base";
 import {Father} from "@/components/use_memo/01_base";
+import Search from "@/components/use_callback/01_base";
+import {TabsContainer} from "@/components/useTransition/01_base";
 
 
 
@@ -47,7 +49,9 @@ const App: FC = () => {
         {/*    <LevelA></LevelA>*/}
         {/*    /!*props.children就是LevelA*!/*/}
         {/*</AppContextWrapper>*/}
-        <Father/>
+        {/*<Father/>*/}
+        {/*<Search/>*/}
+        <TabsContainer/>
     </>
 }
 
