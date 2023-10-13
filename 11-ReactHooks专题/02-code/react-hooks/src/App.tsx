@@ -18,6 +18,8 @@ import {AppContextWrapper} from "@/components/user_context/02_base";
 import {Father} from "@/components/use_memo/01_base";
 import Search from "@/components/use_callback/01_base";
 import {TabsContainer} from "@/components/useTransition/01_base";
+import {SearchBox} from "@/components/use_deferred_value/01_base";
+// import {SearchBox} from "@/components/useTransition/02_input";
 
 
 
@@ -51,7 +53,8 @@ const App: FC = () => {
         {/*</AppContextWrapper>*/}
         {/*<Father/>*/}
         {/*<Search/>*/}
-        <TabsContainer/>
+        {/*<TabsContainer/>*/}
+        <SearchBox/>
     </>
 }
 
