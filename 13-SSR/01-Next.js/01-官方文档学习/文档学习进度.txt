@@ -1,0 +1,8 @@
+英文文档——优先看英文文档吧，这个毕竟是最新的。
+https://vercel.com/docs
+
+中文文档：
+https://www.nextjs.cn/docs/getting-started
+
+
+互动课程看完——23-10-24
