@@ -1,0 +1,6 @@
+https://vercel.com/guides/nextjs-multi-tenant-application
+
+npx pnpm dev1
+
+"sharp": "^0.31.3",
+先去掉，报错
